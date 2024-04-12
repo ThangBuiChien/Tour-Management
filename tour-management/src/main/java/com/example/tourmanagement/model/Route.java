@@ -1,10 +1,8 @@
 package com.example.tourmanagement.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+@Entity
 public class Route {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
@@ -18,6 +16,8 @@ public class Route {
 
     @ManyToOne
     private DetailRoute detailRoute;
+
+
 
 
     public long getId() {

@@ -6,15 +6,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Feedback {
-
+public class Role {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long id;
 
-    private String comment;
-
-    private int rating;
+    private String roleName;
 
     public long getId() {
         return id;
@@ -24,19 +21,11 @@ public class Feedback {
         this.id = id;
     }
 
-    public String getComment() {
-        return comment;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }
