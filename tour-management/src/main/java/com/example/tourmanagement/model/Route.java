@@ -1,6 +1,9 @@
 package com.example.tourmanagement.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Route {
@@ -14,11 +17,17 @@ public class Route {
 
     private int distance;
 
-    @ManyToOne
-    private DetailRoute detailRoute;
+    @OneToMany(mappedBy = "route", cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    private List<DetailRoute> detailRouteList;
 
+    public List<DetailRoute> getDetailRouteList() {
+        return detailRouteList;
+    }
 
-
+    public void setDetailRouteList(List<DetailRoute> detailRouteList) {
+        this.detailRouteList = detailRouteList;
+    }
 
     public long getId() {
         return id;
@@ -53,11 +62,5 @@ public class Route {
         this.distance = distance;
     }
 
-    public DetailRoute getDetailRoute() {
-        return detailRoute;
-    }
 
-    public void setDetailRoute(DetailRoute detailRoute) {
-        this.detailRoute = detailRoute;
-    }
 }

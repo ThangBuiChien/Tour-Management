@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Add Department</h2>
+<form th:action="@{/detail/add}" th:object = "${detailRoute}" method="post">
+
+    <input type="number" th:field="*{lengthTrip}" placeholder="detailRoute's length Trip" >
+    <input type="text" th:field="*{stopLocation}" placeholder="detailRoute's stop Location " >
+    <input type="text" th:field="*{detailTrip}" placeholder="detailRoute's detailTrip" >
+
+    <select th:field="*{route}">
+        <option th:each="route : ${routes}" th:value="${route.getId()}" th:text="${route.startLocation} + ${route.endLocation}"></option>
+    </select>
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.example.tourmanagement.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +38,28 @@ public class Tour {
 //    }
 
     @ManyToOne
-    private Route tourRoute;
-    @ManyToOne
-    private TourDate tourDate;
+    private DetailRoute detailRoute;
+//    @ManyToOne
+//    private TourDate tourDate;
+
+
+    public DetailRoute getDetailRoute() {
+        return detailRoute;
+    }
+
+    public void setDetailRoute(DetailRoute detailRoute) {
+        this.detailRoute = detailRoute;
+    }
+
+    private LocalDate startDate;
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 
     @ManyToOne
     private Capacity tourCapacity;
@@ -84,22 +104,6 @@ public class Tour {
 
     public void setTourPrice(float tourPrice) {
         this.tourPrice = tourPrice;
-    }
-
-    public Route getTourRoute() {
-        return tourRoute;
-    }
-
-    public void setTourRoute(Route tourRoute) {
-        this.tourRoute = tourRoute;
-    }
-
-    public TourDate getTourDate() {
-        return tourDate;
-    }
-
-    public void setTourDate(TourDate tourDate) {
-        this.tourDate = tourDate;
     }
 
     public Capacity getTourCapacity() {

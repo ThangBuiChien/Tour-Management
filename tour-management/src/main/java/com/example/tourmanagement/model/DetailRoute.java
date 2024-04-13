@@ -1,9 +1,6 @@
 package com.example.tourmanagement.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class DetailRoute {
@@ -16,6 +13,19 @@ public class DetailRoute {
     private String stopLocation;
 
     private String detailTrip;
+
+    @ManyToOne
+    @JoinColumn(name = "route_id")
+
+    private Route route;
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
 
     public long getId() {
         return id;
