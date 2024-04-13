@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Route List</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/route/showAddForm}" class="btn btn-primary"> Add new Route</a>
+
+
+    <span th:text="${successMessage}"></span>
+
+    <tr>
+
+        <th>startLocation</th>
+        <th>endLocation</th>
+        <th>distance</th>
+        <th>detailRoute</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="route : ${listRoutes}">
+        <td th:text="${route.startLocation}"></td>
+        <td th:text="${route.endLocation}"></td>
+        <td th:text="${route.distance}"></td>
+
+<!--        <td th:text="${route.getDetailRoute().getStopLocation()}"></td>-->
+
+        <td>
+            <!-- Iterate over the list of employees in the department -->
+            <span th:each="detailRoute : ${route.getDetailRouteList()}" th:text="${detailRoute.stopLocation} + ', '"></span>
+        </td>
+
+
+
+
+        <td>
+            <!-- Edit button -->
+            <form th:action="@{/route/showUpdateForm/{id}(id=${route.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+            <!-- Delete button -->
+            <form th:action="@{/route/delete/{id}(id=${route.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

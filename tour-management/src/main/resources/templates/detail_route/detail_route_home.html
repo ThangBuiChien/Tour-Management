@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Department List</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/detail/showAddForm}" class="btn btn-primary"> Add new Detail route</a>
+
+
+    <span th:text="${successMessage}"></span>
+
+    <tr>
+<!--        <th>ID</th>-->
+        <th>stopLocation</th>
+        <th>lengthTrip</th>
+        <th>detailTrip</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="detailRoute : ${listDetailRoutes}">
+        <td th:text="${detailRoute.stopLocation}"></td>
+        <td th:text="${detailRoute.lengthTrip}"></td>
+        <td th:text="${detailRoute.detailTrip}"></td>
+        <td th:text="${detailRoute.route.getStartLocation()} +  '-->'+ ${detailRoute.route.getEndLocation()}  "></td>
+
+
+        <td>
+            <!-- Edit button -->
+            <form th:action="@{/detail/showUpdateForm/{id}(id=${detailRoute.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+            <!-- Delete button -->
+            <form th:action="@{/detail/delete/{id}(id=${detailRoute.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>
