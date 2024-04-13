@@ -28,9 +28,17 @@
     </select>
 
     <!-- Empty dropdown list for detail routes -->
-    <select id="detailRouteSelect" name="detailRoute">
+    <select id="detailRouteSelect" name="detailRoute"  th:field="*{detailRoute}">
         <!-- Options will be populated dynamically -->
     </select>
+
+    <select id="tourCapacity" th:field="*{tourCapacity}">
+        <option th:each="capacity : ${capacities}" th:value="${capacity.id}"
+                th:text="${capacity.minMember} + '--' + ${capacity.maxMember}"></option>
+    </select>
+
+    <input type="number" th:field="*{tourPrice}" placeholder="Tour's Price" >
+    <input type="date" th:field="*{startDate}" placeholder="Tour's Start Date" >
 
 
     <button type="submit">Add</button>

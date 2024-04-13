@@ -6,5 +6,56 @@
 </head>
 <body>
 
+<h2>TOUR List</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/tour/showAddForm}" class="btn btn-primary"> Add new tour</a>
+
+
+    <span th:text="${successMessage}"></span>
+
+    <tr>
+
+        <th>tourName</th>
+        <th>detailRoute</th>
+        <th>lengthTrip</th>
+        <th>tourDescription</th>
+        <th>tourPrice</th>
+        <th>tourCapacity</th>
+        <th>startDate</th>
+        <th>tourStatus</th>
+        <th>register</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="tour : ${listTours}">
+        <td th:text="${tour.tourName}"></td>
+        <td th:text="${tour.detailRoute.stopLocation}"></td>
+        <td th:text="${tour.lengthTrip}"></td>
+        <td th:text="${tour.tourDescription}"></td>
+        <td th:text="${tour.tourPrice}"></td>
+        <td th:text="${tour.tourCapacity.minMember} + '-' + ${tour.tourCapacity.maxMember}"></td>
+        <td th:text="${tour.startDate}"></td>
+        <td th:text="${tour.tourStatus}"></td>
+        <td th:text="${tour.register}"></td>
+
+
+<!--        <td>-->
+<!--            &lt;!&ndash; Edit button &ndash;&gt;-->
+<!--            <form th:action="@{/route/showUpdateForm/{id}(id=${route.id})}" method="get">-->
+<!--                <button type="submit">Edit</button>-->
+<!--            </form>-->
+<!--            &lt;!&ndash; Delete button &ndash;&gt;-->
+<!--            <form th:action="@{/route/delete/{id}(id=${route.id})}" method="post">-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
+<!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+
+
 </body>
 </html>

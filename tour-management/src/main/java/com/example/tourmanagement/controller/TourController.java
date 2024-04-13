@@ -1,8 +1,10 @@
 package com.example.tourmanagement.controller;
 
+import com.example.tourmanagement.model.Capacity;
 import com.example.tourmanagement.model.DetailRoute;
 import com.example.tourmanagement.model.Route;
 import com.example.tourmanagement.model.Tour;
+import com.example.tourmanagement.service.CapacityService;
 import com.example.tourmanagement.service.RouteService;
 import com.example.tourmanagement.service.TourService;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
@@ -23,9 +25,12 @@ public class TourController {
     private final TourService tourService;
     private final RouteService routeService;
 
-    public  TourController(TourService tourService, RouteService routeService){
+    private final CapacityService capacityService;
+
+    public  TourController(TourService tourService, RouteService routeService, CapacityService capacityService){
         this.tourService = tourService;
         this.routeService = routeService;
+        this.capacityService = capacityService;
     }
 
     @GetMapping({"/", ""})
@@ -46,6 +51,11 @@ public class TourController {
 
     @PostMapping("/add")
     public String addRoute(@ModelAttribute("tour") Tour tour, RedirectAttributes redirectAttributes){
+        tour.setLengthTrip(tour.getDetailRoute().getLengthTrip());
+        tour.setTourDescription(tour.getDetailRoute().getDetailTrip());
+        tour.setTourStatus("available");
+        tour.setRegister(0);
+
         this.tourService.saveTour(tour);
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         return "redirect:/tour/load";
@@ -82,8 +92,11 @@ public class TourController {
     public String showAddForm(Model model){
         Tour tour = new Tour();
         model.addAttribute("tour", tour);
+
         List<Route> routes = routeService.getAllRoute();
         model.addAttribute("routes", routes);
+        List<Capacity> capacities = capacityService.getAllCapacity();
+        model.addAttribute("capacities", capacities);
         return "tour/add_tour";
     }
 
