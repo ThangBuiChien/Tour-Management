@@ -14,57 +14,22 @@ public class Tour {
     private long id;
 
     private String tourName;
+    @ManyToOne
+    private DetailRoute detailRoute;
     private int lengthTrip;
     private String tourDescription;
 
     private float tourPrice;
 
-
-    //ignore the error
-
-
-//    @OneToMany(mappedBy = "tour")
-//    private List<User> tourMembers;
-//
-//  //  private final List<User> tourMember = new ArrayList<User>();
-//
-//
-//    public List<User> getTourMembers() {
-//        return tourMembers;
-//    }
-//
-//    public void setTourMembers(List<User> tourMembers) {
-//        this.tourMembers = tourMembers;
-//    }
-
-    @ManyToOne
-    private DetailRoute detailRoute;
-//    @ManyToOne
-//    private TourDate tourDate;
-
-
-    public DetailRoute getDetailRoute() {
-        return detailRoute;
-    }
-
-    public void setDetailRoute(DetailRoute detailRoute) {
-        this.detailRoute = detailRoute;
-    }
-
-    private LocalDate startDate;
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
     @ManyToOne
     private Capacity tourCapacity;
 
+    private LocalDate startDate;
+
     private String tourStatus;
+
+    //current total of customer
+    private int register;
 
     public long getId() {
         return id;
@@ -80,6 +45,14 @@ public class Tour {
 
     public void setTourName(String tourName) {
         this.tourName = tourName;
+    }
+
+    public DetailRoute getDetailRoute() {
+        return detailRoute;
+    }
+
+    public void setDetailRoute(DetailRoute detailRoute) {
+        this.detailRoute = detailRoute;
     }
 
     public int getLengthTrip() {
@@ -114,11 +87,27 @@ public class Tour {
         this.tourCapacity = tourCapacity;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
     public String getTourStatus() {
         return tourStatus;
     }
 
     public void setTourStatus(String tourStatus) {
         this.tourStatus = tourStatus;
+    }
+
+    public int getRegister() {
+        return register;
+    }
+
+    public void setRegister(int register) {
+        this.register = register;
     }
 }
