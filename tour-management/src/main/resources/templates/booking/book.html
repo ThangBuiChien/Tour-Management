@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book a Tour</title>
+</head>
+<body>
+<form th:action="@{/book/submit}" th:object="${invoice}" method="post">
+    <div>
+        <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
+    </div>
+    <div>
+        <label>User Name:</label>
+        <input type="text" name="userName" required />
+    </div>
+    <div>
+        <label>User Email:</label>
+        <input type="email" name="userEmail" required />
+    </div>
+    <div>
+        <label>User Phone Number:</label>
+        <input type="tel" name="userPhoneNumber" required />
+    </div>
+    <div>
+        <label>Number of Members:</label>
+        <input type="number" id="numMembers" name="numMembers" required />
+    </div>
+    <div id="membersContainer"></div>
+    <button type="submit">Submit Booking</button>
+</form>
+
+<script>
+    document.getElementById('numMembers').addEventListener('change', function() {
+        let container = document.getElementById('membersContainer');
+        container.innerHTML = ''; // Clear existing fields if number changes
+        for (let i = 0; i < this.value; i++) {
+            container.innerHTML += `
+            <div>
+                <label>Member ${i + 1} Name:</label>
+                <input type="text" name="listOfMemberName${i}" required />
+                <label>Member ${i + 1} Citizen ID:</label>
+                <input type="number" name="listOfMemberCitizenId${i}" required />
+            </div>`;
+        }
+    });
+</script>
+</body>
+</html>
