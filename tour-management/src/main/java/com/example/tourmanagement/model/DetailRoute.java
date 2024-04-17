@@ -12,6 +12,9 @@ public class DetailRoute {
 
     private String stopLocation;
 
+    @Column(columnDefinition = "TEXT")
+    private String shortDetailTrip;
+    @Column(columnDefinition = "TEXT")
     private String detailTrip;
 
     @ManyToOne
@@ -49,6 +52,14 @@ public class DetailRoute {
 
     public void setStopLocation(String stopLocation) {
         this.stopLocation = stopLocation;
+    }
+
+    public String getShortDetailTrip() {
+        return shortDetailTrip;
+    }
+
+    public void setShortDetailTrip(String shortDetailTrip) {
+        this.shortDetailTrip = shortDetailTrip;
     }
 
     public String getDetailTrip() {
