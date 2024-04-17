@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capacity home</title>
+</head>
+<body>
+
+<h2>Capacity List</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/capacity/showAddForm}" class="btn btn-primary"> Add new capacity</a>
+
+
+    <span th:text="${successMessage}"></span>
+
+    <tr>
+        <!--        <th>ID</th>-->
+        <th>min member</th>
+        <th>max member</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="capacity : ${listCapacities}">
+        <td th:text="${capacity.minMember}"></td>
+        <td th:text="${capacity.maxMember}"></td>
+
+
+
+<!--        <td>-->
+<!--            &lt;!&ndash; Edit button &ndash;&gt;-->
+<!--            <form th:action="@{/detail/showUpdateForm/{id}(id=${detailRoute.id})}" method="get">-->
+<!--                <button type="submit">Edit</button>-->
+<!--            </form>-->
+<!--            &lt;!&ndash; Delete button &ndash;&gt;-->
+<!--            <form th:action="@{/detail/delete/{id}(id=${detailRoute.id})}" method="post">-->
+<!--                <button type="submit">Delete</button>-->
+<!--            </form>-->
+<!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
