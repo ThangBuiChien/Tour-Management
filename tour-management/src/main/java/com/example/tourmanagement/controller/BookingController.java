@@ -29,7 +29,7 @@ public class BookingController {
         if (tour.isPresent()) {
             model.addAttribute("tour", tour.get());
             model.addAttribute("invoice", new Invoice());
-            return "bookingForm";
+            return "book/book";
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
             return "redirect:/book";
