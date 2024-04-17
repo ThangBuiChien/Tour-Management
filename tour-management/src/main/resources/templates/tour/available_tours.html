@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Tours</title>
+</head>
+<body>
+<h2>Available Tours</h2>
+<div th:if="${availableTours.isEmpty()}">
+    <p>No tours are currently available.</p>
+</div>
+<div th:each="tour : ${availableTours}">
+    <p th:text="|Tour Name: ${tour.tourName}, Description: ${tour.tourDescription}, Price: ${tour.tourPrice}|"></p>
+    <a th:href="@{/book/{id}(id=${tour.id})}">Book Now</a>
+</div>
+</body>
+</html>
