@@ -2,11 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Book a Tour</title>
+    <style>
+        #totalPriceDisplay {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 <form th:action="@{/book/submit}" th:object="${invoice}" method="post">
     <div>
         <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
+    </div>
+    <div>
+        <label>Price Per Person: <span id="pricePerPerson" th:text="${tour.tourPrice}">$100</span></label>
     </div>
     <div>
         <label>User Name:</label>
@@ -25,14 +34,16 @@
         <input type="number" id="numMembers" name="numMembers" required min="1" />
     </div>
     <div id="membersContainer"></div>
+    <div id="totalPriceDisplay">Total Price: $0</div>
     <button type="submit">Submit Booking</button>
 </form>
 
 <script>
     document.getElementById('numMembers').addEventListener('change', function() {
         let container = document.getElementById('membersContainer');
+        let numMembers = parseInt(this.value);
         container.innerHTML = ''; // Clear existing fields if number changes
-        for (let i = 0; i < this.value; i++) {
+        for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
             <div>
                 <label>Member ${i + 1} Name:</label>
@@ -41,7 +52,14 @@
                 <input type="number" name="listOfMemberCitizenId${i}" required />
             </div>`;
         }
+        updateTotalPrice(numMembers);
     });
+
+    function updateTotalPrice(numMembers) {
+        let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
+        let totalPrice = pricePerPerson * numMembers;
+        document.getElementById('totalPriceDisplay').textContent = 'Total Price: $' + totalPrice.toFixed(2);
+    }
 </script>
 </body>
 </html>

@@ -3,6 +3,8 @@ package com.example.tourmanagement.service.impl;
 import com.example.tourmanagement.model.Tour;
 import com.example.tourmanagement.repository.TourRepo;
 import com.example.tourmanagement.service.TourService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,14 @@ public class TourServiceImpl implements TourService {
     @Override
     public List<Tour> getAllTour() {
         return repo.findAll()   ;
+    }
+
+    @Override
+    public Page<Tour> getAllTour(Pageable pageable, String keyword) {
+        if (keyword != null) {
+            return repo.searchPageable(pageable, keyword);
+        }
+        return repo.findAll(pageable);
     }
 
     @Override

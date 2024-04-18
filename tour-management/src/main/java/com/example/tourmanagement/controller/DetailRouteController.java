@@ -60,10 +60,10 @@ public class DetailRouteController {
         Optional<DetailRoute> department = detailRouteServices.findByID(id);
         if(department.isPresent()){
             this.detailRouteServices.deleteDetailRoute(id);
-            return "redirect:/department";
+            return "redirect:/detail/load";
         }
         else{
-            return "redirect:/department";
+            return "redirect:/detail/load";
 
         }
 

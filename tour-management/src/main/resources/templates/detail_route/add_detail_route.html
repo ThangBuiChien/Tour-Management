@@ -11,7 +11,10 @@
 
     <input type="number" th:field="*{lengthTrip}" placeholder="detailRoute's length Trip" >
     <input type="text" th:field="*{stopLocation}" placeholder="detailRoute's stop Location " >
-    <input type="text" th:field="*{detailTrip}" placeholder="detailRoute's detailTrip" >
+<!--    <input type="text" th:field="*{detailTrip}" placeholder="detailRoute's detailTrip" >-->
+
+    <label for="description">Description:</label><br>
+    <textarea id="description" th:field="*{detailTrip}" name="description" rows="4" cols="50"></textarea><br><br>
 
     <select th:field="*{route}">
         <option th:each="route : ${routes}" th:value="${route.getId()}" th:text="${route.startLocation} + ${route.endLocation}"></option>
