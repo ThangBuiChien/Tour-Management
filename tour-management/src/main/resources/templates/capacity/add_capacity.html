@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/capacity/add}" th:object = "${capacity}" method="post">
+
+    <input type="number" th:field="*{minMember}" placeholder="Route's maxMember" >
+    <input type="number" th:field="*{maxMember}" placeholder="Route's minMember " >
+
+    <!--    <select th:field="*{detailRoute}">-->
+    <!--        <option th:each="detailRoute : ${detailRoutes}" th:value="${detailRoute.getId()}" th:text="${detailRoute.stopLocation}"></option>-->
+    <!--    </select>-->
+
+    <button type="submit">Add</button>
+</form>
+
+
+</body>
+</html>
