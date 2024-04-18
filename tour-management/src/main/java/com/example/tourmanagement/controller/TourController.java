@@ -145,7 +145,14 @@ public class TourController {
         }
     }
 
-
+    @GetMapping("/available")
+    public String viewAvailableTours(Model model) {
+        List<Tour> availableTours = tourService.getAllTour().stream()
+                .filter(tour -> "available".equalsIgnoreCase(tour.getTourStatus()))
+                .toList();
+        model.addAttribute("availableTours", availableTours);
+        return "tour/available_tours";
+    }
 
 //    @GetMapping("/showUpdateForm/{id}")
 //    public String showUpdateForm(Model model, @PathVariable long id) {
