@@ -8,6 +8,10 @@ import com.example.tourmanagement.service.CapacityService;
 import com.example.tourmanagement.service.RouteService;
 import com.example.tourmanagement.service.TourService;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -49,16 +53,44 @@ public class TourController {
 
     }
 
+    @GetMapping("/sorting")
+    public String getAllRoutePage(Model model, RedirectAttributes redirectAttributes,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "3") int size,
+                                  @RequestParam(defaultValue = "id") String sortBy,
+                                  @RequestParam(defaultValue = "") String keyword){
+
+        if (redirectAttributes.containsAttribute("successMessage")) {
+            model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
+        }
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
+        model.addAttribute("listTours", listTours);
+        int totalPages = listTours.getTotalPages();
+
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("size", size);
+
+        return "tour/tour_home";
+
+    }
+
     @PostMapping("/add")
     public String addRoute(@ModelAttribute("tour") Tour tour, RedirectAttributes redirectAttributes){
         tour.setLengthTrip(tour.getDetailRoute().getLengthTrip());
         tour.setTourDescription(tour.getDetailRoute().getDetailTrip());
         tour.setTourStatus("available");
         tour.setRegister(0);
+        tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
 
         this.tourService.saveTour(tour);
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
-        return "redirect:/tour/load";
+       // return "redirect:/tour/load";
+        return "redirect:/tour/sorting";
 
     }
 
