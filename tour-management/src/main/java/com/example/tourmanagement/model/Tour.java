@@ -20,17 +20,29 @@ public class Tour {
     private String tourDescription;
 
     private float tourPrice;
-
+    
     @ManyToOne
     private Capacity tourCapacity;
 
     private LocalDate startDate;
 
     private String tourStatus;
+    
 
     //current total of customer
     private int register;
 
+    @ManyToOne
+    private TourGuide tourGuide;
+
+    public TourGuide getTourGuide() {
+        return tourGuide;
+    }
+
+    public void setTourGuide(TourGuide tourGuide) {
+        this.tourGuide = tourGuide;
+    }
+    //
     public long getId() {
         return id;
     }
@@ -110,4 +122,5 @@ public class Tour {
     public void setRegister(int register) {
         this.register = register;
     }
+
 }
