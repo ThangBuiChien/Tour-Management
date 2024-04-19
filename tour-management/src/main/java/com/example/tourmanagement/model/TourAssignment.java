@@ -2,10 +2,8 @@ package com.example.tourmanagement.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-
 @Entity
-public class Tour_Assignment {
+public class TourAssignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,7 +17,7 @@ public class Tour_Assignment {
     private TourGuide tourGuide;
 
     // Constructors
-    public Tour_Assignment() {}
+    public TourAssignment() {}
 
     // Getters and Setters
     public Long getId() {
