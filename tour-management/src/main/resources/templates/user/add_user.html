@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+<h2>Add User!</h2>
+<form action="/user/add" th:object="${user}" method="post">
+
+    <input type="text" th:field="*{id}" placeholder="ID" >
+
+    <input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
+
+    <input type="email" id="email" th:field="*{email}" placeholder="Enter Email" required><br><br>
+
+    <input type="date" id="birthDate" th:field="*{birthDate}" required><br><br>
+
+    <input type="text" id="citizenID" th:field="*{citizenID}" placeholder="Enter Citizen ID" required><br><br>
+
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number" required><br><br>
+
+    <select id="userRole" th:field="*{userRole}" required>
+        <option value="">Select Role</option>
+        <option th:each="role : ${roles}" th:value="${role}" th:text="${role.roleName}"></option>
+    </select><br><br>
+
+    <button type="submit">Add User</button>
+</form>
+</body>
+</html>

@@ -4,25 +4,30 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
-
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "fullName")
     private String fullName;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "birthDate")
     private LocalDate birthDate;
 
+    @Column(name = "citizenID")
     private int citizenID;
 
+    @Column(name = "phoneNumber")
     private int phoneNumber;
 
     @ManyToOne
-    private Role userRole;
+    @JoinColumn(name = "userrole_id")
+    private UserRole userRole;
 
 
     
@@ -75,11 +80,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public Role getUserRole() {
+    public UserRole getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(Role userRole) {
+    public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
 }
