@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>User Main</title>
@@ -10,7 +10,7 @@
 
 </head>
 <body>
-<h2>User List</h2>
+<h2>UserRole List</h2>
 <table border="1">
     <thead>
     <a th:href="@{/user/showAddForm}" class="btn btn-primary"> Add new User</a>
@@ -27,13 +27,13 @@
     <tbody>
     <!-- Iterate over the list of departments -->
     <tr th:each="user : ${ListUsers}">
-        <td th:text="${user.getId}"></td>
+        <td th:text="${user.getId()}"></td>
         <td th:text="${user.getFullName()}"></td>
         <td th:text="${user.getEmail()}"></td>
         <td th:text="${user.getBirthDate()}"></td>
         <td th:text="${user.getCitizenID()}"></td>
         <td th:text="${user.getPhoneNumber()}"></td>
-        <td th:text="${user.getUserRole()}"></td>
+        <td th:text="${user.getUserRole().getRoleName()}"></td>
 
         <td>
             <!-- Edit button -->

@@ -6,6 +6,7 @@ import com.example.tourmanagement.service.UserService;
 import com.example.tourmanagement.service.UserRoleService;
 import com.fasterxml.jackson.annotation.OptBoolean;
 import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,11 @@ import java.util.Optional;
 @RequestMapping("/user")
 public class UserController {
     private final UserService userService;
+    private final UserRoleService userRoleService;
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, UserRoleService userRoleService){
         this.userService = userService;
+        this.userRoleService = userRoleService;
     }
 
     @GetMapping({"/", ""})
@@ -33,7 +36,7 @@ public class UserController {
     @GetMapping("/load")
     public String loadUser(Model model){
         List<User> users = userService.getAllUser();
-        model.addAttribute("ListUsers", emps);
+        model.addAttribute("ListUsers",users);
         return "user/user_home";
     }
 
@@ -68,8 +71,8 @@ public class UserController {
     public String showAddForm(Model model){
         User user = new User();
         model.addAttribute("user", user);
-        List<User> users = userService.getAllDepartment();
-        model.addAttribute("users", users);
+        List<UserRole> userRoles = userRoleService.getAllUserRole();
+        model.addAttribute("userRoles",userRoles);
         return "user/add_user";
     }
 
@@ -78,6 +81,8 @@ public class UserController {
         Optional<User> user = userService.findByID(id);
         if(user.isPresent()){
             model.addAttribute("user", user.get());
+            List<UserRole> userRoles = userRoleService.getAllUserRole();
+            model.addAttribute("userRoles", userRoles);
             return "user/updated_user";
         }
         else{

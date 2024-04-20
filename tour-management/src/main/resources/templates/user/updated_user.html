@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Update User</title>
 </head>
 <body>
 <h2>Update User</h2>
-<form action=@{/user/update/{id} (id = ${user.id})}" object = "${user}" method="post>
-
-    <input type="hidden" th:field="*{id}">
+<form th:action="@{/user/update/{id} (id = ${user.id})}" th:object = "${user}" method="post">
 
     <input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
 
@@ -22,7 +20,7 @@
 
     <select id="userRole" th:field="*{userRole}" required>
         <option value="">Select Role</option>
-        <option th:each="role : ${roles}" th:value="${role}" th:text="${role.roleName}"></option>
+        <option th:each="userRole : ${userRoles}" th:value="${userRole.getId()}" th:text="${userRole.roleName}"></option>
     </select><br><br>
 
     <button type="submit">Update User</button>

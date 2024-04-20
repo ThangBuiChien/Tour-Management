@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>User Role Main</title>
@@ -13,37 +13,29 @@
 <h2>User Role List</h2>
 <table border="1">
     <thead>
-    <a th:href="@{/user_role/showAddForm}" class="btn btn-primary"> Add new User Role</a>
+    <a th:href="@{/role/showAddForm}" class="btn btn-primary"> Add new User Role</a>
 
 
     <span th:text="${successMessage}"></span>
 
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Role</th>
-        <th>User list</th>
+        <th>Role Name</th>
 
     </tr>
     </thead>
     <tbody>
     <!-- Iterate over the list of departments -->
-    <tr th:each="user_role : ${listUserRoles}">
-        <td th:text="${user_role.id}"></td>
-        <td th:text="${user_role.name}"></td>
-        <td th:text="${user_role.address}"></td>
+    <tr th:each="role : ${listUserRoles}">
+        <td th:text="${role.id}"></td>
+        <td th:text="${role.roleName}"></td>
 
-        <td>
-            <!-- Iterate over the list of employees in the department -->
-            <span th:each="user : ${user_role.usersList}" th:text="${user.fullName} + ', '"></span>
-        </td>
-        <td>
             <!-- Edit button -->
-            <form th:action="@{/user_role/showUpdateForm/{id}(id=${user_role.id})}" method="get">
+            <form th:action="@{/role/showUpdateForm/{id}(id=${role.id})}" method="get">
                 <button type="submit">Edit</button>
             </form>
             <!-- Delete button -->
-            <form th:action="@{/user_role/delete/{id}(id=${user_role.id})}" method="post">
+            <form th:action="@{/role/delete/{id}(id=${role.id})}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>

@@ -8,10 +8,10 @@
 
 <!-- Add department form -->
 <h2>Updated New Info Here</h2>
-<form action="@{/user_role/update/{id} (id = *{id})}" object = "${user_role}" method="post">
+<form th:action="@{/role/update/{id} (id = *{id})}" th:object = "${userRole}" method="post">
 
-    <input type="text" field="*{fullName}" placeholder="User Role's Name" >
-    <input type="text" field="*{role}" placeholder=Role" >
+    <input type="text" th:field="*{roleName}" placeholder="RoleName" >
+
     <button type="submit">Updated</button>
 </form>
 

@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRoleService {
-    List<User> getAllUser();
+    List<UserRole> getAllUserRole();
 
-    void saveUser(User user);
+    void saveUserRole(UserRole userRole);
 
-    Optional<User> findByID(long id);
+    Optional<UserRole> findByID(long id);
 
-    void deleteUser(long id);
+    void deleteUserRole(long id);
 }

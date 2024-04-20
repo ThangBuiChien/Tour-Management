@@ -26,23 +26,15 @@ public class User {
     private int phoneNumber;
 
     @ManyToOne
-    @JoinColumn(name = "userrole_id")
     private UserRole userRole;
 
-
-    
-
-    public long getId() {
-        return id;
-    }
+    public long getId() {return id;}
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public String getFullName() {return fullName;}
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
@@ -80,9 +72,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
+    public UserRole getUserRole() {return userRole;}
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;

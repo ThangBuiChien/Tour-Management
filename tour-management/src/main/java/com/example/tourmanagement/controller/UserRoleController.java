@@ -12,7 +12,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("/user_role")
+@RequestMapping("/role")
 public class UserRoleController  {
     private final UserRoleService userRoleService;
 
@@ -22,7 +22,7 @@ public class UserRoleController  {
 
     @GetMapping({"/", ""})
     public String viewHomePage(Model model){
-        return "redirect:/user_role/load";
+        return "redirect:/role/load";
     }
 
     @GetMapping("/load")
@@ -32,15 +32,15 @@ public class UserRoleController  {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listUserRoles",  userRoleService.getAllUserRole());
-        return "user_role/userrole_home";
+        return "role/userrole_home";
 
     }
 
     @PostMapping("/add")
-    public String addUserRole(@ModelAttribute("userRole") UserRole userRole, RedirectAttributes redirectAttributes){
-        this.userRoleService.saveUserRole(userRole);
+    public String addUserRole(@ModelAttribute("role") UserRole role, RedirectAttributes redirectAttributes){
+        this.userRoleService.saveUserRole(role);
         redirectAttributes.addFlashAttribute("successMessage", "User Role added successfully!");
-        return "redirect:/user_role/load";
+        return "redirect:/role/load";
 
     }
 
@@ -49,10 +49,10 @@ public class UserRoleController  {
         Optional<UserRole> userRole = userRoleService.findByID(id);
         if(userRole.isPresent()){
             this.userRoleService.deleteUserRole(id);
-            return "redirect:/user_role";
+            return "redirect:/role";
         }
         else{
-            return "redirect:/user_role";
+            return "redirect:/role";
 
         }
 
@@ -65,17 +65,17 @@ public class UserRoleController  {
         if (optionalUserRole.isPresent()) {
             updatedUserRole.setId(id);
             userRoleService.saveUserRole(updatedUserRole);
-            return "redirect:/user_role";
+            return "redirect:/role";
         } else {
-            return "redirect:/user_role";
+            return "redirect:/role";
         }
     }
 
     @GetMapping("/showAddForm")
     public String showAddForm(Model model){
-        UserRole userRole = new UserRole();
-        model.addAttribute("userRole", userRole);
-        return "user_role/add_userrole";
+        UserRole role = new UserRole();
+        model.addAttribute("role", role);
+        return "role/add_user_role";
     }
 
     @GetMapping("/showUpdateForm/{id}")
@@ -83,12 +83,12 @@ public class UserRoleController  {
         Optional<UserRole> userRole = userRoleService.findByID(id);
         if(userRole.isPresent()){
             model.addAttribute("userRole", userRole.get());
-            return "user_role/updated_userrole";
+            return "role/updated_userrole";
 
         }
         else{
             model.addAttribute("message", "User role is can not found!");
-            return "redirect:/user_role";
+            return "redirect:/role";
         }
 //        model.addAttribute("department", department.get());
 //        return "department/updated_department";
