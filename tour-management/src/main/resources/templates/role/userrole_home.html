@@ -12,11 +12,12 @@
 <body>
 <h2>User Role List</h2>
 <table border="1">
-    <thead>
     <a th:href="@{/role/showAddForm}" class="btn btn-primary"> Add new User Role</a>
 
 
     <span th:text="${successMessage}"></span>
+
+    <thead>
 
     <tr>
         <th>ID</th>
@@ -30,6 +31,7 @@
         <td th:text="${role.id}"></td>
         <td th:text="${role.roleName}"></td>
 
+        <td>
             <!-- Edit button -->
             <form th:action="@{/role/showUpdateForm/{id}(id=${role.id})}" method="get">
                 <button type="submit">Edit</button>

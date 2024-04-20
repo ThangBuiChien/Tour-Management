@@ -6,10 +6,7 @@
 </head>
 <body>
 <h2>Add User!</h2>
-<form th:action="/user/add" th:object="${user}" method="post">
-
-    <label>
-        <input type="text" th:field="*{id}" placeholder="ID" >
+<form th:action="@{/user/add}" th:object="${user}" method="post">
 
 
     <input type="text"  th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
@@ -23,9 +20,9 @@
     <input type="text" th:field="*{phoneNumber}" placeholder="Enter Phone Number" required><br><br>
 
     <select th:field="*{userRole}">
-        <option th:each="userRole : ${userRoles}" th:value="${userRole.getId()}" th:text="${userRole.roleName()}"></option>
+        <option th:each="userRole : ${userRoles}" th:value="${userRole.getId()}" th:text="${userRole.roleName}"></option>
     </select><br><br>
-    </label>
+
     <button type="submit">Add User</button>
 </form>
 </body>
