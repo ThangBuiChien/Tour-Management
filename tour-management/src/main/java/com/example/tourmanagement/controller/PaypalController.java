@@ -1,4 +1,4 @@
-package com.example.paypal.paypal;
+package com.example.tourmanagement.controller;
 
 import com.example.tourmanagement.service.PaypalService;
 import com.paypal.api.payments.Links;
@@ -60,7 +60,7 @@ public class PaypalController {
         return new RedirectView("/payment/error");
     }
 
-    @GetMapping("/payment/success")
+    /*@GetMapping("/payment/success")
     public String paymentSuccess(
             @RequestParam("paymentId") String paymentId,
             @RequestParam("PayerId") String payerId
@@ -73,6 +73,11 @@ public class PaypalController {
         } catch (PayPalRESTException e) {
             log.error("Error occurred: ", e);
         }
+        return "payment/paymentSuccess";
+    }*/
+
+    @GetMapping("/payment/success")
+    public String paymentSuccess() {
         return "payment/paymentSuccess";
     }
 
