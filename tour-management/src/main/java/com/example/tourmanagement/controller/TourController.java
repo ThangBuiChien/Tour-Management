@@ -39,7 +39,7 @@ public class TourController {
 
     @GetMapping({"/", ""})
     public String viewHomePage(Model model){
-        return "redirect:/tour/load";
+        return "redirect:/tour/sorting";
     }
 
     @GetMapping("/load")
