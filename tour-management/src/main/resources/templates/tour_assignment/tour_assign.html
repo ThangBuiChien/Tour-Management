@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assign Tour to Guide</title>
+</head>
+<body>
+
+<h2>Assign Tour to Tour Guide</h2>
+
+<table border="1">
+    <thead>
+
+
+
+    <tr>
+
+        <th>tourName</th>
+        <th>detailRoute</th>
+        <th>lengthTrip</th>
+        <th>tourDescription</th>
+        <th>tourPrice</th>
+        <th>tourCapacity</th>
+        <th>startDate</th>
+        <th>tourStatus</th>
+        <th>register</th>
+        <th>tour guide id</th>
+        <th>name</th>
+        <th>email</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="tourAssignment : ${tourAssignmentList}">
+        <td th:text="${tourAssignment[0].tourName}"></td>
+        <td th:text="${tourAssignment[0].detailRoute.stopLocation}"></td>
+        <td th:text="${tourAssignment[0].lengthTrip}"></td>
+        <td th:text="${tourAssignment[0].tourDescription}"></td>
+        <td th:text="${tourAssignment[0].tourPrice}"></td>
+        <td th:text="${tourAssignment[0].tourCapacity.minMember} + '-' + ${tourAssignment[0].tourCapacity.maxMember}"></td>
+        <td th:text="${tourAssignment[0].startDate}"></td>
+        <td th:text="${tourAssignment[0].tourStatus}"></td>
+        <td th:text="${tourAssignment[0].register}"></td>
+<!--        -->
+        <td th:text="${tourAssignment[1].id}"></td>
+        <td th:text="${tourAssignment[1].name}"></td>
+        <td th:text="${tourAssignment[1].email}"></td>
+
+
+        <!--        <td>-->
+        <!--            &lt;!&ndash; Edit button &ndash;&gt;-->
+        <!--            <form th:action="@{/route/showUpdateForm/{id}(id=${route.id})}" method="get">-->
+        <!--                <button type="submit">Edit</button>-->
+        <!--            </form>-->
+        <!--            &lt;!&ndash; Delete button &ndash;&gt;-->
+        <!--            <form th:action="@{/route/delete/{id}(id=${route.id})}" method="post">-->
+        <!--                <button type="submit">Delete</button>-->
+        <!--            </form>-->
+        <!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+<br/>
+<form th:action="@{/assignments/add}" th:object = "${tourAssignment}" method="post">
+    <select id="tour" th:field="*{tour}">
+        <option th:each="tour : ${tours}" th:value="${tour.getId()}"
+                th:text="${tour.getTourName()}"></option>
+    </select>
+    <select id="tourGuide" th:field="*{tourGuide}">
+        <option th:each="tourGuide : ${tourguides}" th:value="${tourGuide.getId()}"
+                th:text="${tourGuide.getName()}"></option>
+    </select>
+    <button>Add</button>
+</form>
+
+</body>
+</html>
