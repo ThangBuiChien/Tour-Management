@@ -48,6 +48,9 @@
         <td th:text="${tourAssignment[1].id}"></td>
         <td th:text="${tourAssignment[1].name}"></td>
         <td th:text="${tourAssignment[1].email}"></td>
+        <td>
+            <a th:href="@{/assignments/members(tourId=${tourAssignment[0].id})}">View Members</a>
+        </td>
 
 
         <!--        <td>-->
