@@ -12,7 +12,6 @@ public interface TourService {
 
     Page<Tour> getAllTour(Pageable pageable, String keyword);
 
-
     void saveTour(Tour route);
 
     Optional<Tour> findByID(long id);
