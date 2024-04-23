@@ -35,20 +35,13 @@ public class AssignmentController {
     }
 
     @GetMapping
-    public String showTourAssignments(@RequestParam(defaultValue = "0") long tourGuideId,Model model) {
+    public String showTourAssignments(Model model) {
         // Show available tour assignments
-        Object[] tourAssignmentList = null;
+        Object[] tourAssignmentList = tourAssignmentService.getAllTourAssignment().stream().map(i -> Arrays.asList(i.getTour(), i.getTourGuide())).toArray();
+        model.addAttribute("tourAssignmentList", tourAssignmentList);
         // Show adding tour assignment form
         List<Tour> tours = tourService.getAllTour();
         List<TourGuide> tourGuides = tourGuideService.getAllTourGuides();
-        if (tourGuideId == 0)
-        {
-            tourAssignmentList = tourAssignmentService.getAllTourAssignment().stream().map(i -> Arrays.asList(i.getTour(), i.getTourGuide())).toArray();
-        }
-        else {
-            tourAssignmentList = tourAssignmentService.findByTourGuide(tourGuideService.findById(tourGuideId).get()).stream().map(i -> Arrays.asList(i.getTour(), i.getTourGuide())).toArray();
-        }
-        model.addAttribute("tourAssignmentList", tourAssignmentList);
         //
         model.addAttribute("tours", tours);
         model.addAttribute("tourguides", tourGuides);
