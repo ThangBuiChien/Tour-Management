@@ -7,5 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface TourAssignmentRepository extends JpaRepository<TourAssignment, Long> {
-    List<TourAssignment> findByTourGuide(TourGuide tourGuide);
-}
+
+        List<TourAssignment> findByTourGuide(TourGuide tourGuide);
+    }
+

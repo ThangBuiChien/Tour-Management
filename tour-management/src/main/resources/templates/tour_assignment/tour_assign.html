@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assign Tour to Guide</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assign Tour to Guide</title>
 </head>
 <body>
 
@@ -15,6 +15,9 @@
 </select>
 <table border="1">
     <thead>
+
+
+
     <tr>
 
         <th>tourName</th>
@@ -29,6 +32,8 @@
         <th>tour guide id</th>
         <th>name</th>
         <th>email</th>
+
+
     </tr>
     </thead>
     <tbody>
@@ -43,11 +48,14 @@
         <td th:text="${tourAssignment[0].startDate}"></td>
         <td th:text="${tourAssignment[0].tourStatus}"></td>
         <td th:text="${tourAssignment[0].register}"></td>
-        <!--        -->
+<!--        -->
         <td th:text="${tourAssignment[1].id}"></td>
         <td th:text="${tourAssignment[1].name}"></td>
         <td th:text="${tourAssignment[1].email}"></td>
-        .....
+        <td>
+            <a th:href="@{/assignments/members(tourId=${tourAssignment[0].id})}">View Members</a>
+        </td>
+
 
         <!--        <td>-->
         <!--            &lt;!&ndash; Edit button &ndash;&gt;-->
@@ -63,7 +71,7 @@
     </tbody>
 </table>
 <br/>
-<form th:action="@{/assignments/add}" th:object="${tourAssignment}" method="post">
+<form th:action="@{/assignments/add}" th:object = "${tourAssignment}" method="post">
     <select id="tour" th:field="*{tour}">
         <option th:each="tour : ${tours}" th:value="${tour.getId()}"
                 th:text="${tour.getTourName()}"></option>
@@ -80,14 +88,14 @@
         window.location.href = '?tourGuideId=' + selectedValue;
     }
     function setSelectedTourGuide() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const tourGuideId = urlParams.get('tourGuideId'); // Get the tourGuideId from URL
-    const selectElement = document.getElementById('tourGuideSelect');
-    selectElement.value = tourGuideId || '0'; // Set the default value or '0' if none is found
-}
+        const urlParams = new URLSearchParams(window.location.search);
+        const tourGuideId = urlParams.get('tourGuideId'); // Get the tourGuideId from URL
+        const selectElement = document.getElementById('tourGuideSelect');
+        selectElement.value = tourGuideId || '0'; // Set the default value or '0' if none is found
+    }
 
-// Call the function to set the selected value on page load
-window.onload = setSelectedTourGuide;
+    // Call the function to set the selected value on page load
+    window.onload = setSelectedTourGuide;
 </script>
 </body>
 </html>

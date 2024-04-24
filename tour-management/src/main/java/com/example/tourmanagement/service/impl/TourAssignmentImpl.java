@@ -1,9 +1,9 @@
 package com.example.tourmanagement.service.impl;
 
 import com.example.tourmanagement.model.TourAssignment;
-import com.example.tourmanagement.model.TourGuide;
 import com.example.tourmanagement.repository.TourAssignmentRepository;
 import com.example.tourmanagement.service.TourAssignmentService;
+import com.example.tourmanagement.model.TourGuide;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +26,6 @@ public class TourAssignmentImpl implements TourAssignmentService {
     public void save(TourAssignment tourAssignment) {
         repo.save(tourAssignment);
     }
-
     public  List<TourAssignment> findByTourGuide(TourGuide tourGuide){
         return repo.findByTourGuide(tourGuide);
     }
