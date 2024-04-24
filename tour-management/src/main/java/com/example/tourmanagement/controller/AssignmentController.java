@@ -1,21 +1,21 @@
 package com.example.tourmanagement.controller;
 
-import com.example.tourmanagement.model.Invoice;
 import com.example.tourmanagement.model.Tour;
 import com.example.tourmanagement.model.TourAssignment;
 import com.example.tourmanagement.model.TourGuide;
 import com.example.tourmanagement.service.TourAssignmentService;
 import com.example.tourmanagement.service.TourGuideService;
 import com.example.tourmanagement.service.TourService;
-import com.example.tourmanagement.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.expression.Lists;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/assignments")
@@ -23,14 +23,12 @@ public class AssignmentController {
 
     private final TourAssignmentService tourAssignmentService;
     private final TourService tourService;
-    private final InvoiceService invoiceService;
     private final TourGuideService tourGuideService;
 
     @Autowired
-    public AssignmentController(TourAssignmentService tourAssignmentService, TourService tourService, InvoiceService invoiceService, TourGuideService tourGuideService) {
+    public AssignmentController(TourAssignmentService tourAssignmentService, TourService tourService, TourGuideService tourGuideService) {
         this.tourAssignmentService = tourAssignmentService;
         this.tourService = tourService;
-        this.invoiceService = invoiceService;
         this.tourGuideService = tourGuideService;
     }
 
@@ -66,17 +64,6 @@ public class AssignmentController {
         return "redirect:/assignments";
     }
 
-    @GetMapping("/members")
-    public String showTourMembers(@RequestParam("tourId") Long tourId, Model model) {
-        Tour tour = tourService.findByID(tourId).orElseThrow(() -> new RuntimeException("Tour not found!"));
-        List<Invoice> invoices = invoiceService.findInvoicesByTour(tour);
-        List<String> members = invoices.stream()
-                .flatMap(invoice -> invoice.getListOfMember().stream())
-                .distinct()
-                .collect(Collectors.toList());
-        model.addAttribute("members", members);
-        return "tour_assignment/tour_members";
-    }
 
 
 }
