@@ -39,7 +39,7 @@ public class TourController {
 
     @GetMapping({"/", ""})
     public String viewHomePage(Model model){
-        return "redirect:/tour/load";
+        return "redirect:/tour/sorting";
     }
 
     @GetMapping("/load")
@@ -114,7 +114,7 @@ public class TourController {
         if (optionalDepartment.isPresent()) {
             updatedTour.setId(id);
             tourService.saveTour(updatedTour);
-            return "redirect:/tour";
+            return "redirect:/tour/sorting";
         } else {
             return "redirect:/tour";
         }
@@ -154,18 +154,24 @@ public class TourController {
         return "tour/available_tours";
     }
 
-//    @GetMapping("/showUpdateForm/{id}")
-//    public String showUpdateForm(Model model, @PathVariable long id) {
-//        Optional<Route> route = routeServices.findByID(id);
-//        if (route.isPresent()) {
-//            model.addAttribute("route", route.get());
-//            return "route/updated_route";
-//
-//        } else {
-//            model.addAttribute("message", "Detail Route is can not found!");
-//            return "redirect:/route";
-//        }
-//    }
+    @GetMapping("/showUpdateForm/{id}")
+    public String showUpdateForm(Model model, @PathVariable long id) {
+        Optional<Tour> tour = tourService.findByID(id);
+        if (tour.isPresent()) {
+            model.addAttribute("tour", tour.get());
+
+            List<Route> routes = routeService.getAllRoute();
+            model.addAttribute("routes", routes);
+            List<Capacity> capacities = capacityService.getAllCapacity();
+            model.addAttribute("capacities", capacities);
+
+            return "tour/updated_tour";
+
+        } else {
+            model.addAttribute("message", "Detail Route is can not found!");
+            return "redirect:/tour";
+        }
+    }
 
 
 }
