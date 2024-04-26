@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h2 th:text="${tour.getDetailRoute().stopLocation}"></h2>
+    <p th:text="'Start Date ' + ${tour.getStartDate()}"></p>
+    <p th:text="'Price: $' + ${tour.tourPrice}"></p>
+    <a th:href="@{/book/{id}(id=${tour.id})}">Book Now</a>
+    <p th:text="'Desciption Of the trip: ' + ${tour.getTourDescription()}"></p>
+
+
+</div>
+
+
+</body>
+</html>

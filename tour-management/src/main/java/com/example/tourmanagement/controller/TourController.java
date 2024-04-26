@@ -147,9 +147,10 @@ public class TourController {
 
     @GetMapping("/available")
     public String viewAvailableTours(Model model) {
-        List<Tour> availableTours = tourService.getAllTour().stream()
-                .filter(tour -> "available".equalsIgnoreCase(tour.getTourStatus()))
-                .toList();
+//        List<Tour> availableTours = tourService.getAllTour().stream()
+//                .filter(tour -> "available".equalsIgnoreCase(tour.getTourStatus()))
+//                .toList();
+        List<Tour> availableTours = tourService.getAllTour();
         model.addAttribute("availableTours", availableTours);
         return "tour/available_tours";
     }
@@ -172,6 +173,21 @@ public class TourController {
             return "redirect:/tour";
         }
     }
+
+    @GetMapping("/detailed/{id}")
+    public String showDetail(Model model, @PathVariable long id) {
+        Optional<Tour> tour = tourService.findByID(id);
+        if (tour.isPresent()) {
+            model.addAttribute("tour", tour.get());
+            return "tour/detailed_tour";
+
+        } else {
+            model.addAttribute("message", "Detail Route is can not found!");
+            return "tour/available_tours";
+        }
+    }
+
+
 
 
 }
