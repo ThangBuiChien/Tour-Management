@@ -92,16 +92,17 @@
         <td th:text="${tour.register}"></td>
 
 
-<!--        <td>-->
-<!--            &lt;!&ndash; Edit button &ndash;&gt;-->
-<!--            <form th:action="@{/route/showUpdateForm/{id}(id=${route.id})}" method="get">-->
-<!--                <button type="submit">Edit</button>-->
-<!--            </form>-->
-<!--            &lt;!&ndash; Delete button &ndash;&gt;-->
-<!--            <form th:action="@{/route/delete/{id}(id=${route.id})}" method="post">-->
-<!--                <button type="submit">Delete</button>-->
-<!--            </form>-->
-<!--        </td>-->
+        <td>
+            <!-- Edit button -->
+            <form th:action="@{/tour/showUpdateForm/{id}(id=${tour.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+            <!-- Delete button -->
+            <form th:action="@{/tour/delete/{id}(id=${tour.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+
     </tr>
     </tbody>
 </table>
@@ -115,7 +116,7 @@
             <a class="page-link" th:href="@{/tour/sorting(page=${pageNumber}, size=${size}, keyword=${keyword})}" th:text="${pageNumber + 1}"></a>
         </li>
         <li class="page-item">
-            <a class="page-link" th:href="@{tour//sorting(page=${currentPage + 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage < totalPages - 1}">Next</a>
+            <a class="page-link" th:href="@{/tour/sorting(page=${currentPage + 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage < totalPages - 1}">Next</a>
         </li>
     </ul>
 </nav>

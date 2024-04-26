@@ -45,6 +45,7 @@
             <form th:action="@{/route/showUpdateForm/{id}(id=${route.id})}" method="get">
                 <button type="submit">Edit</button>
             </form>
+
             <!-- Delete button -->
             <form th:action="@{/route/delete/{id}(id=${route.id})}" method="post">
                 <button type="submit">Delete</button>

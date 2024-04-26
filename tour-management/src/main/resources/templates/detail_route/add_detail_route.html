@@ -6,12 +6,15 @@
 </head>
 <body>
 
-<h2>Add Department</h2>
+<h2>Add detail route</h2>
 <form th:action="@{/detail/add}" th:object = "${detailRoute}" method="post">
 
     <input type="number" th:field="*{lengthTrip}" placeholder="detailRoute's length Trip" >
     <input type="text" th:field="*{stopLocation}" placeholder="detailRoute's stop Location " >
 <!--    <input type="text" th:field="*{detailTrip}" placeholder="detailRoute's detailTrip" >-->
+
+    <label for="shortDescription">Short Description:</label><br>
+    <textarea id="shortDescription" th:field="*{shortDetailTrip}" name="shortDescription" rows="4" cols="50"></textarea><br><br>
 
     <label for="description">Description:</label><br>
     <textarea id="description" th:field="*{detailTrip}" name="description" rows="4" cols="50"></textarea><br><br>
