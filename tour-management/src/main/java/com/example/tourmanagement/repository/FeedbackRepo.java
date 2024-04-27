@@ -1,9 +1,9 @@
 package com.example.tourmanagement.repository;
 
-import com.example.tourmanagement.model.User;
+import com.example.tourmanagement.model.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface FeedbackRepo extends JpaRepository<Feedback, Long> {
 }
