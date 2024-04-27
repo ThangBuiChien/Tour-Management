@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Add TOUR!</h2>
+<form th:action="@{/tour/update/{id} (id=${tour.id})}" th:object = "${tour}" method="post">
+
+    <!--    <input type="text" th:field="*{detailRoute}" placeholder="EMP's Name" >-->
+
+    <!-- Dropdown list of existing departments -->
+    <!--    <select th:field="*{tourName}">-->
+    <!--        <option th:each="route : ${routes}" th:value="${route.getId()}"-->
+    <!--                th:text="${route.startLocation} + '&ndash;&gt;' + ${route.endLocation}"></option>-->
+    <!--    </select>-->
+
+    <!--    <select id="detailRouteSelect" name="detailRoute">-->
+    <!--        &lt;!&ndash; Options will be populated dynamically &ndash;&gt;-->
+    <!--    </select>-->
+
+    <!-- Dropdown list of existing routes -->
+    <select id="routeSelect" th:field="*{tourName}">
+        <option th:each="route : ${routes}" th:value="${route.id}"
+                th:text="${route.startLocation} + '-->' + ${route.endLocation}">
+
+        </option>
+    </select>
+
+    <!-- Empty dropdown list for detail routes -->
+    <select id="detailRouteSelect" name="detailRoute"  th:field="*{detailRoute}">
+        <!-- Options will be populated dynamically -->
+    </select>
+
+    <select id="tourCapacity" th:field="*{tourCapacity}">
+        <option th:each="capacity : ${capacities}" th:value="${capacity.id}"
+                th:text="${capacity.minMember} + '--' + ${capacity.maxMember}"></option>
+    </select>
+
+    <input type="number" th:field="*{tourPrice}" placeholder="Tour's Price" >
+    <input type="date" th:field="*{startDate}" placeholder="Tour's Start Date" >
+
+
+    <button type="submit">Add</button>
+</form>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    // JavaScript function to fetch detail routes based on selected route
+    function fetchDetailRoutes() {
+        var routeId = document.getElementById('routeSelect').value;
+        var detailRouteSelect = document.getElementById('detailRouteSelect');
+
+        // AJAX call to fetch detail routes based on selected route
+        fetch('/tour/getDetailRoutes?routeId=' + routeId)
+            .then(response => response.json())
+            .then(data => {
+                // Clear existing options
+                detailRouteSelect.innerHTML = '';
+
+                // Add new options based on fetched data
+                data.forEach(detailRoute => {
+                    var option = document.createElement('option');
+                    option.value = detailRoute.id;
+                    option.text = detailRoute.stopLocation;
+                    detailRouteSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error('Error fetching detail routes:', error));
+    }
+
+    // Event listener to trigger fetchDetailRoutes() when route selection changes
+    document.getElementById('routeSelect').addEventListener('change', fetchDetailRoutes);
+
+    // Trigger fetchDetailRoutes() initially to populate the detail route select based on the default selection
+    fetchDetailRoutes();
+    /*]]>*/
+</script>
+
+</body>
+</html>
