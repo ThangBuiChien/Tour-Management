@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("/payment")
+@RequestMapping("/payment/payment_home")
 public class PaymentController {
 
     private final PaymentService paymentService;

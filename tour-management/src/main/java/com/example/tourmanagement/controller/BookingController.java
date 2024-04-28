@@ -40,7 +40,7 @@ public class BookingController {
     public String submitBooking(@ModelAttribute Invoice invoice, HttpSession session, RedirectAttributes redirectAttributes) {
         session.setAttribute("currentInvoice", invoice);
         redirectAttributes.addFlashAttribute("successMessage", "Booking submitted successfully!");
-        return "redirect:/payment";
+        return "redirect:/payment/payment_home";
     }
 
     @GetMapping("/confirm")

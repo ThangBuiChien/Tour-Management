@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+</head>
+<body>
+
+    <li th:each="invoice : ${listInvoice}">
+        <ul>User: <span th:text="${invoice.user}"></span></ul>
+        <ul>Tour: <span th:text="${invoice.tour}"></span></ul>
+        <ul>Date: <span th:text="${invoice.date}"></span></ul>
+        <ul>Total Price: <span th:text="${invoice.totalPrice}"></span></ul>
+    </li>
+
+</body>
+</html>
