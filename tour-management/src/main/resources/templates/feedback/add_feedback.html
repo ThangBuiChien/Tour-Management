@@ -9,8 +9,8 @@
 
     <input type="email" th:field="*{comment}" placeholder="Write your comment" required><br><br>
 
-    <select th:field="*{user}">
-        <option th:each="user : ${users}" th:value="${user.getId()}" th:text="${user.fullName}"></option>
+    <select th:field="*{userModel}">
+        <option th:each="userModel : ${userModels}" th:value="${userModel.getId()}" th:text="${userModel.fullName}"></option>
     </select><br><br>
 
     <select th:field="*{tour}">

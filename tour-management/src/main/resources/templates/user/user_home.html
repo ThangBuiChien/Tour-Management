@@ -13,7 +13,7 @@
 <h2>UserRole List</h2>
 <table border="1">
     <thead>
-    <a th:href="@{/user/showAddForm}" class="btn btn-primary"> Add new User</a>
+    <a th:href="@{/userModel/showAddForm}" class="btn btn-primary"> Add new User</a>
 
 
     <span th:text="${successMessage}"></span>
@@ -26,22 +26,22 @@
     </thead>
     <tbody>
     <!-- Iterate over the list of departments -->
-    <tr th:each="user : ${ListUsers}">
-        <td th:text="${user.getId()}"></td>
-        <td th:text="${user.getFullName()}"></td>
-        <td th:text="${user.getEmail()}"></td>
-        <td th:text="${user.getBirthDate()}"></td>
-        <td th:text="${user.getCitizenID()}"></td>
-        <td th:text="${user.getPhoneNumber()}"></td>
-        <td th:text="${user.getUserRole().getRoleName()}"></td>
+    <tr th:each="userModel : ${ListUsers}">
+        <td th:text="${userModel.getId()}"></td>
+        <td th:text="${userModel.getFullName()}"></td>
+        <td th:text="${userModel.getEmail()}"></td>
+        <td th:text="${userModel.getBirthDate()}"></td>
+        <td th:text="${userModel.getCitizenID()}"></td>
+        <td th:text="${userModel.getPhoneNumber()}"></td>
+        <td th:text="${userModel.getUserRole().getRoleName()}"></td>
 
         <td>
             <!-- Edit button -->
-            <form th:action="@{/user/showUpdateForm/{id}(id=${user.id})}" method="get">
+            <form th:action="@{/userModel/showUpdateForm/{id}(id=${userModel.id})}" method="get">
                 <button type="submit">Edit</button>
             </form>
             <!-- Delete button -->
-            <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post">
+            <form th:action="@{/userModel/delete/{id}(id=${userModel.id})}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>

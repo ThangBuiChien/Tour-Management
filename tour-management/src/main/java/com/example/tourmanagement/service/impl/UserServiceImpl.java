@@ -1,8 +1,12 @@
 package com.example.tourmanagement.service.impl;
 
-import com.example.tourmanagement.model.User;
+import com.example.tourmanagement.model.UserModel;
+import com.example.tourmanagement.model.enumRole;
 import com.example.tourmanagement.repository.UserRepo;
 import com.example.tourmanagement.service.UserService;
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,23 +16,30 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepo repo;
 
-    public UserServiceImpl(UserRepo repo){
+
+    private final PasswordEncoder passwordEncoder;
+
+
+    public UserServiceImpl(UserRepo repo, PasswordEncoder passwordEncoder){
         this.repo = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     @Override
-    public List<User> getAllUser() {
+    public List<UserModel> getAllUser() {
         return this.repo.findAll();
     }
 
     @Override
-    public void saveUser(User user) {
-        this.repo.save(user);
+    public void saveUser(UserModel userModel) {
+        userModel.setUserRole(enumRole.USER);
+        userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+        this.repo.save(userModel);
     }
 
     @Override
-    public Optional<User> findByID(long id) {
+    public Optional<UserModel> findByID(long id) {
         return this.repo.findById(id);
     }
 
@@ -36,5 +47,19 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(long id) {
         this.repo.deleteById(id);
 
+    }
+
+    @Override
+    public Optional<UserModel> loadByEmail(String email) {
+        return repo.findByEmail(email);
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        UserModel user = new UserModel();
+        user.setUserRole(enumRole.ADMIN);
+        user.setEmail("admin");
+        user.setPassword(passwordEncoder.encode("admin"));
+        this.repo.save(user);
     }
 }
