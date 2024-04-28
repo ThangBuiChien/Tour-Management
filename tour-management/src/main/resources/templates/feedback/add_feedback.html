@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/feedback/add}" th:object="${feedback}" method="post">
+
+    <input type="email" th:field="*{comment}" placeholder="Write your comment" required><br><br>
+
+    <select th:field="*{user}">
+        <option th:each="user : ${users}" th:value="${user.getId()}" th:text="${user.fullName}"></option>
+    </select><br><br>
+
+    <select th:field="*{tour}">
+        <option th:each="tour : ${tours}" th:value="${tours.getId()}"></option>
+    </select><br><br>
+
+    <button type="submit">Add User</button>
+</form>
+</body>
+</html>

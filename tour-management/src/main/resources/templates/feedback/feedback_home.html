@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Main</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<h2>COMMENT</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/feedback/showAddForm}" class="btn btn-primary"> Add new Comment</a>
+    <tr>
+        <th>ID</th>
+        <th>Comment</th>
+        <th>Rating</th>
+        <th>User</th>
+        <th>Tour</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="feedback : ${ListFeedbacks}">
+        <td th:text="${feedback.getId()}"></td>
+        <td th:text="${feedback.getComment()()}"></td>
+        <td th:text="${feedback.getRating()()}"></td>
+        <td th:text="${feedback.getUser().getId()}"></td>
+        <td th:text="${feedback.getTour().getId()}"></td>
+
+        <td>
+            <!-- Delete button -->
+            <form th:action="@{/feedback/delete/{id}(id=${feedback.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

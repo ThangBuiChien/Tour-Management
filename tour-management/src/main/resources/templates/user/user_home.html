@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Main</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<h2>UserRole List</h2>
+<table border="1">
+    <thead>
+    <a th:href="@{/user/showAddForm}" class="btn btn-primary"> Add new User</a>
+
+
+    <span th:text="${successMessage}"></span>
+
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate over the list of departments -->
+    <tr th:each="user : ${ListUsers}">
+        <td th:text="${user.getId()}"></td>
+        <td th:text="${user.getFullName()}"></td>
+        <td th:text="${user.getEmail()}"></td>
+        <td th:text="${user.getBirthDate()}"></td>
+        <td th:text="${user.getCitizenID()}"></td>
+        <td th:text="${user.getPhoneNumber()}"></td>
+        <td th:text="${user.getUserRole().getRoleName()}"></td>
+
+        <td>
+            <!-- Edit button -->
+            <form th:action="@{/user/showUpdateForm/{id}(id=${user.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+            <!-- Delete button -->
+            <form th:action="@{/user/delete/{id}(id=${user.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Add department form-->
+<!--<h2>Add Department</h2>-->
+<!--<form th:action="@{/department/add}" method="post" th:object="${department}">-->
+<!--    <label for="name">Name:</label>-->
+<!--    <input type="text" id="name" name="name" th:field="*{name}">-->
+<!--    <button type="submit">Add</button>-->
+<!--</form>-->
+</body>
+</html>
