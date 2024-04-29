@@ -13,10 +13,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
-    private final UserService userService;
+    private final UserRepo repo;
 
-    public DataInitializer(UserService userService) {
-        this.userService = userService;
+    private final PasswordEncoder passwordEncoder;
+
+
+    public DataInitializer(UserRepo repo, PasswordEncoder passwordEncoder) {
+        this.repo = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -27,11 +31,11 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
         // Check if ddl-auto is set to create or update
         if ("create".equalsIgnoreCase(ddlAuto) ) {
             // Initialize your data here
-            UserModel user = new UserModel();
-            user.setEmail("admin");
-            user.setPassword("admin");
-            user.setUserRole(enumRole.ADMIN);
-            userService.saveUser(user);
+            UserModel userModel = new UserModel();
+            userModel.setUserRole(enumRole.ADMIN);
+            userModel.setEmail("admin");
+            userModel.setPassword(passwordEncoder.encode("admin"));
+            this.repo.save(userModel);
         }
 
     }
