@@ -33,6 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveUser(UserModel userModel) {
+        userModel.setFullName(userModel.getEmail());
         userModel.setUserRole(enumRole.USER);
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
         this.repo.save(userModel);
@@ -54,12 +55,5 @@ public class UserServiceImpl implements UserService {
         return repo.findByEmail(email);
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        UserModel user = new UserModel();
-        user.setUserRole(enumRole.ADMIN);
-        user.setEmail("admin");
-        user.setPassword(passwordEncoder.encode("admin"));
-        this.repo.save(user);
-    }
+
 }
