@@ -2,11 +2,12 @@ package com.example.tourmanagement.controller;
 
 import com.example.tourmanagement.model.Feedback;
 import com.example.tourmanagement.model.Tour;
-import com.example.tourmanagement.model.User;
+import com.example.tourmanagement.model.UserModel;
 import com.example.tourmanagement.service.FeedbackService;
 import com.example.tourmanagement.service.TourService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/feedback")
+@PreAuthorize("hasRole('ADMIN')")
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
@@ -72,8 +74,8 @@ public class FeedbackController {
         Feedback feedback = new Feedback();
         model.addAttribute("feedback", feedback);
 
-        List<User> users = userService.getAllUser();
-        model.addAttribute("users",users);
+        List<UserModel> userModels = userService.getAllUser();
+        model.addAttribute("users", userModels);
 
         List<Tour> tours = tourService.getAllTour();
         model.addAttribute("tours",tours);

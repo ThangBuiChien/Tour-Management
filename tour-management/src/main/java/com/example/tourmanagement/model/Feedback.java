@@ -14,7 +14,7 @@ public class Feedback {
     private int rating;
 
     @ManyToOne
-    private User user;
+    private UserModel userModel;
 
     @ManyToOne
     private Tour tour;
@@ -43,10 +43,10 @@ public class Feedback {
         this.rating = rating;
     }
 
-    public User getUser() {return user;}
+    public UserModel getUserModel() {return userModel;}
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 
     public Tour getTour() {return tour;}

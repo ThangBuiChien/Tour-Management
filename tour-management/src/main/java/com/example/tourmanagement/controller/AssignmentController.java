@@ -7,6 +7,7 @@ import com.example.tourmanagement.service.TourAssignmentService;
 import com.example.tourmanagement.service.TourGuideService;
 import com.example.tourmanagement.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/assignments")
+@PreAuthorize("hasRole('ADMIN')")
 public class AssignmentController {
 
     private final TourAssignmentService tourAssignmentService;

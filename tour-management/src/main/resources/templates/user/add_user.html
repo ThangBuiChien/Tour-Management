@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Add User!</h2>
-<form th:action="@{/user/add}" th:object="${user}" method="post">
+<form th:action="@{/userModel/add}" th:object="${user}" method="post">
 
 
     <input type="text"  th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
