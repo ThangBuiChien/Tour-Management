@@ -17,7 +17,7 @@ public class Invoice {
     private LocalDate date;
 
     @ManyToOne
-    private User user;
+    private UserModel userModel;
 
     @ManyToOne
     private Tour tour;
@@ -51,12 +51,12 @@ public class Invoice {
         this.date = date;
     }
 
-    public User getUser() {
-        return user;
+    public UserModel getUserModel() {
+        return userModel;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
     }
 
     public Tour getTour() {

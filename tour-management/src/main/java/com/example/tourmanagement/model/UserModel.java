@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class User {
+public class UserModel {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long id;
@@ -13,8 +13,11 @@ public class User {
     @Column(name = "fullName")
     private String fullName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique=true)
     private String email;
+
+    @Column(name="password")
+    private String password;
 
     @Column(name = "birthDate")
     private LocalDate birthDate;
@@ -25,8 +28,15 @@ public class User {
     @Column(name = "phoneNumber")
     private int phoneNumber;
 
-    @ManyToOne
-    private UserRole userRole;
+    private enumRole userRole;
+
+    public enumRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(enumRole userRole) {
+        this.userRole = userRole;
+    }
 
     public long getId() {return id;}
 
@@ -72,9 +82,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public UserRole getUserRole() {return userRole;}
+    public String getPassword() {
+        return password;
+    }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

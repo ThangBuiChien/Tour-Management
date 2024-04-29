@@ -1,16 +1,20 @@
 package com.example.tourmanagement.service;
 
-import com.example.tourmanagement.model.User;
+import com.example.tourmanagement.model.UserModel;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-    List<User> getAllUser();
+    List<UserModel> getAllUser();
 
-    void saveUser(User user);
+    void saveUser(UserModel userModel);
 
-    Optional<User> findByID(long id);
+    Optional<UserModel> findByID(long id);
 
     void deleteUser(long id);
+
+    Optional<UserModel> loadByEmail(String email);
+
+
 }
