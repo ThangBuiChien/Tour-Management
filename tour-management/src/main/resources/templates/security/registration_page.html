@@ -5,8 +5,13 @@
     <title>Registration page</title>
 </head>
 <body>
+
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}"></p>
+</div>
+
 <form th:action="@{/user/registration}" method="post" th:object="${user}">
-    <input type="text" th:field="*{email}" placeholder="Email" >
+    <input type="email" th:field="*{email}" placeholder="Email" >
     <input type="password" th:field="*{password}" placeholder="Password" >
 
     <input type="submit" value="Register">

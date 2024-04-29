@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -95,17 +96,30 @@ public class UserController {
     }
 
     @GetMapping("/registration")
-    public String getRegistrationPage(Model model) {
+    public String getRegistrationPage(Model model, RedirectAttributes redirectAttributes) {
         UserModel user = new UserModel();
         model.addAttribute("user", user);
+
+        if (redirectAttributes.containsAttribute("errorMessage")) {
+            model.addAttribute("errorMessage", redirectAttributes.getAttribute("errorMessage"));
+        }
         return "security/registration_page";
     }
 
     @PostMapping("/registration")
-    public String registerUser(@ModelAttribute UserModel user) {
-        user.setUserRole(enumRole.USER);
-        userService.saveUser(user);
-        return "redirect:/user/login?success";
+    public String registerUser(@ModelAttribute UserModel user, RedirectAttributes redirectAttributes) {
+        Optional<UserModel> currentUser = userService.loadByEmail(user.getEmail());
+        if(currentUser.isEmpty()) {
+            user.setUserRole(enumRole.USER);
+            userService.saveUser(user);
+
+            return "redirect:/user/login?success";
+        }
+        else{
+            String message = "the email must be unique";
+            redirectAttributes.addFlashAttribute("errorMessage", message);
+            return "redirect:/user/registration";
+        }
     }
 }
 
