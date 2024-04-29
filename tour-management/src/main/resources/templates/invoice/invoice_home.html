@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>Invoice</title>
 </head>
 <body>
-
-    <li th:each="invoice : ${listInvoice}">
-        <ul>User: <span th:text="${invoice.user}"></span></ul>
-        <ul>Tour: <span th:text="${invoice.tour}"></span></ul>
-        <ul>Date: <span th:text="${invoice.date}"></span></ul>
-        <ul>Total Price: <span th:text="${invoice.totalPrice}"></span></ul>
+<h1>Invoices</h1>
+<ul th:each="invoice : ${listInvoice}">
+    <li>User: <span th:text="${invoice.userModel.fullName}"></span></li>
+    <li>Tour: <span th:text="${invoice.tour.tourName}"></span></li>
+    <li>Date: <span th:text="${invoice.date}"></span></li>
+    <li>Status: <span th:text="${invoice.status}"></span></li>
+    <li>Total Price: <span th:text="${invoice.totalPrice}"></span></li>
+    <!-- Admin controls for updating status -->
+    <li sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post">
+            <select name="status">
+                <option th:each="status : ${T(com.example.tourmanagement.model.InvoiceStatus).values()}"
+                        th:value="${status}" th:text="${status}"
+                        th:selected="${status.name() == invoice.status.name()}"></option>
+            </select>
+            <button type="submit">Update Status</button>
+        </form>
     </li>
-
+</ul>
 </body>
 </html>

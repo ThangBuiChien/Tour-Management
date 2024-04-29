@@ -74,4 +74,26 @@ public class Invoice {
     public void setListOfMember(List<String> listOfMember) {
         this.listOfMember = listOfMember;
     }
+
+    @Enumerated(EnumType.STRING)
+    private InvoiceStatus status;
+
+    public InvoiceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(InvoiceStatus status) {
+        this.status = status;
+    }
+    @ManyToOne
+    private UserModel user; // Make sure it's named 'user' or adjust your template accordingly
+
+    // Getters and Setters
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
 }

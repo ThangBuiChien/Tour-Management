@@ -1,6 +1,7 @@
 package com.example.tourmanagement.service.impl;
 
 import com.example.tourmanagement.model.Invoice;
+import com.example.tourmanagement.model.InvoiceStatus;
 import com.example.tourmanagement.repository.InvoiceRepo;
 import com.example.tourmanagement.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,14 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Transactional(readOnly = true)
     public Invoice findInvoiceById(Long id) {
         return invoiceRepository.findById(id).orElseThrow(() -> new RuntimeException("Invoice not found!"));
+    }
+
+    @Override
+    @Transactional
+    public void updateInvoiceStatus(Long invoiceId, InvoiceStatus status) {
+        Invoice invoice = invoiceRepository.findById(invoiceId)
+                .orElseThrow(() -> new RuntimeException("Invoice not found!"));
+        invoice.setStatus(status);
+        invoiceRepository.save(invoice);
     }
 }
