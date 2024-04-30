@@ -10,7 +10,8 @@
     </style>
 </head>
 <body>
-<form th:action="@{/book/submit}" th:object="${invoice}" method="post">
+<form action="#" th:action="@{/book/submit}" th:object="${invoice}" method="post">
+    <input type="hidden" th:field="*{tour.id}" />
     <div>
         <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
     </div>

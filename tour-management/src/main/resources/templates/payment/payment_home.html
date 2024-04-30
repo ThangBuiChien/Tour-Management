@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Payment</title>
-</head>
-<body>
-
-<form th:action="@{/payment/submit}" th:object="${payment}" method="post">
+<form th:action="@{/invoice/submit}" th:object="${invoice}" method="post">
     <div>
-        <label>Payment account:</label>
+        <label>Payment Account:</label>
         <input type="number" name="paymentAccount" required />
     </div>
     <div>
@@ -16,17 +8,12 @@
         <input type="text" name="payerName" required />
     </div>
     <div>
-        <label>Amount: <span th:text="${invoice.total_price}">Price</span></label>
+        <label>Amount: <span th:text="${currentInvoice.totalPrice}">Price</span></label>
     </div>
     <div>
-        <label>Payment date:</label>
+        <label>Payment Date:</label>
         <input type="date" name="paymentDate" required />
     </div>
-    <div>
-        <label>Description:</label>
-        <input type="text" name="description" required />
-    </div>
-    <button type="confirm">Submit Payment</button>
+
+    <button type="submit">Submit Payment</button>
 </form>
-</body>
-</html>

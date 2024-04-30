@@ -12,4 +12,6 @@ public interface InvoiceService {
     Invoice findInvoiceById(Long id);
 
     void updateInvoiceStatus(Long invoiceId, InvoiceStatus status);
+
+    Invoice updateInvoice(Invoice invoice);
 }
