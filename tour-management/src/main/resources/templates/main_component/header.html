@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Header</title>
-    <link rel="stylesheet" href="../maincss.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -12,7 +12,7 @@
     <div th:fragment="header">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom bg-custom">
             <a href="/" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none">
-                <img src="../../images/waylingo_logo.png" class="rounded mx-auto d-block w-50" alt="...">
+                <img th:src="@{/img/waylingo_logo.png}" class="rounded mx-auto d-block w-50" alt="...">
             </a>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
