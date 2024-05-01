@@ -11,7 +11,7 @@
 </head>
 <body>
 <form action="#" th:action="@{/book/submit}" th:object="${invoice}" method="post">
-    <input type="hidden" th:field="*{tour.id}" />
+    <input type="hidden" th:value="${tour.id}" name="tourId" />
     <div>
         <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
     </div>

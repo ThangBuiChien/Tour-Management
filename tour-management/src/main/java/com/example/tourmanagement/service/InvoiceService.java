@@ -14,4 +14,5 @@ public interface InvoiceService {
     void updateInvoiceStatus(Long invoiceId, InvoiceStatus status);
 
     Invoice updateInvoice(Invoice invoice);
+
 }
