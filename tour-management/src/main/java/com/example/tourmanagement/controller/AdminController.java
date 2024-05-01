@@ -12,7 +12,7 @@ public class AdminController {
     public String viewHomePage(Model model){
 
 
-        return "/main_component/index";
+        return "index";
 
 
     }
