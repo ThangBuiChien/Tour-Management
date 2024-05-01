@@ -1,4 +1,4 @@
-<form th:action="@{/invoice/submit}" th:object="${invoice}" method="post">
+<form th:action="@{/book/submitPayment}" th:object="${invoice}" method="post">
     <div>
         <label>Payment Account:</label>
         <input type="number" name="paymentAccount" required />

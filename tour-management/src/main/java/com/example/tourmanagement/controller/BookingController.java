@@ -86,9 +86,10 @@
             try {
                 invoiceService.saveInvoice(invoice);
                 session.setAttribute("currentInvoice", invoice);
+                session.setAttribute("currentInvoiceId", invoice.getId());
                 model.addAttribute("invoice", invoice);
                 redirectAttributes.addFlashAttribute("successMessage", "Booking submitted successfully!");
-                return "redirect:/payment/payment_home?invoiceId=" + invoice.getId() + "&tourId=" + tour.getId();
+                return "redirect:/book/payment/payment_home?invoiceId=" + invoice.getId() + "&tourId=" + tour.getId();
 
             } catch (Exception e) {
                 System.err.println("Error saving invoice: " + e.getMessage());
@@ -99,9 +100,13 @@
 
         @GetMapping("/payment/payment_home")
         public String paymentHome(@RequestParam("invoiceId") Long invoiceId, @RequestParam("tourId") Long tourId, Model model) {
-
-            model.addAttribute("invoiceId", invoiceId);
-            model.addAttribute("tourId", tourId);
+            Optional<Invoice> invoiceOpt = Optional.ofNullable(invoiceService.findInvoiceById(invoiceId));
+            if (invoiceOpt.isPresent()) {
+                model.addAttribute("currentInvoice", invoiceOpt.get());
+            } else {
+                model.addAttribute("errorMessage", "Invoice not found!");
+                return "redirect:/errorPage"; // Redirect to an error handling page or back to a safe page
+            }
             return "payment/payment_home";
         }
 
@@ -129,7 +134,7 @@
                 return "redirect:/payment/payment_home";
             }
 
-            return "redirect:/payment/payment_complete";
+            return "payment/payment_complete";
         }
 
 
