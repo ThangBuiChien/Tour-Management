@@ -49,7 +49,7 @@
 }
 
 .intro {
-    margin: 70px 70px;
+    margin: 70px;
 }
 
 .grid-container {
@@ -82,14 +82,61 @@
     z-index: -1; /* Place it behind other content */
 }
 
-.box-container {
-    width: 800px;
-    height: 75px;
-    background-color: #DCDCDC; /* Gray color */
+.search {
+    margin: 90px;
 }
 
-.col {
-    width: 150px;
-    height: 50px;
-    background-color: #FFFFFC;
+.search .container {
+    width: 1000px;
+    height: 110px;
+    background-color: #DCDCDC;
+}
+
+.search .container .col {
+    width: 500px;
+    height: 85px;
+    background-color: #f8f9fa;
+}
+
+.search .box-container .col:last-child {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search .box-container .col:last-child .button {
+    width: 50%;
+    height: 60%;
+}
+
+.tours {
+    margin: 110px;
+}
+
+.tours .tours-container {
+    max-width: 1000px; /* Adjust as needed */
+    margin: 0 auto; /* Centers the container horizontally */
+}
+
+.tours .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+    gap: 0; /* No gap between grid items */
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.tours .container .tour-normal .description {
+    text-align: justify;
+}
+
+.tours .container .tour-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; /* Three columns with equal width */
+    gap: 0; /* No gap between grid items */
+    margin: 0;
+    padding: 0;
 }

@@ -9,9 +9,9 @@
 </head>
 <body>
     <!--header-->
-    <div th:replace="~{/main_component/header :: header}"></div>
+    <section th:replace="~{/main_component/header :: header}"></section>
 
-    <div class="intro">
+    <section class="intro">
         <div class="grid-container">
             <div class="grid-item-left flex-column">
                 <div class="text-div px-4">
@@ -29,18 +29,58 @@
                 </a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="search container justify-content-center my-2">
-        <div class="box-container align-items-center row">
-            <div class="dest col mx-2">asfgasfg</div>
-            <div class="fd col mx-2">gfdhjdfgh</div>
-            <div class="td col mx-2">kghjkghjk</div>
-            <div class="sb col mx-2">vbnmvnmeyy</div>
+    <section class="search">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="box-container row">
+                <div class="col mx-3 py-2">
+                    <h6>Destination</h6>
+                    <input type="text" class="form-control " name="destination" placeholder="Where to?" required/>
+                </div>
+                <div class="col mx-3 py-2">
+                    <h6>From date</h6>
+                    <input type="text" id="fromDate" class="form-control datepicker" placeholder="dd/mm/yyyy" required/>
+                </div>
+                <div class="col mx-3 py-2">
+                    <h6>To date</h6>
+                    <input type="text" id="toDate" class="form-control datepicker" placeholder="dd/mm/yyyy" required/>
+                </div>
+                <div class="col">
+                    <button type="button" class="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section class="tours">
+        <div class="tours-container">
+            <h1 class="text-center">Destinations and Experiences</h1>
+            <div class="container mt-3">
+                <div class="tour-normal mx-5">
+                    <img th:src="@{/img/waylingo_logo.png}" class="rounded my-auto w-100" alt="...">
+                    <div class="tour-text mt-3">
+                        <h3 class="pt-2">Tour name</h3>
+                        <span class="description mt-2">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis
+                        </span>
+                    </div>
+                </div>
+                <div class="tour-grid mx-5">
+                    <div class=""></div>
+                    <div>xcvbncntbn  gfhbsdbvc</div>
+                    <div>aresgt sfdgerg</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!--footer-->
-    <div th:replace="~{/main_component/footer :: footer}"></div>
+    <section th:replace="~{/main_component/footer :: footer}"></section>
 </body>
 </html>
