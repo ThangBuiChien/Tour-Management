@@ -11,17 +11,32 @@
     <!--header-->
     <div th:replace="~{/main_component/header :: header}"></div>
 
-    <div class="container-fluid d-flex mx-0 px-0">
-        <div class="flex-grow-1 mr-0">
-            <div class="m-5 me-0" style="width: 54px">
-                <h1 class="display-3">WayLingo</h1>
-                <p class="display-6 pt-2" style="width: 582px"><small>Your passport to unforgettable journeys</small></p>
+    <div class="intro">
+        <div class="grid-container">
+            <div class="grid-item-left flex-column">
+                <div class="text-div px-4">
+                    <h1 class="display-3">WayLingo</h1>
+                    <p class="display-6 pt-2"><small>Your passport to unforgettable journeys</small></p>
+                </div>
+                <div class="but-div mt-4 px-4">
+                    <button type="button" class="button">Explore our magic</button>
+                </div>
+            </div>
+            <div class="grid-item-right">
+                <div class="gray-shape rounded"></div>
+                <a href="#" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none">
+                    <img th:src="@{/img/journey.png}" class="rounded mx-auto d-block w-100" alt="...">
+                </a>
             </div>
         </div>
-        <div class="flex-grow-1 justify-content-center align-item-center">
-            <a href="/" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none">
-                <img th:src="@{/static/img/vietnam.png}" class="rounded mx-auto d-block w-100" alt="...">
-            </a>
+    </div>
+
+    <div class="search container justify-content-center my-2">
+        <div class="box-container align-items-center row">
+            <div class="dest col mx-2">asfgasfg</div>
+            <div class="fd col mx-2">gfdhjdfgh</div>
+            <div class="td col mx-2">kghjkghjk</div>
+            <div class="sb col mx-2">vbnmvnmeyy</div>
         </div>
     </div>
 
