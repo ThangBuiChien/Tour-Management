@@ -47,11 +47,6 @@
         public String submitBooking(@ModelAttribute Invoice invoice, @RequestParam("numMembers") int numMembers, @RequestParam("tourId") Long tourId, @RequestParam List<String> listOfMember, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
 
-            // Debug logs to check received parameters
-            System.out.println("Number of members: " + numMembers);
-            System.out.println("Received tour ID: " + tourId);
-
-
 
 
             // Fetch the tour from the database
@@ -62,7 +57,9 @@
             }
 
             Tour tour = tourOpt.get();
-            invoice.setTour(tour); // Associate the tour with the invoice
+            invoice.setTour(tour);
+
+
 
             // Check number of members
             if (numMembers <= 0) {
@@ -81,6 +78,7 @@
             float tourPrice = tour.getTourPrice();
             invoice.setTotalPrice(numMembers * tourPrice);
 
+
             //Set status for invoice
             invoice.setStatus(InvoiceStatus.PENDING);
 
@@ -88,6 +86,9 @@
                 listOfMember = new ArrayList<>();
             }
             invoice.setListOfMember(listOfMember);
+
+
+
 
             // Save the invoice
             try {
