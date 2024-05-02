@@ -75,6 +75,7 @@
 
             Tour tour = tourOpt.get();
             invoice.setTour(tour);
+            invoice.setUserModel(userOpt.get());
 
 
 
