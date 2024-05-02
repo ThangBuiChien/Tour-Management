@@ -2,6 +2,8 @@ package com.example.tourmanagement.service.impl;
 
 import com.example.tourmanagement.model.Invoice;
 import com.example.tourmanagement.model.InvoiceStatus;
+import com.example.tourmanagement.model.Tour;
+import com.example.tourmanagement.service.TourService;
 import com.example.tourmanagement.repository.InvoiceRepo;
 import com.example.tourmanagement.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,12 @@ import java.util.List;
 public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepo invoiceRepository;
+    private final TourService tourService;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepo invoiceRepository) {
+    public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService) {
         this.invoiceRepository = invoiceRepository;
+        this.tourService = tourService;  // Initialize TourService
     }
 
     @Override
@@ -46,9 +50,16 @@ public class InvoiceServiceImpl implements InvoiceService {
                 .orElseThrow(() -> new RuntimeException("Invoice not found!"));
         invoice.setStatus(status);
 
-        // If the status is CANCELLED, clear the list of members
         if (status == InvoiceStatus.CANCELLED) {
+            List<String> members = invoice.getListOfMember();
+            int numMembers = members.size();
             invoice.setListOfMember(new ArrayList<>());
+
+            Tour tour = invoice.getTour();
+            int newRegister = tour.getRegister() - numMembers;
+            tour.setRegister(Math.max(0, newRegister));  // Ensure the register value does not go negative
+
+            tourService.saveTour(tour);  // Persist changes to the Tour
         }
 
         invoiceRepository.save(invoice);
