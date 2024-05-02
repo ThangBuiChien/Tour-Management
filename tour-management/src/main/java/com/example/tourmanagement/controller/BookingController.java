@@ -39,14 +39,21 @@
         public String showBookingForm(@PathVariable Long tourId, Model model, RedirectAttributes redirectAttributes) {
             Optional<Tour> tour = tourService.findByID(tourId);
             if (tour.isPresent()) {
-                model.addAttribute("tour", tour.get());
-                model.addAttribute("invoice", new Invoice());  // Make sure the invoice has a tour set if needed
+                Tour tourData = tour.get();
+                int remainingCapacity = tourData.getRemainingCapacity();
+                model.addAttribute("tour", tourData);
+                model.addAttribute("remainingCapacity", remainingCapacity);
+                model.addAttribute("invoice", new Invoice());
+                //System.out.println("Remaining capacity: " + remainingCapacity);
                 return "book/book";
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
                 return "redirect:/tour/available";
             }
+
         }
+
+
 
         @PostMapping("/submit")
         public String submitBooking(@ModelAttribute Invoice invoice,
@@ -74,6 +81,16 @@
             }
 
             Tour tour = tourOpt.get();
+
+            int remainingCapacity = tour.getTourCapacity().getMaxMember() - tour.getRegister();
+            if (numMembers > remainingCapacity) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Number of members exceeds the tour capacity!");
+                return "redirect:/book/" + tour.getId();
+            }
+
+            tour.setRegister(tour.getRegister() + numMembers);
+            tourService.saveTour(tour);
+
             invoice.setTour(tour);
             invoice.setUserModel(userOpt.get());
 

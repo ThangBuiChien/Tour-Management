@@ -122,5 +122,8 @@ public class Tour {
     public void setRegister(int register) {
         this.register = register;
     }
+    public int getRemainingCapacity() {
+        return this.tourCapacity.getMaxMember() - this.register;
+    }
 
 }

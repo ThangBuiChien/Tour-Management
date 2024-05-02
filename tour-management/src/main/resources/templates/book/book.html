@@ -36,28 +36,38 @@
     </div>
     <div>
         <label>Number of Members:</label>
-        <input type="number" id="numMembers" name="numMembers" required min="1" />
+        <input type="number" id="numMembers" name="numMembers" required min="1" th:attr="max=${remainingCapacity}" />
+        <small>Remaining capacity: </small> <span th:text="${remainingCapacity}">0</span>
     </div>
+
     <div id="membersContainer"></div>
     <div id="totalPriceDisplay">Total Price: $0</div>
     <button type="submit">Submit Booking</button>
 </form>
 
 <script>
-    document.getElementById('numMembers').addEventListener('change', function() {
-        let container = document.getElementById('membersContainer');
+    document.getElementById('numMembers').addEventListener('input', function() {
+        let maxCapacity = parseInt(this.max); // More reliable access to the 'max' attribute
         let numMembers = parseInt(this.value);
+
+        // Ensure the number does not exceed max capacity
+        if (numMembers > maxCapacity) {
+            alert("Number of members exceeds tour capacity!");
+            this.value = maxCapacity; // Reset value to maximum capacity
+            numMembers = maxCapacity; // Ensure subsequent logic uses the corrected number
+        }
+
+        let container = document.getElementById('membersContainer');
         container.innerHTML = ''; // Clear existing fields if number changes
         for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
-        <div>
-            <label>Member ${i + 1} Name:</label>
-            <input type="text" name="listOfMember" required />
-        </div>`;
+                <div>
+                    <label>Member ${i + 1} Name:</label>
+                    <input type="text" name="listOfMember" required />
+                </div>`;
         }
         updateTotalPrice(numMembers);
     });
-
 
     function updateTotalPrice(numMembers) {
         let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
@@ -65,5 +75,6 @@
         document.getElementById('totalPriceDisplay').textContent = 'Total Price: $' + totalPrice.toFixed(2);
     }
 </script>
+
 </body>
 </html>
