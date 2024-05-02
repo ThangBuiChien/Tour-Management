@@ -111,17 +111,9 @@ public class Invoice {
     public void setStatus(InvoiceStatus status) {
         this.status = status;
     }
-    @ManyToOne
-    private UserModel user; // Make sure it's named 'user' or adjust your template accordingly
 
-    // Getters and Setters
-    public UserModel getUser() {
-        return user;
-    }
 
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
+
 
 
 }
