@@ -1,0 +1,95 @@
+.button {
+    display: inline-block;
+    background-color: #327d81;
+    color: #fff;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #276567;
+}
+
+.button:active {
+    background-color: #1c4d52;
+}
+
+.button-outline {
+    display: inline-block;
+    background-color: transparent;
+    color: #327d81;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-outline:hover {
+    background-color: #327d81;
+    color: #fff;
+}
+
+.button-outline:active {
+    background-color: #276567;
+    border-color: #276567;
+}
+
+.bg-custom {
+    background-color: #f4f6ef;
+}
+
+.intro {
+    margin: 70px 70px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
+    gap: 0; /* No gap between grid items */
+    margin: 0;
+    padding: 0;
+}
+
+.grid-item-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the start (left) */
+    margin-left: 70px;
+}
+
+.grid-item-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gray-shape {
+    position: absolute;
+    width: 300px; /* Adjust width and height as needed */
+    height: 200px;
+    background-color: #DCDCDC; /* Gray color */
+    z-index: -1; /* Place it behind other content */
+}
+
+.box-container {
+    width: 800px;
+    height: 75px;
+    background-color: #DCDCDC; /* Gray color */
+}
+
+.col {
+    width: 150px;
+    height: 50px;
+    background-color: #FFFFFC;
+}

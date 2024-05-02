@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!--header-->
+    <div th:replace="~{/main_component/header :: header}"></div>
+
+    <div class="intro">
+        <div class="grid-container">
+            <div class="grid-item-left flex-column">
+                <div class="text-div px-4">
+                    <h1 class="display-3">WayLingo</h1>
+                    <p class="display-6 pt-2"><small>Your passport to unforgettable journeys</small></p>
+                </div>
+                <div class="but-div mt-4 px-4">
+                    <button type="button" class="button">Explore our magic</button>
+                </div>
+            </div>
+            <div class="grid-item-right">
+                <div class="gray-shape rounded"></div>
+                <a href="#" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none">
+                    <img th:src="@{/img/journey.png}" class="rounded mx-auto d-block w-100" alt="...">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="search container justify-content-center my-2">
+        <div class="box-container align-items-center row">
+            <div class="dest col mx-2">asfgasfg</div>
+            <div class="fd col mx-2">gfdhjdfgh</div>
+            <div class="td col mx-2">kghjkghjk</div>
+            <div class="sb col mx-2">vbnmvnmeyy</div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div th:replace="~{/main_component/footer :: footer}"></div>
+</body>
+</html>
