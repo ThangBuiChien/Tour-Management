@@ -1,32 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Payment</title>
-</head>
-<body>
-
-<form th:action="@{/payment/submit}" th:object="${payment}" method="post">
+<form th:action="@{/book/submitPayment}" th:object="${invoice}" method="post">
     <div>
-        <label>Payment account:</label>
-        <input type="number" name="paymentAccount" required />
+        <label>Payment Account:</label>
+        <input type="text" name="paymentAccount" required />
     </div>
     <div>
         <label>Payer:</label>
         <input type="text" name="payerName" required />
     </div>
     <div>
-        <label>Amount: <span th:text="${invoice.total_price}">Price</span></label>
+        <label>Amount: <span th:text="${currentInvoice.totalPrice}">Price</span></label>
     </div>
     <div>
-        <label>Payment date:</label>
-        <input type="date" name="paymentDate" required />
+        <label>Payment Date:</label>
+        <input type="date" name="paymentDate" id="paymentDate" required readonly />
     </div>
-    <div>
-        <label>Description:</label>
-        <input type="text" name="description" required />
-    </div>
-    <button type="confirm">Submit Payment</button>
+    <button type="submit">Submit Payment</button>
 </form>
-</body>
-</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().substring(0, 10); // Get current date in YYYY-MM-DD format
+        document.getElementById('paymentDate').value = today; // Set the value of the payment date input
+    });
+</script>

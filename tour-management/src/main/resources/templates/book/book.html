@@ -10,7 +10,8 @@
     </style>
 </head>
 <body>
-<form th:action="@{/book/submit}" th:object="${invoice}" method="post">
+<form action="#" th:action="@{/book/submit}" th:object="${invoice}" method="post">
+    <input type="hidden" th:value="${tour.id}" name="tourId" />
     <div>
         <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
     </div>
@@ -30,6 +31,10 @@
         <input type="tel" name="userPhoneNumber" required />
     </div>
     <div>
+        <label>Booking Date:</label>
+        <input type="date" name="date" required />
+    </div>
+    <div>
         <label>Number of Members:</label>
         <input type="number" id="numMembers" name="numMembers" required min="1" />
     </div>
@@ -45,15 +50,14 @@
         container.innerHTML = ''; // Clear existing fields if number changes
         for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
-            <div>
-                <label>Member ${i + 1} Name:</label>
-                <input type="text" name="listOfMemberName${i}" required />
-                <label>Member ${i + 1} Citizen ID:</label>
-                <input type="number" name="listOfMemberCitizenId${i}" required />
-            </div>`;
+        <div>
+            <label>Member ${i + 1} Name:</label>
+            <input type="text" name="listOfMember" required />
+        </div>`;
         }
         updateTotalPrice(numMembers);
     });
+
 
     function updateTotalPrice(numMembers) {
         let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));

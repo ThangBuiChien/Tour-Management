@@ -1,65 +1,151 @@
-package com.example.tourmanagement.controller;
+    package com.example.tourmanagement.controller;
 
-import com.example.tourmanagement.model.Invoice;
-import com.example.tourmanagement.model.Tour;
-import com.example.tourmanagement.service.TourService;
-import com.example.tourmanagement.service.InvoiceService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import java.util.Optional;
+    import com.example.tourmanagement.model.*;
+    import com.example.tourmanagement.service.TourService;
+    import com.example.tourmanagement.service.InvoiceService;
+    import com.example.tourmanagement.service.UserService;
+    import jakarta.servlet.http.HttpSession;
+    import org.springframework.security.core.Authentication;
+    import org.springframework.security.core.context.SecurityContextHolder;
+    import org.springframework.stereotype.Controller;
+    import org.springframework.ui.Model;
+    import org.springframework.web.bind.annotation.*;
+    import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller
-@RequestMapping("/book")
-public class BookingController {
+    import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Optional;
+    import java.time.LocalDate;
 
-    private final TourService tourService;
-    private final InvoiceService invoiceService;
+    @Controller
+    @RequestMapping("/book")
+    public class BookingController {
 
-    public BookingController(TourService tourService, InvoiceService invoiceService) {
-        this.tourService = tourService;
-        this.invoiceService = invoiceService;
-    }
+        private final TourService tourService;
+        private final InvoiceService invoiceService;
 
-    @GetMapping("/{tourId}")
-    public String showBookingForm(@PathVariable Long tourId, Model model, RedirectAttributes redirectAttributes) {
-        Optional<Tour> tour = tourService.findByID(tourId);
-        if (tour.isPresent()) {
-            model.addAttribute("tour", tour.get());
-            model.addAttribute("invoice", new Invoice());
-            return "book/book";
-        } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
-            return "redirect:/book";
+        public BookingController(TourService tourService, InvoiceService invoiceService) {
+            this.tourService = tourService;
+            this.invoiceService = invoiceService;
         }
-    }
 
-    @PostMapping("/submit")
-    public String submitBooking(@ModelAttribute Invoice invoice, HttpSession session, RedirectAttributes redirectAttributes) {
-        session.setAttribute("currentInvoice", invoice);
-        redirectAttributes.addFlashAttribute("successMessage", "Booking submitted successfully!");
-        return "redirect:/payment/payment_home";
-    }
-
-    @GetMapping("/confirm")
-    public String confirmBooking(HttpSession session, RedirectAttributes redirectAttributes) {
-        Invoice invoice = (Invoice) session.getAttribute("currentInvoice");
-        if (invoice != null) {
-            invoiceService.saveInvoice(invoice);
-            session.removeAttribute("currentInvoice");
-            redirectAttributes.addFlashAttribute("successMessage", "Booking confirmed and payment completed!");
-            return "redirect:/invoice/" + invoice.getId();
-        } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "No booking found to confirm.");
-            return "redirect:/book";
+        @GetMapping("/{tourId}")
+        public String showBookingForm(@PathVariable Long tourId, Model model, RedirectAttributes redirectAttributes) {
+            Optional<Tour> tour = tourService.findByID(tourId);
+            if (tour.isPresent()) {
+                model.addAttribute("tour", tour.get());
+                model.addAttribute("invoice", new Invoice());  // Make sure the invoice has a tour set if needed
+                return "book/book";
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
+                return "redirect:/tour/available";
+            }
         }
-    }
 
-    @GetMapping
-    public String viewAllBookings(Model model) {
-        model.addAttribute("listOfInvoices", invoiceService.getAllInvoices());
-        return "listBookings";
+        @PostMapping("/submit")
+        public String submitBooking(@ModelAttribute Invoice invoice, @RequestParam("numMembers") int numMembers, @RequestParam("tourId") Long tourId, @RequestParam List<String> listOfMember, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+
+
+
+
+            // Fetch the tour from the database
+            Optional<Tour> tourOpt = tourService.findByID(tourId);
+            if (tourOpt.isEmpty()) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
+                return "redirect:/tour/available";
+            }
+
+            Tour tour = tourOpt.get();
+            invoice.setTour(tour);
+
+
+
+            // Check number of members
+            if (numMembers <= 0) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Invalid number of members.");
+                return "redirect:/tour/available";
+            }
+
+            // Check capacity constraints
+            Capacity capacity = tour.getTourCapacity();
+            if (numMembers > capacity.getMaxMember()) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Number of members exceeds the tour capacity!");
+                return "redirect:/book/" + tour.getId();
+            }
+
+            // Calculate total price
+            float tourPrice = tour.getTourPrice();
+            invoice.setTotalPrice(numMembers * tourPrice);
+
+
+            //Set status for invoice
+            invoice.setStatus(InvoiceStatus.PENDING);
+
+            if (listOfMember == null) {
+                listOfMember = new ArrayList<>();
+            }
+            invoice.setListOfMember(listOfMember);
+
+
+
+
+            // Save the invoice
+            try {
+                invoiceService.saveInvoice(invoice);
+                session.setAttribute("currentInvoice", invoice);
+                session.setAttribute("currentInvoiceId", invoice.getId());
+                model.addAttribute("invoice", invoice);
+                redirectAttributes.addFlashAttribute("successMessage", "Booking submitted successfully!");
+                return "redirect:/book/payment/payment_home?invoiceId=" + invoice.getId() + "&tourId=" + tour.getId();
+
+            } catch (Exception e) {
+                System.err.println("Error saving invoice: " + e.getMessage());
+                redirectAttributes.addFlashAttribute("errorMessage", "Failed to save booking.");
+                return "redirect:/tour/available";
+            }
+        }
+
+        @GetMapping("/payment/payment_home")
+        public String paymentHome(@RequestParam("invoiceId") Long invoiceId, @RequestParam("tourId") Long tourId, Model model) {
+            Optional<Invoice> invoiceOpt = Optional.ofNullable(invoiceService.findInvoiceById(invoiceId));
+            if (invoiceOpt.isPresent()) {
+                model.addAttribute("currentInvoice", invoiceOpt.get());
+            } else {
+                model.addAttribute("errorMessage", "Invoice not found!");
+                return "redirect:/errorPage"; // Redirect to an error handling page or back to a safe page
+            }
+            return "payment/payment_home";
+        }
+
+
+        @PostMapping("/submitPayment")
+        public String submitPayment(@RequestParam Map<String, String> params, HttpSession session, RedirectAttributes redirectAttributes) {
+            Long invoiceId = (Long) session.getAttribute("currentInvoiceId"); // Assuming invoice ID is stored in the session
+            Optional<Invoice> invoiceOpt = Optional.ofNullable(invoiceService.findInvoiceById(invoiceId));
+
+            if (invoiceOpt.isEmpty()) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Invoice not found!");
+                return "redirect:/payment/payment_home";
+            }
+
+            Invoice invoice = invoiceOpt.get();
+            invoice.setPaymentAccount(params.get("paymentAccount"));
+            invoice.setPayerName(params.get("payerName"));
+            invoice.setPaymentDate(LocalDate.now());
+
+            try {
+                invoiceService.updateInvoice(invoice);
+                redirectAttributes.addFlashAttribute("successMessage", "Payment submitted successfully!");
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Error updating invoice: " + e.getMessage());
+                return "redirect:/payment/payment_home";
+            }
+
+            return "payment/payment_complete";
+        }
+
+
+
+
     }
-}

@@ -46,4 +46,20 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoice.setStatus(status);
         invoiceRepository.save(invoice);
     }
+    @Override
+    @Transactional
+    public Invoice updateInvoice(Invoice invoice) {
+        // Assuming the invoice ID is set, fetch the existing invoice, update and save it
+        Invoice existingInvoice = invoiceRepository.findById(invoice.getId())
+                .orElseThrow(() -> new RuntimeException("Invoice not found with id: " + invoice.getId()));
+
+        // Update fields of the existing invoice
+        existingInvoice.setPaymentAccount(invoice.getPaymentAccount());
+        existingInvoice.setPayerName(invoice.getPayerName());
+        existingInvoice.setPaymentDate(invoice.getPaymentDate());
+        existingInvoice.setStatus(invoice.getStatus()); // Assuming you might want to update the status too
+
+        // Save and return the updated invoice
+        return invoiceRepository.save(existingInvoice);
+    }
 }

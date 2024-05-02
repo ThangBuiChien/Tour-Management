@@ -27,6 +27,10 @@ public class Invoice {
     @Column(name = "listOfMember", nullable = false)
     private List<String> listOfMember = new ArrayList<>();
 
+    private String paymentAccount;
+    private String payerName;
+    private LocalDate paymentDate;
+
     public long getId() {
         return id;
     }
@@ -75,6 +79,28 @@ public class Invoice {
         this.listOfMember = listOfMember;
     }
 
+    public String getPaymentAccount() {
+        return paymentAccount;
+    }
+
+    public void setPaymentAccount(String paymentAccount) {
+        this.paymentAccount = paymentAccount;
+    }
+    public String getPayerName() {
+        return payerName;
+    }
+
+    public void setPayerName(String payerName) {
+        this.payerName = payerName;
+    }
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
@@ -85,15 +111,9 @@ public class Invoice {
     public void setStatus(InvoiceStatus status) {
         this.status = status;
     }
-    @ManyToOne
-    private UserModel user; // Make sure it's named 'user' or adjust your template accordingly
 
-    // Getters and Setters
-    public UserModel getUser() {
-        return user;
-    }
 
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
+
+
+
 }
