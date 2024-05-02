@@ -7,11 +7,11 @@
 <body>
 <h1>Invoices</h1>
 <ul th:each="invoice : ${listInvoice}">
-    <li>User: <span th:text="${invoice.userModel.fullName}"></span></li>
-    <li>Payer:</li>
-    <li>PayerAccount:</li>
+<!--    <li>User: <span th:text="${invoice.userModel.fullName}"></span></li>-->
+    <li>Payer:<span th:text="${invoice.payerName}"></span></li>
+    <li>PayerAccount:<span th:text="${invoice.paymentAccount}"></span> </li>
     <li>Tour: <span th:text="${invoice.tour.tourName}"></span></li>
-    <li>Date: <span th:text="${invoice.date}"></span></li>
+    <li>Date: <span th:text="${invoice.paymentDate}"></span></li>
     <li>
         <!-- Display Status for normal users -->
         <span sec:authorize="!hasRole('ADMIN')">Status: <span th:text="${invoice.status}"></span></span>

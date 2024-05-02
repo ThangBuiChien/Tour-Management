@@ -12,6 +12,8 @@
     import org.springframework.web.bind.annotation.*;
     import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+    import java.util.ArrayList;
+    import java.util.List;
     import java.util.Map;
     import java.util.Optional;
     import java.time.LocalDate;
@@ -42,7 +44,7 @@
         }
 
         @PostMapping("/submit")
-        public String submitBooking(@ModelAttribute Invoice invoice, @RequestParam("numMembers") int numMembers, @RequestParam("tourId") Long tourId, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        public String submitBooking(@ModelAttribute Invoice invoice, @RequestParam("numMembers") int numMembers, @RequestParam("tourId") Long tourId, @RequestParam List<String> listOfMember, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 
 
             // Debug logs to check received parameters
@@ -81,6 +83,11 @@
 
             //Set status for invoice
             invoice.setStatus(InvoiceStatus.PENDING);
+
+            if (listOfMember == null) {
+                listOfMember = new ArrayList<>();
+            }
+            invoice.setListOfMember(listOfMember);
 
             // Save the invoice
             try {

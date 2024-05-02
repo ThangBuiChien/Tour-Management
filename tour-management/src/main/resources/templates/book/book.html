@@ -46,14 +46,14 @@
         container.innerHTML = ''; // Clear existing fields if number changes
         for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
-            <div>
-                <label>Member ${i + 1} Name:</label>
-                <input type="text" name="listOfMemberName${i}" required />
-
-            </div>`;
+        <div>
+            <label>Member ${i + 1} Name:</label>
+            <input type="text" name="listOfMember" required />
+        </div>`;
         }
         updateTotalPrice(numMembers);
     });
+
 
     function updateTotalPrice(numMembers) {
         let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
