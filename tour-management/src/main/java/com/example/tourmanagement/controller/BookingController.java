@@ -6,7 +6,9 @@
     import com.example.tourmanagement.service.UserService;
     import jakarta.servlet.http.HttpSession;
     import org.springframework.security.core.Authentication;
+    import org.springframework.security.core.annotation.AuthenticationPrincipal;
     import org.springframework.security.core.context.SecurityContextHolder;
+    import org.springframework.security.core.userdetails.UserDetails;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.*;
@@ -25,9 +27,12 @@
         private final TourService tourService;
         private final InvoiceService invoiceService;
 
-        public BookingController(TourService tourService, InvoiceService invoiceService) {
+        private final UserService userService;
+
+        public BookingController(TourService tourService, InvoiceService invoiceService, UserService userService) {
             this.tourService = tourService;
             this.invoiceService = invoiceService;
+            this.userService = userService;
         }
 
         @GetMapping("/{tourId}")
@@ -44,10 +49,22 @@
         }
 
         @PostMapping("/submit")
-        public String submitBooking(@ModelAttribute Invoice invoice, @RequestParam("numMembers") int numMembers, @RequestParam("tourId") Long tourId, @RequestParam List<String> listOfMember, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+        public String submitBooking(@ModelAttribute Invoice invoice,
+                                    @RequestParam("numMembers") int numMembers,
+                                    @RequestParam("tourId") Long tourId,
+                                    @RequestParam List<String> listOfMember,
+                                    HttpSession session, Model model,
+                                    RedirectAttributes redirectAttributes,
+                                    @AuthenticationPrincipal UserDetails userDetails) {
 
 
-
+            String userMail = userDetails.getUsername();
+            Optional<UserModel> userOpt = userService.loadByEmail(userMail);
+            if (userOpt.isEmpty()) {
+                redirectAttributes.addFlashAttribute("errorMessage", "User not found!");
+                return "redirect:/tour/available";
+            }
+            Long id = userOpt.get().getId();
 
             // Fetch the tour from the database
             Optional<Tour> tourOpt = tourService.findByID(tourId);
