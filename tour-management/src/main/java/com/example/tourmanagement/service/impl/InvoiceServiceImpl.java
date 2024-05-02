@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,8 +45,15 @@ public class InvoiceServiceImpl implements InvoiceService {
         Invoice invoice = invoiceRepository.findById(invoiceId)
                 .orElseThrow(() -> new RuntimeException("Invoice not found!"));
         invoice.setStatus(status);
+
+        // If the status is CANCELLED, clear the list of members
+        if (status == InvoiceStatus.CANCELLED) {
+            invoice.setListOfMember(new ArrayList<>());
+        }
+
         invoiceRepository.save(invoice);
     }
+
     @Override
     @Transactional
     public Invoice updateInvoice(Invoice invoice) {
