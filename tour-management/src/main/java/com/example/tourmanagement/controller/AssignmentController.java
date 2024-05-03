@@ -1,8 +1,10 @@
 package com.example.tourmanagement.controller;
 
+import com.example.tourmanagement.model.Invoice;
 import com.example.tourmanagement.model.Tour;
 import com.example.tourmanagement.model.TourAssignment;
 import com.example.tourmanagement.model.TourGuide;
+import com.example.tourmanagement.service.InvoiceService;
 import com.example.tourmanagement.service.TourAssignmentService;
 import com.example.tourmanagement.service.TourGuideService;
 import com.example.tourmanagement.service.TourService;
@@ -17,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/assignments")
@@ -27,11 +30,14 @@ public class AssignmentController {
     private final TourService tourService;
     private final TourGuideService tourGuideService;
 
+    private final InvoiceService invoiceService;
+
     @Autowired
-    public AssignmentController(TourAssignmentService tourAssignmentService, TourService tourService, TourGuideService tourGuideService) {
+    public AssignmentController(TourAssignmentService tourAssignmentService,InvoiceService invoiceService, TourService tourService, TourGuideService tourGuideService) {
         this.tourAssignmentService = tourAssignmentService;
         this.tourService = tourService;
         this.tourGuideService = tourGuideService;
+        this.invoiceService = invoiceService;
     }
 
     @GetMapping
@@ -64,6 +70,17 @@ public class AssignmentController {
         //
         tourAssignmentService.save(tourAssignment);
         return "redirect:/assignments";
+    }
+    @GetMapping("/members")
+    public String showTourMembers(@RequestParam("tourId") Long tourId, Model model) {
+        Tour tour = tourService.findByID(tourId).orElseThrow(() -> new RuntimeException("Tour not found!"));
+        List<Invoice> invoices = invoiceService.findInvoicesByTour(tour);
+        List<String> members = invoices.stream()
+                .flatMap(invoice -> invoice.getListOfMember().stream())
+                .distinct()
+                .collect(Collectors.toList());
+        model.addAttribute("members", members);
+        return "tour_assignment/tour_members";
     }
 
 

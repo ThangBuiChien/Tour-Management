@@ -42,6 +42,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Invoice findInvoiceById(Long id) {
         return invoiceRepository.findById(id).orElseThrow(() -> new RuntimeException("Invoice not found!"));
     }
+    @Override
+    @Transactional(readOnly = true)
+    public List<Invoice> findInvoicesByTour(Tour tour) {
+        return invoiceRepository.findByTour(tour);
+    }
 
     @Override
     @Transactional
