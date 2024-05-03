@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,5 +47,10 @@ public class TourServiceImpl implements TourService {
     public void deleteTour(long id) {
         this.repo.deleteById(id);
 
+    }
+
+    @Override
+    public List<Tour> findToursByDayAndSmallerThanMinCapacity(LocalDate date) {
+        return repo.findToursByDayAndSmallerThanMinCapacity(date);
     }
 }
