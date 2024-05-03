@@ -6,6 +6,7 @@ import com.example.tourmanagement.model.Tour;
 import com.example.tourmanagement.service.TourService;
 import com.example.tourmanagement.repository.InvoiceRepo;
 import com.example.tourmanagement.service.InvoiceService;
+import com.example.tourmanagement.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 
     private final InvoiceRepo invoiceRepository;
     private final TourService tourService;
+    @Autowired
+    private NotificationService notificationService;
 
     @Autowired
     public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService) {
@@ -68,6 +71,9 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
 
         invoiceRepository.save(invoice);
+
+        // Create and send notification
+        notificationService.createNotification(invoice.getUserModel(), "The status of your invoice #" + invoiceId + " has been updated to " + status + ".");
     }
 
     @Override
