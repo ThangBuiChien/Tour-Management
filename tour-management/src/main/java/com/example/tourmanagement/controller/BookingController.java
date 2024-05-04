@@ -44,13 +44,12 @@
                 model.addAttribute("tour", tourData);
                 model.addAttribute("remainingCapacity", remainingCapacity);
                 model.addAttribute("invoice", new Invoice());
-                //System.out.println("Remaining capacity: " + remainingCapacity);
+                model.addAttribute("startDate", tourData.getStartDate().toString());  // Adding start date to the model
                 return "book/book";
             } else {
                 redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
                 return "redirect:/tour/available";
             }
-
         }
 
 
