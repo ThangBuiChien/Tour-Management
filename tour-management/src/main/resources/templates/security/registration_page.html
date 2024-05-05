@@ -11,8 +11,25 @@
 </div>
 
 <form th:action="@{/user/registration}" method="post" th:object="${user}">
-    <input type="email" th:field="*{email}" placeholder="Email" >
-    <input type="password" th:field="*{password}" placeholder="Password" >
+    <label for="email">Your email</label>
+    <input type="email" id="email" th:field="*{email}" placeholder="Email" ><br><br>
+
+
+    <label for="password">Your password</label>
+    <input type="password" id = "password" th:field="*{password}" placeholder="Password" ><br><br>
+
+
+    <label for="fullName">Your full name</label>
+    <input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
+
+    <label for="birthDate">Your birthdate</label>
+    <input type="date" id="birthDate" th:field="*{birthDate}" required><br><br>
+
+    <label for="citizenID">Your citizen ID</label>
+    <input type="text" id="citizenID" th:field="*{citizenID}" placeholder="Enter Citizen ID" required><br><br>
+
+    <label for="phoneNumber">Your phone number</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number" required><br><br>
 
     <input type="submit" value="Register">
 </form>

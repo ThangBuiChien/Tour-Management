@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Update User</h2>
-<form th:action="@{/userModel/update/{id} (id = ${userModel.id})}" th:object = "${userModel}" method="post">
+<form th:action="@{/user/update/{id} (id = ${user.id})}" th:object = "${user}" method="post">
 
     <input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
 
