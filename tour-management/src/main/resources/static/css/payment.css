@@ -1,3 +1,6 @@
+body {
+    background-color: #f4f6ef;
+}
 
 input[type="text"], input[type="email"], input[type="tel"], input[type="date"], input[type="number"] {
     width: 100%;
@@ -10,18 +13,105 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="date"], 
     box-sizing: border-box;
 }
 
-button {
-    width: 100%;
-    background-color: #327d81;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+.card {
+    width: 70%; /* Utilize the full width as per container size */
+    height: 50%; /* Height automatically adjusts to content */
+    margin: auto; /* Center the card horizontally */
+    display: flex; /* Using flex to align image and content */
+    flex-direction: column; /* Stack the image and content vertically */
 }
 
-@media screen and (max-width: 600px) {
-    /* Ensure that all form elements are full width on small screens */
-    input, select {
-        width: 100%;
+.card-img-top {
+    width: 50px;
+    height: 250px; /* Height adjusts to maintain aspect ratio */
+    object-fit: cover;
+}
+
+.row {
+    display: flex; /* Makes sure both columns are flex items */
+    align-items: stretch; /* Stretches items to cover the full height of the row */
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
     }
+    .col-md-6 {
+        width: 100%; /* Full width on small screens for each section */
+    }
+    .card, .form-section {
+        width: 100%; /* Both card and form take full width */
+        height: auto; /* Height adjusts based on content */
+    }
+}
+
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.button {
+    display: inline-block;
+    background-color: #327d81;
+    color: #fff;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #276567;
+}
+
+.button:active {
+    background-color: #1c4d52;
+}
+
+.button-outline {
+    display: inline-block;
+    background-color: transparent;
+    color: #327d81;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-outline:hover {
+    background-color: #327d81;
+    color: #fff;
+}
+
+.button-outline:active {
+    background-color: #276567;
+    border-color: #276567;
+}
+
+.bg-custom {
+    background-color: #f4f6ef;
+}
+
+.mb-3 {
+    margin-bottom: 1rem; /* 16px if base font size is 16px */
 }
