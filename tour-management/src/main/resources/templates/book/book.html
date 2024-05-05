@@ -37,7 +37,6 @@
                 <div>
                     <input type="hidden" name="date" th:value="${startDate}" />
                 </div>
-                <div id="totalPriceDisplay" class="total-price">Total Price: <span th:text="${totalPrice}">$0</span></div>
                 <button type="submit" class="button ">Submit Booking</button>
             </form>
         </div>
@@ -51,6 +50,7 @@
                     <p class="card-text">Price Per Person: <span id="pricePerPerson" th:text="${tour.tourPrice}">$100</span></p>
                     <p class="card-text">Booking Date: <span id="date" th:text="${startDate}">$100</span></p>
                     <p class="card-text">Remaining capacity: <span th:text="${remainingCapacity}">0</span></p>
+                    <p class="total-price">Total Price: <span th:text="${totalPrice}">$0</span></p>
                 </div>
             </div>
         </div>
