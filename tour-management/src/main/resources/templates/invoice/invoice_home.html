@@ -22,7 +22,7 @@
                 <select name="status">
                     <option th:each="status : ${T(com.example.tourmanagement.model.InvoiceStatus).values()}"
                             th:value="${status}" th:text="${status}"
-                            th:selected="${status.name() == invoice.status.name()}"></option>
+                            th:selected="${status == invoice.status}"></option>
                 </select>
                 <button type="submit">Update</button>
             </form>
