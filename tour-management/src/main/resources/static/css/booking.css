@@ -14,7 +14,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="date"], 
 }
 
 .card {
-    width: 100%; /* Utilize the full width as per container size */
+    width: 70%; /* Utilize the full width as per container size */
     height: 50%; /* Height automatically adjusts to content */
     margin: auto; /* Center the card horizontally */
     display: flex; /* Using flex to align image and content */
@@ -23,7 +23,7 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="date"], 
 
 .card-img-top {
     width: 50px;
-    height: 500px; /* Height adjusts to maintain aspect ratio */
+    height: 250px; /* Height adjusts to maintain aspect ratio */
     object-fit: cover; 
 }
 
