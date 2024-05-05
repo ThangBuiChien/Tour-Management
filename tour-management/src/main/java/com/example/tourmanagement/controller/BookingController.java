@@ -143,11 +143,20 @@
         @GetMapping("/payment/payment_home")
         public String paymentHome(@RequestParam("invoiceId") Long invoiceId, @RequestParam("tourId") Long tourId, Model model) {
             Optional<Invoice> invoiceOpt = Optional.ofNullable(invoiceService.findInvoiceById(invoiceId));
-            if (invoiceOpt.isPresent()) {
-                model.addAttribute("currentInvoice", invoiceOpt.get());
+            Optional<Tour> tourOpt = tourService.findByID(tourId); // Ensure this method exists and works as expected
+
+            if (invoiceOpt.isPresent() && tourOpt.isPresent()) {
+                Invoice invoice = invoiceOpt.get();
+                Tour tour = tourOpt.get();
+
+                model.addAttribute("currentInvoice", invoice);
+                model.addAttribute("tour", tour);
+                model.addAttribute("startDate", tour.getStartDate().toString());  // Ensure dates are formatted as needed
+                model.addAttribute("remainingCapacity", tour.getRemainingCapacity());
+                model.addAttribute("totalPrice", invoice.getTotalPrice());  // Assuming total price is calculated at booking
             } else {
-                model.addAttribute("errorMessage", "Invoice not found!");
-                return "redirect:/errorPage"; // Redirect to an error handling page or back to a safe page
+                model.addAttribute("errorMessage", "Invoice or Tour not found!");
+                return "redirect:/errorPage";
             }
             return "payment/payment_home";
         }
