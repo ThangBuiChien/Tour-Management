@@ -1,0 +1,13 @@
+body {
+    background-color: #f4f6ef;
+}
+h2, h5 {
+    color: #327d81;
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    h2, h5 {
+        font-size: smaller;
+    }
+}
