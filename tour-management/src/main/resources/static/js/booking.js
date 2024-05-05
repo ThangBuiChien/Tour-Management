@@ -25,6 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateTotalPrice(numMembers) {
         let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
         let totalPrice = pricePerPerson * numMembers;
-        document.getElementById('totalPriceDisplay').textContent = 'Total Price: $' + totalPrice.toFixed(2);
+        document.querySelector('.total-price span').textContent = totalPrice.toFixed(2);
     }
 });

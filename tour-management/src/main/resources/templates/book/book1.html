@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book a Tour</title>
+    <style>
+        #totalPriceDisplay {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<form action="#" th:action="@{/book/submit}" th:object="${invoice}" method="post">
+    <input type="hidden" th:value="${tour.id}" name="tourId" />
+    <div>
+        <label>Tour: <span th:text="${tour.tourName}">Tour Name</span></label>
+    </div>
+    <div>
+        <label>Price Per Person: <span id="pricePerPerson" th:text="${tour.tourPrice}">$100</span></label>
+    </div>
+    <div>
+        <label>User Name:</label>
+        <input type="text" name="userName" required />
+    </div>
+    <div>
+        <label>User Email:</label>
+        <input type="email" name="userEmail" required />
+    </div>
+    <div>
+        <label>User Phone Number:</label>
+        <input type="tel" name="userPhoneNumber" required />
+    </div>
+    <div>
+        <label>Booking Date:</label>
+        <input type="date" name="date" th:value="${startDate}" readonly />
+    </div>
+    <div>
+        <label>Number of Members:</label>
+        <input type="number" id="numMembers" name="numMembers" required min="1" th:attr="max=${remainingCapacity}" />
+        <small>Remaining capacity: </small> <span th:text="${remainingCapacity}">0</span>
+    </div>
+
+    <div id="membersContainer"></div>
+    <div id="totalPriceDisplay">Total Price: $0</div>
+    <button type="submit">Submit Booking</button>
+</form>
+
+<script>
+    document.getElementById('numMembers').addEventListener('input', function() {
+        let maxCapacity = parseInt(this.max); // More reliable access to the 'max' attribute
+        let numMembers = parseInt(this.value);
+
+        // Ensure the number does not exceed max capacity
+        if (numMembers > maxCapacity) {
+            alert("Number of members exceeds tour capacity!");
+            this.value = maxCapacity; // Reset value to maximum capacity
+            numMembers = maxCapacity; // Ensure subsequent logic uses the corrected number
+        }
+
+        let container = document.getElementById('membersContainer');
+        container.innerHTML = ''; // Clear existing fields if number changes
+        for (let i = 0; i < numMembers; i++) {
+            container.innerHTML += `
+                <div>
+                    <label>Member ${i + 1} Name:</label>
+                    <input type="text" name="listOfMember" required />
+                </div>`;
+        }
+        updateTotalPrice(numMembers);
+    });
+
+    function updateTotalPrice(numMembers) {
+        let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
+        let totalPrice = pricePerPerson * numMembers;
+        document.getElementById('totalPriceDisplay').textContent = 'Total Price: $' + totalPrice.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
