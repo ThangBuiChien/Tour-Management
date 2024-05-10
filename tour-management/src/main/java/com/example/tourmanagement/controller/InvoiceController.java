@@ -20,7 +20,7 @@ public class InvoiceController {
     }
 
     // Update this from "/invoice" to just "/" to match the base mapping + this
-    @GetMapping
+    @GetMapping({"/", ""})
     public String getAllInvoices(Model model) {
         model.addAttribute("listInvoice", invoiceService.getAllInvoices());
         return "invoice/invoice_home";

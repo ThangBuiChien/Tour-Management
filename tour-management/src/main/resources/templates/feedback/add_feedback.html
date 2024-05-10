@@ -7,14 +7,35 @@
 <body>
 <form th:action="@{/feedback/add}" th:object="${feedback}" method="post">
 
-    <input type="email" th:field="*{comment}" placeholder="Write your comment" required><br><br>
+<!--    <input type="email" th:field="*{comment}" placeholder="Write your comment" required><br><br>-->
+
+    <label for="comment">Comment:</label><br>
+    <input type="text" id="comment"  th:field="*{comment}" placeholder="Write your comment" required style="width: 300px; height: 100px;"><br><br>
+
+<!--    <label for="rating">Rating:</label><br>-->
+<!--    <input type="range" id="rating" name="Your rating" min="1" max="5" value="5"><br>-->
+
+    <label for="rating">Rating: </label>
+    <span id="ratingValue"> 5*</span><br>
+    <input type="range" id="rating" name="rating" min="1" max="5" value="5" oninput="updateRating(this.value)"><br>
+
+
+    <script>
+        function updateRating(value) {
+            document.getElementById("ratingValue").textContent = value + "*";
+        }
+    </script>
+
+
+
+
 
     <select th:field="*{userModel}">
-        <option th:each="userModel : ${userModels}" th:value="${userModel.getId()}" th:text="${userModel.fullName}"></option>
+        <option th:each="userModel : ${users}" th:value="${userModel.getId()}" th:text="${userModel.fullName}"></option>
     </select><br><br>
 
     <select th:field="*{tour}">
-        <option th:each="tour : ${tours}" th:value="${tours.getId()}"></option>
+        <option th:each="tour : ${tours}" th:value="${tour.getId()}" th:text="${tour.getTourName()}"></option>
     </select><br><br>
 
     <button type="submit">Add User</button>
