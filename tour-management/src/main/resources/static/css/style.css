@@ -65,7 +65,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start; /* Align items to the start (left) */
-    margin-left: 70px;
+    margin-left: 120px;
+}
+
+.intro .grid-container .grid-item-left b{
+    font-weight: 600;
 }
 
 .grid-item-right {
@@ -74,9 +78,14 @@
     align-items: center;
 }
 
+.grid-item-right img {
+    width: 250px;
+    height: 400px;
+}
+
 .gray-shape {
     position: absolute;
-    width: 300px; /* Adjust width and height as needed */
+    width: 400px; /* Adjust width and height as needed */
     height: 200px;
     background-color: #DCDCDC; /* Gray color */
     z-index: -1; /* Place it behind other content */
@@ -116,7 +125,7 @@
 }
 
 .tours .tours-container {
-    max-width: 1000px; /* Adjust as needed */
+    max-width: 1250px; /* Adjust as needed */
     margin: 0 auto; /* Centers the container horizontally */
 }
 
@@ -129,14 +138,34 @@
     justify-content: center;
 }
 
+.tours .tours-container h1 {
+    font-weight: 500;
+}
+
+.tours .container .tour-normal img {
+    width: 630px;
+    height: 300px;
+}
+
 .tours .container .tour-normal .description {
     text-align: justify;
 }
 
-.tours .container .tour-grid {
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr; /* Three columns with equal width */
-    gap: 0; /* No gap between grid items */
-    margin: 0;
-    padding: 0;
+.tours .container .tour-flexbox img {
+    width: 250px;
+    height: 100px;
+}
+
+.tours .container .tour-flexbox .txt span,
+.tours .container .tour-flexbox .txt p{
+    font-size: 15px;
+}
+
+.tours .container .tour-flexbox .txt p a{
+    text-decoration: none;
+    color: black;
+}
+
+.feedbacks {
+    margin: 110px;
 }
