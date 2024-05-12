@@ -115,9 +115,27 @@
     align-items: center;
 }
 
-.search .box-container .col:last-child .button {
-    width: 50%;
-    height: 60%;
+.search-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #327d81;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.search-link:hover {
+    background-color: #276567;
+}
+
+.search-link:active {
+    background-color: #1c4d52;
+}
+
+.search-icon {
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .tours {
@@ -179,17 +197,35 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0;
-    margin: 0;
+    margin: 0 35px;
     padding: 0;
     justify-content: center;
     align-items: center;
 }
 
 .feedbacks .feedback-container .fb-features .fb-grid .grid-container {
-    width: 400px;
-    height: 250px;
-    background-color: yellow;
+    width: 417px;
+    height: 400px;
+    background-color: #E9EAE6;
     border: none;
     margin: 10px;
-    padding: 10px;
+    padding: 15px 10px;
+}
+
+.feedbacks .feedback-container .fb-features .fb-grid .grid-container .grid-content {
+    padding: 15px 20px;
+}
+
+.feedbacks .feedback-container .fb-features .fb-grid .grid-container .grid-content .grid-icon {
+    width: 60px;
+    height: 60px;
+    background-color: lightslategray;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.grid-tourist {
+    margin-top: 150px;
 }
