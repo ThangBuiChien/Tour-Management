@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -80,17 +81,49 @@ public class TourController {
 
     }
 
+//    @PostMapping("/add")
+//    public String addRoute(@ModelAttribute("tour") Tour tour, RedirectAttributes redirectAttributes){
+//        tour.setLengthTrip(tour.getDetailRoute().getLengthTrip());
+//        tour.setTourDescription(tour.getDetailRoute().getDetailTrip());
+//        tour.setTourStatus("available");
+//        tour.setRegister(0);
+//        tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+//
+//        this.tourService.saveTour(tour);
+//        redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
+//       // return "redirect:/tour/load";
+//        return "redirect:/tour/sorting";
+//
+//    }
+
     @PostMapping("/add")
-    public String addRoute(@ModelAttribute("tour") Tour tour, RedirectAttributes redirectAttributes){
+    public String addRoute(@ModelAttribute("tour") Tour tour,
+                           @RequestParam("startDates") List<LocalDate> startDates,
+                           RedirectAttributes redirectAttributes){
         tour.setLengthTrip(tour.getDetailRoute().getLengthTrip());
         tour.setTourDescription(tour.getDetailRoute().getDetailTrip());
         tour.setTourStatus("available");
         tour.setRegister(0);
         tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
 
-        this.tourService.saveTour(tour);
+        for (LocalDate startDate : startDates) {
+            // Create a new Tour object for each start date
+            Tour tourCopy = new Tour();
+            tourCopy.setDetailRoute(tour.getDetailRoute());
+            tourCopy.setTourCapacity(tour.getTourCapacity());
+            tourCopy.setTourPrice(tour.getTourPrice());
+            tourCopy.setStartDate(startDate);
+
+            tourCopy.setLengthTrip(tour.getDetailRoute().getLengthTrip());
+            tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
+            tourCopy.setTourStatus("available");
+            tourCopy.setRegister(0);
+            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+
+            this.tourService.saveTour(tourCopy);
+        }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
-       // return "redirect:/tour/load";
+        // return "redirect:/tour/load";
         return "redirect:/tour/sorting";
 
     }
