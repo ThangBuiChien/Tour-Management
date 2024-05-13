@@ -7,11 +7,14 @@ import com.example.tourmanagement.service.UserRoleService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -115,6 +118,7 @@ public class UserController {
             userService.saveUser(user);
 
             return "redirect:/user/login?success";
+            //return "redirect:/user/showUpdateNewForm/" + user.getId() ;
         }
         else{
             String message = "the email must be unique";
@@ -122,5 +126,52 @@ public class UserController {
             return "redirect:/user/registration";
         }
     }
+
+    @PostMapping("update2/{id}")
+    public String updateUser(Model model, @PathVariable long id, @ModelAttribute("user") UserModel updatedUserModel, RedirectAttributes redirectAttributes) {
+        Optional<UserModel> optionalUser = userService.findByID(id);
+        if (optionalUser.isPresent()) {
+            UserModel existingUser = optionalUser.get();
+
+            try {
+                // Get all fields declared in the UserModel class
+                Field[] fields = UserModel.class.getDeclaredFields();
+                for (Field field : fields) {
+                    // Set accessible to true to access private fields
+                    field.setAccessible(true);
+
+                    // Get the value of the field from the updatedUserModel
+                    Object updatedValue = field.get(updatedUserModel);
+
+                    // If the updatedValue is not null, update the corresponding field in the existingUser
+                    if (updatedValue != null) {
+                        field.set(existingUser, updatedValue);
+                    }
+                }
+
+                userService.saveUser(existingUser);
+
+
+                redirectAttributes.addFlashAttribute("successMessage", "User updated successfully");
+                return "redirect:/user";
+
+
+
+            } catch (IllegalAccessException e) {
+                // Handle IllegalAccessException
+                redirectAttributes.addFlashAttribute("errorMessage", "Failed to update user");
+                return "redirect:/user";
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "User not found");
+            return "redirect:/user";
+        }
+    }
+
+    
+
+
+
+
 }
 

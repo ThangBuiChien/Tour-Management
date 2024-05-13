@@ -28,7 +28,10 @@
             <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post">
                 <select name="status" class="status-dropdown">
                     <option th:each="status : ${T(com.example.tourmanagement.model.InvoiceStatus).values()}"
-                            th:value="${status}" th:text="${status}" th:selected="${status.name() == invoice.status.name()}"></option>
+
+                            th:value="${status}" th:text="${status}"
+                            th:selected="${status == invoice.status}"></option>
+
                 </select>
                 <button type="submit" class="update-button">Update</button>
             </form>

@@ -3,24 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Your custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        /* Custom CSS for centering the form */
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Adjust this value to center vertically */
+        }
+    </style>
 </head>
 <body>
-<div th:if="${param.success}">
-    You successfully registered. Please use your credentials to log in.
-</div>
-<div th:if="${param.error}">
-    Login or password incorrect.
+<div class="container">
+    <div class="row center-form">
+        <div class="col-md-6">
+            <!-- Success message -->
+            <div class="alert alert-success" th:if="${param.success}">
+                You successfully registered. Please use your credentials to log in.
+            </div>
+            <!-- Error message -->
+            <div class="alert alert-danger" th:if="${param.error}">
+                Login or password incorrect.
+            </div>
+            <!-- Logout message -->
+            <div class="alert alert-info" th:if="${param.logout}">
+                You've been logged out.
+            </div>
+            <p class="mt-3 text-center" >Log in with</p>
+            <h4 class="mb-4">The default admin account is tk: admin - mk: admin</h4>
+            <form th:action="@{/user/login}" method="post">
+                <div class="mb-3">
+                    <input name="username" type="text" class="form-control" placeholder="Username">
+                </div>
+                <div class="mb-3">
+                    <input name="password" type="password" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Log in</button>
+            </form>
+            <p class="mt-3 text-center">Don't have an account? <a href="/user/registration">Register here</a></p>
+        </div>
+    </div>
 </div>
 
-<div th:if="${param.logout}">
-    You've been logged out.
-</div>
-<h2>The default admin accout is tk: admin - mk: admin</h2>
-<form th:action="@{/user/login}" method="post">
-    <input name="username" type="text" placeholder="Username">
-    <input name="password" type="password" placeholder="Password">
-    <input type="submit" value="Log in">
-</form>
-<a href="/user/registration">Register here</a>
+<!-- Bootstrap JS (optional) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

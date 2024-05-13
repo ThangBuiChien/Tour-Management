@@ -26,10 +26,10 @@
     <!-- Iterate over the list of departments -->
     <tr th:each="feedback : ${ListFeedbacks}">
         <td th:text="${feedback.getId()}"></td>
-        <td th:text="${feedback.getComment()()}"></td>
-        <td th:text="${feedback.getRating()()}"></td>
-        <td th:text="${feedback.getUser().getId()}"></td>
-        <td th:text="${feedback.getTour().getId()}"></td>
+        <td th:text="${feedback.getComment()}"></td>
+        <td th:text="${feedback.getRating()}"></td>
+        <td th:text="${feedback.getUserModel().getEmail()}"></td>
+        <td th:text="${feedback.getTour().getTourName()}"></td>
 
         <td>
             <!-- Delete button -->
