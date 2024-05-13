@@ -2,10 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Purchase Confirmation</title>
+    <link rel="stylesheet" th:href="@{/css/completepage.css}" />
 </head>
 <body>
-    <h2>Thank you for booking our tours</h2>
-    <h5>Please stand by until the admin accepted your payment</h5>
+<div class="confirmation-box">
+    <div class="icon-container">
+        <span class="icon">&#10004;</span>
+    </div>
+    <h2>Thank You for Your Purchase!</h2>
+    <p>Your order was completed successfully.</p>
+    <button class="return-button" onclick="returnToIndex()">Return</button>
+</div>
+
+<script>
+    function returnToIndex() {
+        window.location.href = '/tour/available';
+    }
+</script>
 </body>
 </html>
