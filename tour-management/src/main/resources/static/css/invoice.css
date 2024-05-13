@@ -1,65 +1,119 @@
-body {
-    background-color: #f4f6ef;
-    font-family: Arial, sans-serif;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-}
-
 .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 15px;
     display: flex;
-    align-items: center; /* Adjust alignment */
+    flex-direction: row;
+    align-items: stretch;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    background-color: #f4f6ef;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.card-image {
-    width: 60px; /* Adjust size as needed */
-    height: 60px;
-    margin-right: 15px;
-    border-radius: 50%; /* Circular image */
+.card-img-left {
+    flex: 0 0 180px;
+    overflow: hidden;
 }
 
-.card-header {
+.card-img-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-grow: 1; /* Let header take the remaining space */
-}
-
-.date {
-    font-size: 0.8rem;
-    color: grey;
-}
-
-.card-body p {
-    margin: 5px 0;
-    flex-grow: 1;
+    flex-direction: row; /* Change from column to row */
+    padding: 20px;
+    justify-content: space-between; /* Ensures content and footer are spaced apart */
 }
 
 .card-footer {
-    text-align: right;
-    flex-grow: 1;
+    flex: 0 1 200px; /* Adjust width as needed */
+    padding: 10px;
+    display: flex;
+    align-items: center; /* Centers the content vertically */
+    justify-content: center; /* Centers the content horizontally */
+}
+.details span {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.details span span {
+    margin-left: 5px;
+    font-weight: bold;
 }
 
 .status-dropdown, .update-button {
-    padding: 8px;
-    margin-top: 10px;
+    width: auto;
 }
 
 .update-button {
     background-color: #327d81;
     color: white;
     border: none;
+    padding: 6px 12px;
     cursor: pointer;
 }
 
 .update-button:hover {
-    background-color: #285a64;
+    background-color: #285960;
+}
+
+.form-select {
+    color: #327d81;
+    border: 2px solid #327d81;
+    background-color: #f4f6ef;
+    padding: 8px 12px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #285960;
+    box-shadow: 0 0 0 2px rgba(50,125,129,0.5);
+}
+
+
+.pagination {
+    justify-content: center;
+    display: inline-flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #eee;
+}
+
+.pagination .active a {
+    background-color: #285960;
+    color: #fff;
+    border-color: #327d81;
+}
+
+.pagination .disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination .disabled a:hover {
+    background-color: #fff;
 }
