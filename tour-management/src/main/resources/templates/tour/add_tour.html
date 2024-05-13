@@ -27,6 +27,9 @@
                 th:text="${route.startLocation} + '-->' + ${route.endLocation}"></option>
     </select>
 
+
+
+
     <!-- Empty dropdown list for detail routes -->
     <select id="detailRouteSelect" name="detailRoute"  th:field="*{detailRoute}">
         <!-- Options will be populated dynamically -->
@@ -38,7 +41,16 @@
     </select>
 
     <input type="number" th:field="*{tourPrice}" placeholder="Tour's Price" >
-    <input type="date" th:field="*{startDate}" placeholder="Tour's Start Date" >
+<!--    <input type="date" th:field="*{startDate}" placeholder="Tour's Start Date" >-->
+
+<!--     Div to hold dynamic input fields for start dates -->
+    <div id="startDatesContainer"></div>
+
+    <!-- Button to add another start date input field -->
+    <button type="button" onclick="addStartDateField()">Add Start Date</button>
+
+    <button type="button" onclick="removeLastStartDate()">Remove Last Start Date</button>
+
 
 
     <button type="submit">Add</button>
@@ -74,6 +86,23 @@
 
     // Trigger fetchDetailRoutes() initially to populate the detail route select based on the default selection
     fetchDetailRoutes();
+
+    // JavaScript function to add input field for start date
+    function addStartDateField() {
+        var container = document.getElementById('startDatesContainer');
+        var input = document.createElement('input');
+        input.type = 'date';
+        input.name = 'startDates';
+        container.appendChild(input);
+    }
+
+    function removeLastStartDate() {
+        var container = document.getElementById('startDatesContainer');
+        var inputs = container.getElementsByTagName('input');
+        if (inputs.length > 0) {
+            container.removeChild(inputs[inputs.length - 1]);
+        }
+    }
     /*]]>*/
 </script>
 
