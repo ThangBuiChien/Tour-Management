@@ -2,33 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+<!--    <title>Booked Tours</title>-->
+    <link rel="stylesheet" th:href="@{/css/invoice.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script th:src="@{/js/invoice.js}" defer></script>
 </head>
 <body>
-<h1>Invoices</h1>
-<ul th:each="invoice : ${listInvoice}">
-<!--    <li>User: <span th:text="${invoice.userModel.fullName}"></span></li>-->
-    <li>Payer:<span th:text="${invoice.payerName}"></span></li>
-    <li>PayerAccount:<span th:text="${invoice.paymentAccount}"></span> </li>
-    <li>Tour: <span th:text="${invoice.tour.tourName}"></span></li>
-    <li>Date: <span th:text="${invoice.paymentDate}"></span></li>
-    <li>
-        <!-- Display Status for normal users -->
-        <span sec:authorize="!hasRole('ADMIN')">Status: <span th:text="${invoice.status}"></span></span>
-        <!-- Admin controls for updating status -->
-        <span sec:authorize="hasRole('ADMIN')">
-            <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post" style="display: inline;">
+<section th:replace="~{/main_component/header :: header}"></section>
+<h1>Booked Tours</h1>
 
-                <select name="status">
+<div class="container" th:each="invoice : ${listInvoice}">
+    <div class="card">
+        <div class="card-header">
+            <img src="@{/img/journey.png}" alt="Default Image" class="card-image">
+            <h2 th:text="${invoice.tour.tourName}"></h2>
+            <span class="date" th:text="${invoice.paymentDate}"></span>
+        </div>
+        <div class="card-body">
+            <p>Payer: <span th:text="${invoice.payerName}"></span></p>
+            <p>Account: <span th:text="${invoice.paymentAccount}"></span></p>
+            <p>Status: <span th:text="${invoice.status}"></span></p>
+            <p>Total Price: <span th:text="${invoice.totalPrice}"></span></p>
+        </div>
+        <div class="card-footer" sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post">
+                <select name="status" class="status-dropdown">
                     <option th:each="status : ${T(com.example.tourmanagement.model.InvoiceStatus).values()}"
+
                             th:value="${status}" th:text="${status}"
                             th:selected="${status == invoice.status}"></option>
+
                 </select>
-                <button type="submit">Update</button>
+                <button type="submit" class="update-button">Update</button>
             </form>
-        </span>
-    </li>
-    <li>Total Price: <span th:text="${invoice.totalPrice}"></span></li>
-</ul>
+        </div>
+    </div>
+</div>
+<section th:replace="~{/main_component/footer :: footer}"></section>
+
 </body>
 </html>
