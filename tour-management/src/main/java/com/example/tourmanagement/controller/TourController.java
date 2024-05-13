@@ -221,6 +221,40 @@ public class TourController {
         }
     }
 
+    @PostMapping("/clone/{id}")
+    public String cloneTour(@PathVariable Long id, Model model  ){
+        Optional<Tour> tour = tourService.findByID(id);
+        if(tour.isPresent()){
+            Tour tourCopy = new Tour();
+//            tourCopy.setDetailRoute(tour.get().getDetailRoute());
+//            tourCopy.setTourCapacity(tour.get().getTourCapacity());
+//            tourCopy.setTourPrice(tour.get().getTourPrice());
+//
+//            tourCopy.setLengthTrip(tour.get().getDetailRoute().getLengthTrip());
+//            tourCopy.setTourDescription(tour.get().getDetailRoute().getDetailTrip());
+//            tourCopy.setTourStatus("available");
+//            tourCopy.setRegister(0);
+//            tourCopy.setTourName(tour.get().getDetailRoute().getRoute().getEndLocation() + tour.get().getDetailRoute().getStopLocation());
+            tourCopy.setTourName(tour.get().getTourName());
+            tourCopy.setDetailRoute(tour.get().getDetailRoute());
+            tourCopy.setTourCapacity(tour.get().getTourCapacity());
+            tourCopy.setTourPrice(tour.get().getTourPrice());
+
+
+            model.addAttribute("tour", tourCopy);
+            model.addAttribute("routes", tour.get().getDetailRoute().getRoute());
+//            model.addAttribute("tour", tourCopy);
+            model.addAttribute("capacities", tour.get().getTourCapacity());
+
+            return "tour/add_tour";
+        }
+        else{
+            return "redirect:/tour";
+
+        }
+
+    }
+
 
 
 
