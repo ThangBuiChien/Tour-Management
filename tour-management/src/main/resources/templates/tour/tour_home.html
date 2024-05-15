@@ -101,6 +101,9 @@
             <form th:action="@{/tour/delete/{id}(id=${tour.id})}" method="post">
                 <button type="submit">Delete</button>
             </form>
+            <form th:action="@{/tour/clone/{id}(id=${tour.id})}" method="post">
+                <button type="submit">Duplicate</button>
+            </form>
         </td>
 
     </tr>

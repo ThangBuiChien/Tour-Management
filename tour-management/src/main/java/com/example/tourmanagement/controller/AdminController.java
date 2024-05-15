@@ -15,6 +15,5 @@ public class AdminController {
         return "index";
        //x return "index";
 
-
     }
 }
