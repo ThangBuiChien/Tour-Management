@@ -12,10 +12,8 @@ public class AdminController {
     public String viewHomePage(Model model){
 
 
-        
         return "index";
-
-
+       //x return "index";
 
     }
 }
