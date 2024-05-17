@@ -9,7 +9,7 @@
 </head>
 <body>
     <!--header-->
-    <section th:replace="~{/main_component/header :: header}"></section>
+    <section th:replace="~{/main_component/header_admin :: header}"></section>
 
     <section class="intro">
         <div class="grid-container">
@@ -47,7 +47,7 @@
                     <input type="text" id="toDate" class="form-control datepicker" placeholder="dd/mm/yyyy" required/>
                 </div>
                 <div class="col">
-                    <a th:href="@{/}" class="search-link">
+                    <a th:href="@{/}" class="a-button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                         </svg>
@@ -197,5 +197,5 @@
     <!--footer-->
     <section th:replace="~{/main_component/footer :: footer}"></section>
 </body>
-    <script th:href="@{/js/script.js}"></script>
+    <script th:href="@{/js/script.js}" defer></script>
 </html>

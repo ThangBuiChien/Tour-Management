@@ -44,6 +44,12 @@
     border-color: #276567;
 }
 
+.account {
+    gap: 4rem;
+    display: flex;
+    justify-content: center;
+}
+
 .account-button {
     position: relative;
     width: 60px;
@@ -167,7 +173,7 @@
     align-items: center;
 }
 
-.search-link {
+.a-button {
     width: 170px;
     height: 70px;
     padding: 8px 16px;
@@ -181,11 +187,11 @@
     display: flex;
 }
 
-.search-link:hover {
+.a-button:hover {
     background-color: #276567;
 }
 
-.search-link:active {
+.a-button:active {
     background-color: #1c4d52;
 }
 
