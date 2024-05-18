@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tour Details</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
@@ -11,11 +12,45 @@
     <p th:text="'Start Date ' + ${tour.getStartDate()}"></p>
     <p th:text="'Price: $' + ${tour.tourPrice}"></p>
     <a th:href="@{/book/{id}(id=${tour.id})}">Book Now</a>
-    <p th:text="'Desciption Of the trip: ' + ${tour.getTourDescription()}"></p>
+    <p style="white-space: pre-line" th:text="'Description : ' + ${tour.getTourDescription()}"></p>
+</div>
 
+<div>
+    <h2>Comments</h2>
+    <table>
+        <tr>
+            <th>Comment</th>
+            <th>Rating</th>
+            <th>User</th>
+        </tr>
+        <tr th:each="feedback : ${feedbacks}">
+            <td th:text="${feedback.getComment()}"></td>
+            <td th:text="${feedback.getRating()}"></td>
+            <td th:text="${feedback.getUserModel().getEmail()}"></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <form th:action="@{/feedback/add}" th:object="${feedbacks}" method="post">
+        <input type="hidden" name="tourId" th:value="${tour.id}"/>
+
+        <label for="comment">Comment:</label><br>
+        <textarea id="comment" th:field="*{comment}" placeholder="Write your comment" required style="width: 300px; height: 100px;"></textarea><br><br>
+
+        <label for="rating">Rating:</label>
+        <span id="ratingValue">5*</span><br>
+        <input type="range" id="rating" th:field="*{rating}" min="1" max="5" value="5" oninput="updateRating(this.value)"><br>
+
+        <select th:field="*{userModel}">
+            <option th:each="userModel : ${users}" th:value="${userModel.id}" th:text="${userModel.fullName}"></option>
+        </select><br><br>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
 
 </div>
 
-
+<script src="/js/script.js"></script>
 </body>
 </html>

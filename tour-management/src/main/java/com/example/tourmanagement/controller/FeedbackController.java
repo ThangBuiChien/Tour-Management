@@ -44,10 +44,9 @@ public class FeedbackController {
     }
 
     @PostMapping("/add")
-    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback){
+    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback, @RequestParam("tourId") long tourId){
         this.feedbackService.saveFeedback(feedback);
-        return "redirect:/feedback";
-
+        return "redirect:/detailed/" + tourId;  // Redirect back to the detailed tour page
     }
 
     @PostMapping("/delete/{id}")
