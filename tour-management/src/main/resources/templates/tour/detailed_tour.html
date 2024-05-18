@@ -32,7 +32,7 @@
 </div>
 
 <div>
-    <form th:action="@{/feedback/add}" th:object="${feedbacks}" method="post">
+    <form th:action="@{/feedback/add}" th:object="${feedback}" method="post">
         <input type="hidden" name="tourId" th:value="${tour.id}"/>
 
         <label for="comment">Comment:</label><br>

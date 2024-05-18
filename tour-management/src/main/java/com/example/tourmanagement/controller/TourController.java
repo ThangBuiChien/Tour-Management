@@ -214,6 +214,7 @@ public class TourController {
             model.addAttribute("tour", tour.get());
             Feedback feedback = new Feedback();
             model.addAttribute("feedbacks", feedbacks);
+            model.addAttribute("feedback", feedback);
             return "tour/detailed_tour";
         } else {
             model.addAttribute("message", "Detail Route is cannot be found!");
