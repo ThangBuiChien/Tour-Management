@@ -44,10 +44,19 @@ public class FeedbackController {
     }
 
     @PostMapping("/add")
-    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback, @RequestParam("tourId") long tourId){
-        this.feedbackService.saveFeedback(feedback);
-        return "redirect:/detailed/" + tourId;  // Redirect back to the detailed tour page
+    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback, @RequestParam("tourId") long tourId) {
+        Optional<Tour> tour = tourService.findByID(tourId);
+        if (tour.isPresent()) {
+            feedback.setTour(tour.get()); // Set the tour
+            // Assuming userModel is correctly set via th:field in your form
+            this.feedbackService.saveFeedback(feedback);
+            return "redirect:/tour/detailed/" + tourId;
+        } else {
+            model.addAttribute("message", "Tour not found!");
+            return "error_page";  // Or any appropriate error handling view
+        }
     }
+
 
     @PostMapping("/delete/{id}")
     public String deleteFeedback(Model model, @PathVariable long id){
