@@ -7,12 +7,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         for (let i = 0; i < 5; i++) {
             if (i < rating) {
-                starsHtml += '<i class="fas fa-star" style="color: gold;"></i>';
+                starsHtml += '<i class="fas fa-star"></i>';
             } else {
-                starsHtml += '<i class="far fa-star" style="color: gray;"></i>';
+                starsHtml += '<i class="far fa-star"></i>';
             }
         }
 
         starRating.innerHTML = starsHtml;
     });
 });
+
+function updateRatingText(ratingDescription) {
+    document.getElementById('rating-text').innerText = ratingDescription;
+}
