@@ -26,7 +26,6 @@
 
         private final TourService tourService;
         private final InvoiceService invoiceService;
-
         private final UserService userService;
 
         public BookingController(TourService tourService, InvoiceService invoiceService, UserService userService) {

@@ -1,20 +1,16 @@
 package com.example.tourmanagement.controller;
 
-import com.example.tourmanagement.model.Capacity;
-import com.example.tourmanagement.model.DetailRoute;
-import com.example.tourmanagement.model.Route;
-import com.example.tourmanagement.model.Tour;
+import com.example.tourmanagement.model.*;
 import com.example.tourmanagement.service.CapacityService;
+import com.example.tourmanagement.service.FeedbackService;
 import com.example.tourmanagement.service.RouteService;
 import com.example.tourmanagement.service.TourService;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,12 +26,14 @@ import java.util.Optional;
 public class TourController {
     private final TourService tourService;
     private final RouteService routeService;
+    private final FeedbackService feedbackService;
 
     private final CapacityService capacityService;
 
-    public  TourController(TourService tourService, RouteService routeService, CapacityService capacityService){
+    public  TourController(TourService tourService, RouteService routeService, FeedbackService feedbackService, CapacityService capacityService){
         this.tourService = tourService;
         this.routeService = routeService;
+        this.feedbackService = feedbackService;
         this.capacityService = capacityService;
     }
 
@@ -211,15 +209,19 @@ public class TourController {
     @GetMapping("/detailed/{id}")
     public String showDetail(Model model, @PathVariable long id) {
         Optional<Tour> tour = tourService.findByID(id);
+        List<Feedback> feedbacks = feedbackService.findAllByTourId(id);  // Assuming this method is available
         if (tour.isPresent()) {
             model.addAttribute("tour", tour.get());
+            Feedback feedback = new Feedback();
+            model.addAttribute("feedbacks", feedbacks);
+            model.addAttribute("feedback", feedback);
             return "tour/detailed_tour";
-
         } else {
-            model.addAttribute("message", "Detail Route is can not found!");
+            model.addAttribute("message", "Detail Route is cannot be found!");
             return "tour/available_tours";
         }
     }
+
 
     @PostMapping("/clone/{id}")
     public String cloneTour(@PathVariable Long id, Model model  ){
