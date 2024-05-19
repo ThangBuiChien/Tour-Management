@@ -8,9 +8,12 @@ import com.example.tourmanagement.service.TourService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -44,18 +47,26 @@ public class FeedbackController {
     }
 
     @PostMapping("/add")
-    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback, @RequestParam("tourId") long tourId) {
+    public String addFeedback(Model model, @ModelAttribute("feedback") Feedback feedback, @RequestParam("tourId") long tourId, RedirectAttributes redirectAttributes, @AuthenticationPrincipal UserDetails userDetails) {
+        String userMail = userDetails.getUsername();
+        Optional<UserModel> userOpt = userService.loadByEmail(userMail);
+        if (userOpt.isEmpty()) {
+            redirectAttributes.addFlashAttribute("errorMessage", "User not found!");
+            return "redirect:/tour/available";
+        }
+        UserModel user = userOpt.get();
         Optional<Tour> tour = tourService.findByID(tourId);
         if (tour.isPresent()) {
             feedback.setTour(tour.get()); // Set the tour
-            // Assuming userModel is correctly set via th:field in your form
+            feedback.setUserModel(user); // Set the user
             this.feedbackService.saveFeedback(feedback);
             return "redirect:/tour/detailed/" + tourId;
         } else {
             model.addAttribute("message", "Tour not found!");
-            return "error_page";  // Or any appropriate error handling view
+            return "err/error";  // Or any appropriate error handling view
         }
     }
+
 
 
     @PostMapping("/delete/{id}")
