@@ -6,6 +6,7 @@ document.addEventListener('click', e => {
     let currentDropdown;
     if (isDropdownButton) {
         currentDropdown = e.target.closest('[data-dropdown]');
+        const dropdownList = currentDropdown.querySelector('.dropdown-list');
         currentDropdown.classList.toggle('active');
     }
 
