@@ -51,7 +51,7 @@ public class DetailRouteController {
     @PostMapping("/add")
     public String addDepartment(@ModelAttribute("detailRoute") DetailRoute detailRoute, RedirectAttributes redirectAttributes){
         this.detailRouteServices.saveDetailRoute(detailRoute);
-        redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
+        redirectAttributes.addFlashAttribute("successMessage", "Detail Route added successfully!");
         return "redirect:/detail/load";
 
     }

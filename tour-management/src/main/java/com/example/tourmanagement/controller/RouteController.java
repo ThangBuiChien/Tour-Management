@@ -51,7 +51,7 @@ public class RouteController {
     @PostMapping("/add")
     public String addRoute(@ModelAttribute("route") Route route, RedirectAttributes redirectAttributes){
         this.routeServices.saveRoute(route);
-        redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
+        redirectAttributes.addFlashAttribute("successMessage", "Route added successfully!");
         return "redirect:/route/load";
 
     }
