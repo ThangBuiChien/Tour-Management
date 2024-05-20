@@ -15,12 +15,18 @@
 <section th:replace="~{/main_component/header :: header}"></section>
 
 <section class="container my-4">
+    <h2>Tour Detail</h2>
     <div class="card mb-4 shadow-sm">
         <div class="card-body">
-            <h2 class="card-title" th:text="${tour.getDetailRoute().stopLocation}">Lam Dong - Bao Loc - Hang MU</h2>
-            <p class="card-text" th:text="'Start Date ' + ${tour.getStartDate()}">Start Date 2024-06-01</p>
-            <p class="card-text" th:text="'Price: $' + ${tour.tourPrice}">Price: $150.0</p>
-            <p class="card-text" th:text="'Description : ' + ${tour.getTourDescription()}">Description : Detail Trip 2</p>
+            <h2 class="card-title" th:text="${tour.getDetailRoute().stopLocation}">Ha Noi - Pho Co - Hang Khay - Bun Cha Obama</h2>
+            <div class="card-text">
+                <p><strong>Start Date:</strong> <span th:text="${tour.getStartDate()}">2024-05-31</span></p>
+                <p><strong>Price:</strong> <span th:text="${tour.tourPrice}">$3.0</span></p>
+                <p><strong>Description:</strong></p>
+                <ul th:with="days=${T(com.example.tourmanagement.others.Day).parseTourDescription(tour.getTourDescription())}">
+                    <li th:each="day : ${days}" th:text="${day}"></li>
+                </ul>
+            </div>
             <a th:href="@{/book/{id}(id=${tour.id})}" class="button">Book Now</a>
         </div>
     </div>

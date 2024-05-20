@@ -117,3 +117,8 @@
 .pagination .disabled a:hover {
     background-color: #fff;
 }
+h2 {
+    text-align: center;
+    color: #327d81;
+    margin-bottom: 20px;
+}

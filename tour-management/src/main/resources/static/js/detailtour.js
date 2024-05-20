@@ -20,3 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
 function updateRatingText(ratingDescription) {
     document.getElementById('rating-text').innerText = ratingDescription;
 }
+
+function parseTourDescription(description) {
+    const days = description.split(/Day \d+/).filter(Boolean);
+    return days.map((day, index) => `Day ${index + 1}: ${day.trim()}`);
+}
