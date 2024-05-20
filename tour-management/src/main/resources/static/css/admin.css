@@ -78,7 +78,7 @@
     transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
-.account.active > .account-button + .dropdown-list {
+.account.active > .dropdown-list {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -106,6 +106,37 @@
     background-color: #f4f6ef;
 }
 
+.info .dd-accicon {
+    background-color: #327d81;
+    color: #fff;
+    border: 1px solid #327d81;
+    width: 55px;
+    height: 55px;
+    text-decoration: none;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.accessible a {
+    color: #000;
+    font-size: 18px;
+}
+
+.signout a {
+    color: #000;
+    font-size: 18px;
+}
+
+.show {
+    display: block;
+}
+
+.bg-custom {
+    background-color: #f4f6ef;
+}
+
 .dashboard {
     margin: 100px 225px 200px;
 }
@@ -116,7 +147,7 @@
 }
 
 .dashboard .db-title h1 {
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .dashboard .proj-data .pd-grid {
