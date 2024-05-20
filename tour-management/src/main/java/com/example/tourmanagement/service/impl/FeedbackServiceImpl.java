@@ -36,4 +36,9 @@ public class FeedbackServiceImpl implements FeedbackService {
         this.repo.deleteById(id);
 
     }
+    @Override
+    public List<Feedback> findAllByTourId(long tourId) {
+        return this.repo.findByTourId(tourId);  // Assuming this method exists in the repository
+    }
+
 }

@@ -1,0 +1,63 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 960px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+.form-control, .form-range {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #276567;
+    border: none;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+}
+
+.rating label {
+    color: #ccc;
+    cursor: pointer;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+    color: #ffc107;
+}
+
+.rating input {
+    display: none;
+}
+
+.star-rating {
+    display: inline-block;
+}
+
+.star-rating .fas {
+    color: gold;
+}
+
+.star-rating .far {
+    color: gray;
+}

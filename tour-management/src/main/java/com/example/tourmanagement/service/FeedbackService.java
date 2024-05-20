@@ -13,4 +13,6 @@ public interface FeedbackService {
     Optional<Feedback> findByID(long id);
 
     void deleteFeedback(long id);
+
+    List<Feedback> findAllByTourId(long tourId);
 }
