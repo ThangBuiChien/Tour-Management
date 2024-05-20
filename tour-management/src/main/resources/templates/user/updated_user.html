@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Update User</title>
+    <link rel="stylesheet" th:href="@{/css/user.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/user_management.js}" defer></script>
 </head>
 <body>
-<h2>Update User</h2>
-<form th:action="@{/user/update2/{id} (id = ${user.id})}" th:object = "${user}" method="post">
-
-    <label for="fullName">Full Name:</label>
-    <input type="text" id="fullName" th:field="*{fullName}" placeholder="Enter Full Name" required><br><br>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" placeholder="Enter Email" required disabled><br><br>
-
-    <label for="birthDate">Birth Date:</label>
-    <input type="date" id="birthDate" th:field="*{birthDate}" th:value="${user.birthDate}" required><br><br>
-
-
-
-    <label for="citizenID">Citizen ID:</label> <!-- Add this line -->
-    <input type="text" id="citizenID" th:field="*{citizenID}" placeholder="Enter Citizen ID" required><br><br>
-
-    <label for = "phoneNumber">Phone Number:</label>
-    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter Phone Number" required><br><br>
-
-<!--    <select id="userRole" th:field="*{userRole}" required>-->
-<!--        <option value="">Select Role</option>-->
-<!--        <option th:each="userRole : ${userRoles}" th:value="${userRole.getId()}" th:text="${userRole.roleName}"></option>-->
-<!--    </select>-->
-    <br><br>
-
-    <button type="submit">Update User</button>
-</form>
+<section th:replace="~{/main_component/header :: header}"></section>
+<section class="container mt-5">
+    <h2>Update User</h2>
+    <form th:action="@{/user/update2/{id} (id = ${user.id})}" th:object="${user}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name:</label>
+            <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="Enter Full Name" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Enter Email" required disabled>
+        </div>
+        <div class="mb-3">
+            <label for="birthDate" class="form-label">Birth Date:</label>
+            <input type="date" id="birthDate" th:field="*{birthDate}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="citizenID" class="form-label">Citizen ID:</label>
+            <input type="text" id="citizenID" th:field="*{citizenID}" class="form-control" placeholder="Enter Citizen ID" required>
+        </div>
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="form-control" placeholder="Enter Phone Number" required>
+        </div>
+        <button type="submit" class="btn-primary">Update User</button>
+    </form>
+</section>
+<section th:replace="~{/main_component/footer :: footer}"></section>
 </body>
 </html>
