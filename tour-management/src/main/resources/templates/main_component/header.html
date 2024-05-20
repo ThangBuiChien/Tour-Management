@@ -6,12 +6,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script th:src="@{/js/script.js}" defer></script>
+    <script th:href="@{/js/script.js}" defer></script>
 </head>
 <body>
 <div th:fragment="header">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between border-bottom bg-custom">
-        <a href="/" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none text-center">
+        <a th:href="@{/}" class="d-flex align-items-center col-md-3 my-2 md-0 text-dark text-decoration-none text-center">
             <img th:src="@{/img/waylingo_logo.png}" class="rounded mx-auto d-block w-50" alt="...">
         </a>
 
@@ -21,70 +21,64 @@
             <li><a th:href="@{/}" class="nav-link px-2 link-dark">Contact</a></li>
         </ul>
 
-<!--        <div class="col-md-3 text-center account" data-dropdown>-->
-<!--            <div class="notifi pt-3">-->
-<!--                <a th:href="@{/}" class="notifi-link">-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="Black" class="bi bi-bell" viewBox="0 0 16 16">-->
-<!--                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>-->
-<!--                    </svg>-->
-<!--                </a>-->
-<!--            </div>-->
-<!--            <div class="account-btn">-->
-<!--                <button class="button account-button" id="abc" type="button" data-dropdown-button>-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">-->
-<!--                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>-->
-<!--                    </svg>-->
-<!--                </button>-->
-<!--                <div class="dropdown-list">-->
-<!--                    afiou dsgfiuoksa dgfijkasgdiofu <br>-->
-<!--                    6545435 iuyguyfrtutf <br>-->
-<!--                    bhbgjvifhutfdyt765-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-                    <div class="notifi pt-3">
-                        <a th:href="@{/}" class="notifi-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="Black" class="bi bi-bell" viewBox="0 0 16 16">
-                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
-                            </svg>
-                        </a>
-                    </div>
-<!--        Normal user-->
-<!--        <div class="col-md-3 text-center account" data-dropdown>-->
-<!--            <button class="button me-2 account-button" id="abc" type="button" data-dropdown-button>-->
-<!--                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">-->
-<!--                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>-->
-<!--                </svg>-->
-<!--            </button>-->
-<!--            <div class="dropdown-list">-->
-<!--                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">-->
-<!--                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg> Tourist profile</a>-->
-
-<!--                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">-->
-<!--                    <path d="M2 2v13.5l5.5-3.5L13 15.5V2H2z"/></svg> Booked tours</a>-->
-<!--                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">-->
-<!--                    <path d="M6.854 12.354a.5.5 0 0 1-.708-.708L9.293 9H1.5a.5.5 0 0 1 0-1h7.793L6.146 4.354a.5.5 0 1 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5z"/><path d="M13.5 15a1.5 1.5 0 0 1-1.5-1.5V8a.5.5 0 0 1 1 0v5.5a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H13a.5.5 0 0 1 0-1h2.5A1.5 1.5 0 0 1 16 6.5v7a1.5 1.5 0 0 1-1.5 1.5H13.5z"/></svg> Sign out</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        Admin-->
+        <!--this is for normal user (without register)-->
+        <!--            <div class="col-md-3 text-center">-->
+        <!--                <a th:href="@{/}"><button type="button" class="button-outline me-2">Login</button></a>-->
+        <!--                <a th:href="@{/}"><button type="button" class="button">Sign-up</button></a>-->
+        <!--            </div>-->
+        <!--this is for registered user-->
         <div class="col-md-3 text-center account" data-dropdown>
-            <button class="button me-2 account-button" id="abc" type="button" data-dropdown-button>
+            <button class="button me-2 account-button" id = "abc" type="button" data-dropdown-button>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                 </svg>
             </button>
             <div class="dropdown-list">
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
-                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/></svg> Admin profile</a>
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-lock" viewBox="0 0 16 16">
-                    <path d="M5.6 5.6c0-1.314 1.1-2.4 2.4-2.4s2.4 1.1 2.4 2.4c0 .643-.257 1.243-.707 1.693-.45.45-1.05.707-1.693.707-.643 0-1.243-.257-1.693-.707-.45-.45-.707-1.05-.707-1.693zM8 0C3.64 0 0 2.4 0 2.4s0 1.606 0 2.692c0 1.085 0 2.593.693 4.013.384.766.95 1.39 1.687 1.97l.027.022c.81.63 1.837 1.276 3.3 1.77.635.222 1.35.407 2.293.578.176.032.356.063.543.094C9.73 15.9 9.94 16 10.173 16H11.5a1.5 1.5 0 0 0 1.5-1.5V10a4.5 4.5 0 0 0 3-1.5 1.5 1.5 0 0 0 0-2.08A4.5 4.5 0 0 0 11.5 4.5h-.354c-.12-1.002-.672-2.121-1.5-2.904A4.5 4.5 0 0 0 8 .001V0zm-.5 8.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm5-6.45a2 2 0 0 1 1.46.61c.78.78.856 2.144.292 2.962a3.5 3.5 0 0 1-1.824.856L12.5 10V2.05zM6.5 8.5a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/></svg> Admin page</a>
-                <div class="dropdown-divider"></div>
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                    <path d="M6.854 12.354a.5.5 0 0 1-.708-.708L9.293 9H1.5a.5.5 0 0 1 0-1h7.793L6.146 4.354a.5.5 0 1 1 .708-.708l3.5 3.5a.5.5 0 0 1 0 .708l-3.5 3.5z"/><path d="M13.5 15a1.5 1.5 0 0 1-1.5-1.5V8a.5.5 0 0 1 1 0v5.5a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H13a.5.5 0 0 1 0-1h2.5A1.5 1.5 0 0 1 16 6.5v7a1.5 1.5 0 0 1-1.5 1.5H13.5z"/></svg> Sign out</a>
+                <div class="info d-flex p-2">
+                    <div class="dd-accicon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                        </svg>
+                    </div>
+                    <div class="ms-2 text-start">
+                        <h6>Full name</h6> <!--name here-->
+                        <p>example@gmail.com</p> <!--email here-->
+                    </div>
+                </div>
+                <hr class="mt-0 mb-2">
+                <div class="accessible p-2">
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gray" class="bi bi-person-circle" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                        </svg>
+                        <a th:href="@{/}" class="text-decoration-none ms-2 pf">Tourist Profile</a>
+                    </div>
+                    <div class="mt-3 d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gray" class="bi bi-bookmark" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                        </svg>
+                        <a th:href="@{/}" class="text-decoration-none ms-2 pf">Booked Tours</a>
+                    </div>
+                    <div class="mt-3 d-flex mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gray" class="bi bi-bell" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                        </svg>
+                        <a th:href="@{/}" class="text-decoration-none ms-2 pf">Notification</a>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-2">
+                <div class="signout d-flex p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="gray" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                    </svg>
+                    <a th:href="@{/}" class="text-decoration-none ms-2 pf">Sign out</a>
+                </div>
             </div>
         </div>
-
     </header>
 </div>
 </body>
+<script th:href="@{/js/script.js}" defer></script>
 </html>

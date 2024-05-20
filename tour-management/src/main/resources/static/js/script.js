@@ -1,12 +1,11 @@
 //header
 document.addEventListener('click', e => {
-    const isDropdownButton = e.target.matches('[data-dropdown-button]');
+    const isDropdownButton = e.target.matches('[data-dropdown-button]') || e.target.closest('[data-dropdown-button]');
     if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
 
     let currentDropdown;
     if (isDropdownButton) {
         currentDropdown = e.target.closest('[data-dropdown]');
-        const dropdownList = currentDropdown.querySelector('.dropdown-list');
         currentDropdown.classList.toggle('active');
     }
 

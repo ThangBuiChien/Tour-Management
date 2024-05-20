@@ -65,38 +65,23 @@
 }
 
 .dropdown-list {
-    display: none;
     position: absolute;
-    background-color: white;
-    min-width: 200px; /* Increased from 160px */
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    text-align: left;
-    border-radius: .45rem;
-    padding: 1.5rem; /* Increased from .75rem */
     right: 6%;
     top: 13%;
+    background-color: white;
+    padding: .75rem;
+    border-radius: .45rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
 
-.dropdown-list a {
-    color: black;
-    padding: 16px 24px; /* Increased from 12px 16px */
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    font-size: 18px; /* Increased from default */
-}
-
-.dropdown-list a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown-list svg {
-    margin-right: 12px; /* Increased from 8px */
-}
-
-.account:hover .dropdown-list {
-    display: block;
+.account.active > .dropdown-list {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .btt-button {
@@ -119,6 +104,29 @@
 
 .bg-custom {
     background-color: #f4f6ef;
+}
+
+.info .dd-accicon {
+    background-color: #327d81;
+    color: #fff;
+    border: 1px solid #327d81;
+    width: 55px;
+    height: 55px;
+    text-decoration: none;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.accessible a {
+    color: #000;
+    font-size: 18px;
+}
+
+.signout a {
+    color: #000;
+    font-size: 18px;
 }
 
 .intro {
@@ -305,39 +313,4 @@
 
 .grid-tourist {
     margin-top: 150px;
-}
-
-/* Additional CSS for dropdown */
-.dropdown-list {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    text-align: left;
-    border-radius: .45rem;
-    padding: .75rem;
-    right: 6%;
-    top: 13%;
-}
-
-.dropdown-list a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-}
-
-.dropdown-list a:hover {
-    background-color: #f1f1f1;
-}
-
-.dropdown-list svg {
-    margin-right: 8px;
-}
-
-.account:hover .dropdown-list {
-    display: block;
 }
