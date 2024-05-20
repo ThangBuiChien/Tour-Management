@@ -1,0 +1,154 @@
+.button {
+    display: inline-block;
+    background-color: #327d81;
+    color: #fff;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #276567;
+}
+
+.button:active {
+    background-color: #1c4d52;
+}
+
+.button-outline {
+    display: inline-block;
+    background-color: transparent;
+    color: #327d81;
+    border: 1px solid #327d81;
+    padding: 8px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.button-outline:hover {
+    background-color: #327d81;
+    color: #fff;
+}
+
+.button-outline:active {
+    background-color: #276567;
+    border-color: #276567;
+}
+
+.account {
+    gap: 4rem;
+    display: flex;
+    justify-content: center;
+}
+
+.account-button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.account-button svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.dropdown-list {
+    position: absolute;
+    right: 6%;
+    top: 13%;
+    background-color: white;
+    padding: .75rem;
+    border-radius: .45rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.account.active > .account-button + .dropdown-list {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.btt-button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.btt-button svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.show {
+    display: block;
+}
+
+.bg-custom {
+    background-color: #f4f6ef;
+}
+
+.dashboard {
+    margin: 100px 225px 200px;
+}
+
+.dashboard .db-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.dashboard .db-title h1 {
+    font-weight: 600;
+}
+
+.dashboard .proj-data .pd-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard .proj-data .pd-grid .grid-container {
+    width: 400px;
+    height: 170px;
+    background-color: #E9EAE6;
+    border: none;
+    margin: 10px;
+    padding: 15px 10px;
+}
+
+.dashboard .proj-data .pd-grid .grid-container .data-info .money .price {
+    font-weight: 400;
+    font-size: 25px;
+}
+
+.dashboard .proj-data .pd-grid .grid-container .data-icon .icon-border {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
