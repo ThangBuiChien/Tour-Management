@@ -206,3 +206,42 @@
     text-align: center;
     width: 100px; /* Adjust as necessary */
 }
+
+.setting {
+    display: flex;
+    justify-content: center;
+}
+
+.setting-button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.setting-button svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.setting-dropdown {
+    position: absolute;
+    right: 4%;
+    /*top: 13%;*/
+    background-color: white;
+    padding: .75rem;
+    border-radius: .45rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+}
+
+.setting.active > .setting-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
