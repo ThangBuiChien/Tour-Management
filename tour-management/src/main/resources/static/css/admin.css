@@ -245,3 +245,35 @@
     transform: translateY(0);
     pointer-events: auto;
 }
+
+.status-button {
+    width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: none;
+}
+
+.status-button[data-status="available"] {
+    background-color: green;
+    color: white;
+}
+
+.status-button[data-status="unavailable"] {
+    background-color: red;
+    color: white;
+}
+
+.status-button[data-status="fully-booked"] {
+    background-color: yellow;
+    color: black;
+}
+
+.set {
+    color: gray;
+}
+
+

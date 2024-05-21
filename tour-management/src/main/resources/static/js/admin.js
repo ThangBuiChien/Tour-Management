@@ -36,6 +36,51 @@ function topFunction() {
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-//dropdown
+//setting status
+let currentButton;
+
+function openStatusModal(button) {
+    currentButton = button;
+    if (currentButton.dataset.status === 'fully-booked') {
+        return;
+    }
+    $('#statusModal').modal('show');
+}
+
+function changeStatus(newStatus) {
+    currentButton.dataset.status = newStatus;
+    currentButton.textContent = capitalizeFirstLetter(newStatus);
+    $('#statusModal').modal('hide');
+    updateButtonStyles(currentButton);
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
+}
+
+function updateButtonStyles(button) {
+    // Clear previous styles
+    button.classList.remove('btn-success', 'btn-danger', 'btn-warning');
+
+    // Update styles based on the new status
+    if (button.dataset.status === 'available') {
+        button.style.backgroundColor = 'green';
+        button.style.color = 'white';
+    } else if (button.dataset.status === 'unavailable') {
+        button.style.backgroundColor = 'red';
+        button.style.color = 'white';
+    } else if (button.dataset.status === 'fully-booked') {
+        button.style.backgroundColor = 'yellow';
+        button.style.color = 'black';
+    }
+}
+
+// Initialize button styles on page load
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.status-button').forEach(updateButtonStyles);
+});
+
+
+
 
 
