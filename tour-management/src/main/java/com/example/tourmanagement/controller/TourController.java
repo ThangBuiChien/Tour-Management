@@ -49,14 +49,14 @@ public class TourController {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listTours",  tourService.getAllTour());
-        return "tour/tour_home";
+        return "tour/available_tours";
 
     }
 
     @GetMapping("/sorting")
     public String getAllRoutePage(Model model, RedirectAttributes redirectAttributes,
                                   @RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(defaultValue = "3") int size,
+                                  @RequestParam(defaultValue = "5") int size,
                                   @RequestParam(defaultValue = "id") String sortBy,
                                   @RequestParam(defaultValue = "") String keyword){
 
@@ -65,9 +65,11 @@ public class TourController {
         }
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
-        model.addAttribute("listTours", listTours);
-        int totalPages = listTours.getTotalPages();
+//        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
+//        model.addAttribute("listTours", listTours);
+        Page<Tour> availableTours = tourService.getAllTour(pageable, keyword);
+        model.addAttribute("availableTours", availableTours);
+        int totalPages = availableTours.getTotalPages();
 
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", page);
@@ -75,7 +77,7 @@ public class TourController {
         model.addAttribute("page", page);
         model.addAttribute("size", size);
 
-        return "tour/tour_home";
+        return "tour/available_tours";
 
     }
 
