@@ -183,3 +183,26 @@
     justify-content: center;
     align-items: center;
 }
+
+.tours {
+    margin: 100px 225px 200px;
+}
+
+.tours .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tours .title-part .tours-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.table-wrap table td a.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0;
+    text-align: center;
+    width: 100px; /* Adjust as necessary */
+}
