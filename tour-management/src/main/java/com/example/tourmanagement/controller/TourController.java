@@ -49,7 +49,9 @@ public class TourController {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listTours",  tourService.getAllTour());
-        return "tour/available_tours";
+        model.addAttribute("availableTours",  tourService.getAllTour());
+
+        return "tour/tour_home";
 
     }
 
@@ -105,7 +107,7 @@ public class TourController {
         model.addAttribute("page", page);
         model.addAttribute("size", size);
 
-        return "tour/available_tours";
+        return "tour/tour_home";
 
     }
 
