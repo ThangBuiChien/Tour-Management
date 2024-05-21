@@ -51,7 +51,7 @@ public class TourController {
         model.addAttribute("listTours",  tourService.getAllTour());
         model.addAttribute("availableTours",  tourService.getAllTour());
 
-        return "tour/tour_home";
+        return "tour/available_tours";
 
     }
 
