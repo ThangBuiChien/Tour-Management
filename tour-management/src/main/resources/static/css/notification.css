@@ -1,0 +1,35 @@
+body {
+    padding-top: 20px;
+    background-color: #f4f6ef;
+}
+/*.container {*/
+/*    background: #f4f6ef;*/
+/*    padding: 20px;*/
+/*    border-radius: 5px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+/*}*/
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #327d81;
+    font-size: 24px;
+}
+.notification-container {
+    border: none;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+.notification-container:hover {
+    transform: scale(1.02);
+    background-color: #f4f6ef;
+}
+table {
+    width: 100%;
+}
+/*th {*/
+/*    background-color: #f4f6ef;*/
+/*    color: white;*/
+/*}*/
+td {
+    padding: 15px;
+}
