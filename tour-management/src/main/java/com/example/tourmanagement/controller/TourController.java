@@ -49,6 +49,8 @@ public class TourController {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listTours",  tourService.getAllTour());
+        model.addAttribute("availableTours",  tourService.getAllTour());
+
         return "tour/available_tours";
 
     }
@@ -80,6 +82,9 @@ public class TourController {
         return "tour/available_tours";
 
     }
+
+
+
 
 //    @PostMapping("/add")
 //    public String addRoute(@ModelAttribute("tour") Tour tour, RedirectAttributes redirectAttributes){
