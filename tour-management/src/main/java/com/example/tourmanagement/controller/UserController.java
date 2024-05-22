@@ -38,7 +38,8 @@ public class UserController {
     public String loadUser(Model model){
         List<UserModel> userModels = userService.getAllUser();
         model.addAttribute("ListUsers", userModels);
-        return "user/user_home";
+        //return "user/user_home";
+        return "admin/admin_users";
     }
 
     @PostMapping("/add")

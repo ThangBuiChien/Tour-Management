@@ -22,6 +22,38 @@
             <h1 class="title ms-2 mb-0">Users report</h1>
         </div>
     </div>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>Full name</th>
+            <th>EMAIL</th>
+            <th>PHONE NUMBER	</th>
+            <th>CITIZEN ID	</th>
+            <th>DATE OF BIRTH</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="userModel : ${ListUsers}">
+            <td th:text="${userModel.getFullName()}"></td>
+            <td th:text="${userModel.getEmail()}"></td>
+            <td th:text="${userModel.getPhoneNumber()}"></td>
+            <td th:text="${userModel.getCitizenID()}"></td>
+            <td th:text="${userModel.getBirthDate()}"></td>
+            <td>
+                <!-- Edit button -->
+                <form th:action="@{/user/showUpdateForm/{id}(id=${userModel.id})}" method="get" class="d-inline">
+                    <button type="submit" class="btn btn-warning">Edit</button>
+                </form>
+                <!-- Delete button -->
+                <form th:action="@{/user/delete/{id}(id=${userModel.id})}" method="post" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
     <div class="table-part mt-5">
         <div class="row">
             <div class="col-md-12">
