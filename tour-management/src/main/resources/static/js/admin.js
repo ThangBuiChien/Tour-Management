@@ -128,43 +128,42 @@ function topFunction() {
 })();
 
 
-// let currentButton;
-//
-// function openStatusModal(button) {
-//     currentButton = button;
-//     if (currentButton.dataset.status === 'fully-booked') {
-//         return;
-//     }
-//     $('#statusModal').modal('show');
-// }
-//
-// function changeStatus(newStatus) {
-//     currentButton.dataset.status = newStatus;
-//     currentButton.textContent = capitalizeFirstLetter(newStatus);
-//     $('#statusModal').modal('hide');
-//     updateButtonStyles(currentButton);
-// }
-//
-// function capitalizeFirstLetter(string) {
-//     return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
-// }
-//
-// function updateButtonStyles(button) {
-//
-//     // Update styles based on the new status
-//     if (button.dataset.status === 'available') {
-//         button.style.backgroundColor = 'green';
-//         button.style.color = 'white';
-//     } else if (button.dataset.status === 'unavailable') {
-//         button.style.backgroundColor = 'red';
-//         button.style.color = 'white';
-//     }
-// }
-//
-// // Initialize button styles on page load
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.querySelectorAll('.status-button').forEach(updateButtonStyles);
-// });
+//Add tour form
+document.getElementById('submitLink').addEventListener('click', function(event) {
+    event.preventDefault();
+
+    var routeSelect = document.getElementById('routeSelect');
+    var detailRouteSelect = document.getElementById('detailRouteSelect');
+    var tourCapacity = document.getElementById('tourCapacity');
+    var tourPrice = document.getElementById('tourPrice');
+    var stday = document.getElementById('stday');
+
+    if (routeSelect.value == "Choose a main route" || detailRouteSelect.value == "Choose a detail route" || tourCapacity.value == "Choose a tour capacity") {
+        event.preventDefault();
+        alert('Please fill out all fields correctly.');
+    } else if (tourPrice.value <= 0) {
+        event.preventDefault();
+        alert('The price must be > 0.');
+    } else if (new Date(stday.value) < new Date('2024-01-01')) {
+        event.preventDefault();
+        alert('The date must be >= 2024.');
+    } else {
+        alert('The tour has been added!!!');
+    }
+});
+
+//remove
+document.addEventListener('DOMContentLoaded', (event) => {
+    document.querySelectorAll('.remove').forEach(element => {
+        element.addEventListener('click', function(event) {
+            event.preventDefault();
+            const row = this.closest('tr');
+            if (row) {
+                row.remove();
+            }
+        });
+    });
+});
 
 
 

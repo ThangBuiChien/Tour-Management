@@ -26,9 +26,19 @@ public class AdminController {
     public String viewHomePage(Model model){
 
 
-        return "admin/admin_payment";
+        return "admin/admin_users";
        //x return "index";
 
+    }
+
+    @GetMapping({"/admin_addtour"})
+    public String addTour(Model model){
+        return "admin/admin_addtour";
+    }
+
+    @GetMapping({"/admin_edittour"})
+    public String editTour(Model model){
+        return "admin/admin_edittour";
     }
 
 //    @GetMapping("/admin_tours")

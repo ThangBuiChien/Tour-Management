@@ -351,4 +351,78 @@
     color: gray;
 }
 
+.addtour {
+    margin: 100px 225px 200px;
+}
 
+.addtour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addtour .title-part .addtour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.addtour-form {
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: none;
+    background-color: #f4f6ef;
+    align-items: center;
+}
+
+.edittour {
+    margin: 100px 225px 200px;
+}
+
+.edittour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edittour .title-part .edittour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.edittour-form {
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: none;
+    background-color: #f4f6ef;
+    align-items: center;
+}
+
+.tourprice,
+.stday {
+    border: none;
+    height: 35px;
+}
+
+.a-button {
+    width: 100px;
+    height: 50px;
+    padding: 8px 16px;
+    background-color: #327d81;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.a-button:hover {
+    background-color: #276567;
+}
+
+.a-button:active {
+    background-color: #1c4d52;
+}
