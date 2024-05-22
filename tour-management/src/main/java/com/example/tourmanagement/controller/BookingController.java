@@ -5,6 +5,7 @@
     import com.example.tourmanagement.service.InvoiceService;
     import com.example.tourmanagement.service.UserService;
     import jakarta.servlet.http.HttpSession;
+    import org.springframework.security.access.prepost.PreAuthorize;
     import org.springframework.security.core.Authentication;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
     import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +23,7 @@
 
     @Controller
     @RequestMapping("/book")
+    @PreAuthorize("hasRole('USER')")
     public class BookingController {
 
         private final TourService tourService;
