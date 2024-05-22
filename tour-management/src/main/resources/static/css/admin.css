@@ -259,6 +259,21 @@
     font-size: 36px;
 }
 
+.routes {
+    margin: 100px 225px 200px;
+}
+
+.routes .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.routes .title-part .routes-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
 .table-wrap table td a.btn {
     display: inline-block;
     padding: 5px 10px;

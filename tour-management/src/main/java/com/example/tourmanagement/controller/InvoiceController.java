@@ -33,7 +33,7 @@ public class InvoiceController {
         model.addAttribute("listInvoice", invoicePage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", invoicePage.getTotalPages());
-        return "invoice/invoice_home";
+        return "invoice/admin_invoice";
     }
 
 
