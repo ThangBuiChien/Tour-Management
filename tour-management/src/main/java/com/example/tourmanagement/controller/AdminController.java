@@ -26,8 +26,10 @@ public class AdminController {
     public String viewHomePage(Model model){
 
 
-        return "admin/admin_payment";
-       //x return "index";
+       // return "admin/admin_payment";
+        return "depa/payment";
+
+        //x return "index";
 
     }
 
