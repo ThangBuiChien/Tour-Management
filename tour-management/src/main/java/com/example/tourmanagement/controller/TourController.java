@@ -159,7 +159,7 @@ public class TourController {
         }
     }
 
-    @GetMapping("/showAddForm")
+    @GetMapping("/admin_addTour")
     public String showAddForm(Model model){
         Tour tour = new Tour();
         model.addAttribute("tour", tour);
