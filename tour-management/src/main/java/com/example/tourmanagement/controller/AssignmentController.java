@@ -83,6 +83,14 @@ public class AssignmentController {
         return "tour_assignment/tour_members";
     }
 
+    @GetMapping("/loadTourGuide")
+    public String loadTourGuide(Model model) {
+        List<TourGuide> tourGuides = tourGuideService.getAllTourGuides();
+
+        model.addAttribute("tourGuides", tourGuides);
+        return "admin/admin_tourguides";
+    }
+
 
 
 }
