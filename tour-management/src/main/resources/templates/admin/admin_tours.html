@@ -30,14 +30,6 @@
                         Add tour
                     </button>
                 </a>
-                <a th:href="@{/}">
-                    <button type="button" class="button">
-                        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"></path>
-                        </svg>
-                        Export
-                    </button>
-                </a>
             </div>
         </div>
         <div class="table-part mt-5">
@@ -56,13 +48,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="tour : ${listTours}">
-                                    <th th:text="${tour.tourName}" scope="row"></th>
-                                    <td th:text="${tour.startDate}"></td>
-                                    <td th:text="${tour.tourPrice}"></td>
-                                    <td th:text="${tour.tourCapacity.minMember} + '/' + ${tour.tourCapacity.maxMember}"></td>
+                                <tr>
+                                    <th scope="row">
+                                        DU LỊCH ĐÀ NẴNG <br>
+                                        - HỘI AN - BÀ NÀ HILLS <br>
+                                        - ĐỘNG THIÊN ĐƯỜNG - HUẾ
+                                    </th>
+                                    <td>Mark Otto</td>
+                                    <td>$3000</td>
+                                    <td>$1200</td>
                                     <td>
-                                        <button type="button" class="status-button" data-status="available" onclick="openStatusModal(this)">Available</button>
+                                        <button type="button" class="status-button" data-status="available" onclick="openStatusModalAvailable(this)">Available</button>
                                     </td>
                                     <td>
                                         <div class="text-center setting" data-dropdown>
@@ -101,7 +97,7 @@
                                     <td>$3000</td>
                                     <td>$1200</td>
                                     <td>
-                                        <button type="button" class="status-button" data-status="fully-booked" onclick="openStatusModal(this)">Fully Booked</button>
+                                        <button type="button" class="status-button" data-status="fully-booked" onclick="openStatusModalAvailable(this)">Fully Booked</button>
                                     </td>
                                     <td>
                                         <div class="text-center setting" data-dropdown>
@@ -140,7 +136,7 @@
                                     <td>$3000</td>
                                     <td>$1200</td>
                                     <td>
-                                        <button type="button" class="status-button" data-status="unavailable" onclick="openStatusModal(this)">Unavailable</button>
+                                        <button type="button" class="status-button" data-status="unavailable" onclick="openStatusModalAvailable(this)">Unavailable</button>
                                     </td>
                                     <td>
                                         <div class="text-center setting" data-dropdown>
@@ -381,8 +377,8 @@
                 </div>
                 <div class="modal-body">
                     <p>Select a new status:</p>
-                    <button type="button" class="btn btn-success btn-block" onclick="changeStatus('available')">Available</button>
-                    <button type="button" class="btn btn-danger btn-block" onclick="changeStatus('unavailable')">Unavailable</button>
+                    <button type="button" class="btn btn-success btn-block" onclick="changeStatusAvailable('available')">Available</button>
+                    <button type="button" class="btn btn-danger btn-block" onclick="changeStatusAvailable('unavailable')">Unavailable</button>
                 </div>
             </div>
         </div>

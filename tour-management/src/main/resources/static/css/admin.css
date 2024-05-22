@@ -199,6 +199,66 @@
     font-size: 36px;
 }
 
+.tourguides {
+    margin: 100px 225px 200px;
+}
+
+.tourguides .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tourguides .title-part .tourguides-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.users {
+    margin: 100px 225px 200px;
+}
+
+.users .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users .title-part .users-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.tourists {
+    margin: 100px 225px 200px;
+}
+
+.tourists .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tourists .title-part .tourists-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.payment {
+    margin: 100px 225px 200px;
+}
+
+.payment .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment .title-part .payment-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
 .table-wrap table td a.btn {
     display: inline-block;
     padding: 5px 10px;
@@ -268,6 +328,21 @@
 }
 
 .status-button[data-status="fully-booked"] {
+    background-color: yellow;
+    color: black;
+}
+
+.status-button[data-status="complete"] {
+    background-color: green;
+    color: white;
+}
+
+.status-button[data-status="deny"] {
+    background-color: red;
+    color: white;
+}
+
+.status-button[data-status="pending"] {
     background-color: yellow;
     color: black;
 }

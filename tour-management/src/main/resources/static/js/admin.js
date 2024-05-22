@@ -37,48 +37,134 @@ function topFunction() {
 }
 
 //setting status
-let currentButton;
+// Namespace for handling 'available' and 'unavailable' statuses
+(function() {
+    let currentButton;
 
-function openStatusModal(button) {
-    currentButton = button;
-    if (currentButton.dataset.status === 'fully-booked') {
-        return;
+    function openStatusModal(button) {
+        currentButton = button;
+        if (currentButton.dataset.status === 'fully-booked') {
+            return;
+        }
+        $('#statusModal').modal('show');
     }
-    $('#statusModal').modal('show');
-}
 
-function changeStatus(newStatus) {
-    currentButton.dataset.status = newStatus;
-    currentButton.textContent = capitalizeFirstLetter(newStatus);
-    $('#statusModal').modal('hide');
-    updateButtonStyles(currentButton);
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
-}
-
-function updateButtonStyles(button) {
-    // Clear previous styles
-    button.classList.remove('btn-success', 'btn-danger', 'btn-warning');
-
-    // Update styles based on the new status
-    if (button.dataset.status === 'available') {
-        button.style.backgroundColor = 'green';
-        button.style.color = 'white';
-    } else if (button.dataset.status === 'unavailable') {
-        button.style.backgroundColor = 'red';
-        button.style.color = 'white';
-    } else if (button.dataset.status === 'fully-booked') {
-        button.style.backgroundColor = 'yellow';
-        button.style.color = 'black';
+    function changeStatus(newStatus) {
+        currentButton.dataset.status = newStatus;
+        currentButton.textContent = capitalizeFirstLetter(newStatus);
+        $('#statusModal').modal('hide');
+        updateButtonStyles(currentButton);
     }
-}
 
-// Initialize button styles on page load
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.status-button').forEach(updateButtonStyles);
-});
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
+    }
+
+    function updateButtonStyles(button) {
+
+        // Update styles based on the new status
+        if (button.dataset.status === 'available') {
+            button.style.backgroundColor = 'green';
+            button.style.color = 'white';
+        } else if (button.dataset.status === 'unavailable') {
+            button.style.backgroundColor = 'red';
+            button.style.color = 'white';
+        }
+    }
+
+    // Initialize button styles on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.status-button.available-unavailable').forEach(updateButtonStyles);
+    });
+
+    // Expose functions to the global scope if needed
+    window.openStatusModalAvailable = openStatusModal;
+    window.changeStatusAvailable = changeStatus;
+})();
+
+// Namespace for handling 'complete' and 'deny' statuses
+(function() {
+    let currentButton;
+
+    function openStatusModal(button) {
+        currentButton = button;
+        if (currentButton.dataset.status === 'pending') {
+            return;
+        }
+        $('#statusModal').modal('show');
+    }
+
+    function changeStatus(newStatus) {
+        currentButton.dataset.status = newStatus;
+        currentButton.textContent = capitalizeFirstLetter(newStatus);
+        $('#statusModal').modal('hide');
+        updateButtonStyles(currentButton);
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
+    }
+
+    function updateButtonStyles(button) {
+
+        // Update styles based on the new status
+        if (button.dataset.status === 'complete') {
+            button.style.backgroundColor = 'green';
+            button.style.color = 'white';
+        } else if (button.dataset.status === 'deny') {
+            button.style.backgroundColor = 'red';
+            button.style.color = 'white';
+        }
+    }
+
+    // Initialize button styles on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.status-button.complete-deny').forEach(updateButtonStyles);
+    });
+
+    // Expose functions to the global scope if needed
+    window.openStatusModalComplete = openStatusModal;
+    window.changeStatusComplete = changeStatus;
+})();
+
+
+// let currentButton;
+//
+// function openStatusModal(button) {
+//     currentButton = button;
+//     if (currentButton.dataset.status === 'fully-booked') {
+//         return;
+//     }
+//     $('#statusModal').modal('show');
+// }
+//
+// function changeStatus(newStatus) {
+//     currentButton.dataset.status = newStatus;
+//     currentButton.textContent = capitalizeFirstLetter(newStatus);
+//     $('#statusModal').modal('hide');
+//     updateButtonStyles(currentButton);
+// }
+//
+// function capitalizeFirstLetter(string) {
+//     return string.charAt(0).toUpperCase() + string.slice(1).replace('-', ' ');
+// }
+//
+// function updateButtonStyles(button) {
+//
+//     // Update styles based on the new status
+//     if (button.dataset.status === 'available') {
+//         button.style.backgroundColor = 'green';
+//         button.style.color = 'white';
+//     } else if (button.dataset.status === 'unavailable') {
+//         button.style.backgroundColor = 'red';
+//         button.style.color = 'white';
+//     }
+// }
+//
+// // Initialize button styles on page load
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.querySelectorAll('.status-button').forEach(updateButtonStyles);
+// });
 
 
 
