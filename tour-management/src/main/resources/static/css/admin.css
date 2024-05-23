@@ -245,7 +245,7 @@
 }
 
 .payment {
-    margin: 100px 225px 200px;
+    margin: 100px 225px;
 }
 
 .payment .title-part {
@@ -270,6 +270,21 @@
 }
 
 .routes .title-part .routes-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.detailroutes {
+    margin: 100px 225px 200px;
+}
+
+.detailroutes .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detailroutes .title-part .routes-title .title {
     font-weight: 700;
     font-size: 36px;
 }
@@ -391,7 +406,7 @@
 }
 
 .edittour {
-    margin: 100px 225px 200px;
+    margin: 100px 225px 150px;
 }
 
 .edittour .title-part {

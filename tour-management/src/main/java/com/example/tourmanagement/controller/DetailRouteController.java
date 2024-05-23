@@ -43,7 +43,7 @@ public class DetailRouteController {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listDetailRoutes",  detailRouteServices.getAllDetailRoute());
-        return "detail_route/detail_route_home";
+        return "detail_route/admin_detailRoute";
 
     }
 
@@ -88,7 +88,7 @@ public class DetailRouteController {
         model.addAttribute("detailRoute", detailRoute);
         List<Route> routes = routeService.getAllRoute();
         model.addAttribute("routes", routes);
-        return "detail_route/add_detail_route";
+        return "detail_route/admin_addDetailRoute";
     }
 
     @GetMapping("/showUpdateForm/{id}")

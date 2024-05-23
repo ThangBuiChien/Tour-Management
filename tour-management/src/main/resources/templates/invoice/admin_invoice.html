@@ -80,14 +80,14 @@
     </div>
 </section>
 
-<div class="text-center mt-4">
+<div class="text-center mt-1">
     <ul class="pagination">
         <li th:classappend="${currentPage == 0 ? 'disabled' : ''}">
             <a th:href="@{/invoice(page=${currentPage - 1})}" th:if="${currentPage > 0}">Prev</a>
             <span th:unless="${currentPage > 0}">Prev</span>
         </li>
         <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${i - 1 == currentPage ? 'active' : ''}">
-            <a th:href="@{/invoice(page=${i - 1})}" th:text="${i}"></a>
+            <a th:href="@{/invoice(page=${i - 1})}" th:text="${i}" ></a>
         </li>
         <li th:classappend="${currentPage == totalPages - 1 ? 'disabled' : ''}">
             <a th:href="@{/invoice(page=${currentPage + 1})}" th:if="${currentPage < totalPages - 1}">Next</a>
