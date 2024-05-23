@@ -82,7 +82,33 @@ public class TourController {
         return "tour/available_tours";
 
     }
+    @GetMapping("/admin")
+    public String getTourPage(Model model, RedirectAttributes redirectAttributes,
+                                  @RequestParam(defaultValue = "0") int page,
+                                  @RequestParam(defaultValue = "5") int size,
+                                  @RequestParam(defaultValue = "id") String sortBy,
+                                  @RequestParam(defaultValue = "") String keyword){
 
+        if (redirectAttributes.containsAttribute("successMessage")) {
+            model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
+        }
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
+        model.addAttribute("listTours", listTours);
+//        Page<Tour> availableTours = tourService.getAllTour(pageable, keyword);
+//        model.addAttribute("availableTours", availableTours);
+        int totalPages = listTours.getTotalPages();
+
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("page", page);
+        model.addAttribute("size", size);
+
+        return "tour/tour_home";
+
+    }
 
 
 
@@ -129,7 +155,7 @@ public class TourController {
         }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         // return "redirect:/tour/load";
-        return "redirect:/tour/sorting";
+        return "redirect:/tour/admin";
 
     }
 
@@ -138,7 +164,7 @@ public class TourController {
         Optional<Tour> department = tourService.findByID(id);
         if(department.isPresent()){
             this.tourService.deleteTour(id);
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
         }
         else{
             return "redirect:/tour";
