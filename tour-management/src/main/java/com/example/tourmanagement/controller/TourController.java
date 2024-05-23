@@ -22,7 +22,6 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/tour")
-@PreAuthorize("hasRole('ADMIN')")
 public class TourController {
     private final TourService tourService;
     private final RouteService routeService;
@@ -82,33 +81,7 @@ public class TourController {
         return "tour/available_tours";
 
     }
-    @GetMapping("/admin")
-    public String getTourPage(Model model, RedirectAttributes redirectAttributes,
-                                  @RequestParam(defaultValue = "0") int page,
-                                  @RequestParam(defaultValue = "5") int size,
-                                  @RequestParam(defaultValue = "id") String sortBy,
-                                  @RequestParam(defaultValue = "") String keyword){
 
-        if (redirectAttributes.containsAttribute("successMessage")) {
-            model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
-        }
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
-        model.addAttribute("listTours", listTours);
-//        Page<Tour> availableTours = tourService.getAllTour(pageable, keyword);
-//        model.addAttribute("availableTours", availableTours);
-        int totalPages = listTours.getTotalPages();
-
-        model.addAttribute("totalPages", totalPages);
-        model.addAttribute("currentPage", page);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
-        model.addAttribute("size", size);
-
-        return "tour/tour_home";
-
-    }
 
 
 
@@ -127,6 +100,7 @@ public class TourController {
 //
 //    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addRoute(@ModelAttribute("tour") Tour tour,
                            @RequestParam("startDates") List<LocalDate> startDates,
@@ -155,16 +129,17 @@ public class TourController {
         }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         // return "redirect:/tour/load";
-        return "redirect:/tour/admin";
+        return "redirect:/tour/sorting";
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteRoute(@PathVariable Long id){
         Optional<Tour> department = tourService.findByID(id);
         if(department.isPresent()){
             this.tourService.deleteTour(id);
-            return "redirect:/tour/admin";
+            return "redirect:/tour";
         }
         else{
             return "redirect:/tour";
@@ -173,6 +148,7 @@ public class TourController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/update/{id}")
     public String updateDepartment(@PathVariable Long id, @ModelAttribute("tour") Tour updatedTour) {
         Optional<Tour> optionalDepartment = tourService.findByID(id);
@@ -185,7 +161,8 @@ public class TourController {
         }
     }
 
-    @GetMapping("/admin_addTour")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/showAddForm")
     public String showAddForm(Model model){
         Tour tour = new Tour();
         model.addAttribute("tour", tour);
@@ -210,6 +187,7 @@ public class TourController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/available")
     public String viewAvailableTours(Model model) {
 //        List<Tour> availableTours = tourService.getAllTour().stream()
@@ -220,7 +198,8 @@ public class TourController {
         return "tour/available_tours";
     }
 
-    @GetMapping("/admin_edittour/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/showUpdateForm/{id}")
     public String showUpdateForm(Model model, @PathVariable long id) {
         Optional<Tour> tour = tourService.findByID(id);
         if (tour.isPresent()) {
@@ -239,6 +218,7 @@ public class TourController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/detailed/{id}")
     public String showDetail(Model model, @PathVariable long id) {
         Optional<Tour> tour = tourService.findByID(id);
@@ -256,6 +236,7 @@ public class TourController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/clone/{id}")
     public String cloneTour(@PathVariable Long id, Model model  ){
         Optional<Tour> tour = tourService.findByID(id);
