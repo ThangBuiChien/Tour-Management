@@ -194,7 +194,7 @@ public class TourController {
         return "tour/available_tours";
     }
 
-    @GetMapping("/showUpdateForm/{id}")
+    @GetMapping("/admin_edittour/{id}")
     public String showUpdateForm(Model model, @PathVariable long id) {
         Optional<Tour> tour = tourService.findByID(id);
         if (tour.isPresent()) {
