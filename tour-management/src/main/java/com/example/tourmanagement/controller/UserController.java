@@ -34,7 +34,7 @@ public class UserController {
         return "redirect:/user/load";
     }
 
-    @GetMapping("/load")
+    @GetMapping("/admin_users")
     public String loadUser(Model model){
         List<UserModel> userModels = userService.getAllUser();
         model.addAttribute("ListUsers", userModels);
@@ -52,7 +52,7 @@ public class UserController {
     @PostMapping("/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id){
         this.userService.deleteUser(id);
-        return "redirect:/user";
+        return "redirect:/user/admin_users";
     }
 
     @PostMapping("update/{id}")
