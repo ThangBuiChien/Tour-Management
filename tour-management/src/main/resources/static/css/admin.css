@@ -199,6 +199,21 @@
     font-size: 36px;
 }
 
+.users {
+    margin: 100px 225px 200px;
+}
+
+.users .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users .title-part .users-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
 .tourguides {
     margin: 100px 225px 200px;
 }
@@ -386,6 +401,21 @@
     border: none;
     background-color: #f4f6ef;
     align-items: center;
+}
+
+.adduser {
+    margin: 100px 225px 200px;
+}
+
+.adduser .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adduser .title-part .adduser-title .title {
+    font-weight: 700;
+    font-size: 36px;
 }
 
 .listtour {
