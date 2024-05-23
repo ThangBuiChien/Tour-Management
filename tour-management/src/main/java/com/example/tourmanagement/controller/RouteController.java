@@ -43,7 +43,7 @@ public class RouteController {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
         }
         model.addAttribute("listRoutes",  routeServices.getAllRoute());
-        return "route/route_home";
+        return "route/admin_route";
 
     }
 
@@ -88,7 +88,7 @@ public class RouteController {
         model.addAttribute("route", route);
 //        List<DetailRoute> detailRoutes = detailRouteServices.getAllDetailRoute();
 //        model.addAttribute("detailRoutes", detailRoutes);
-        return "route/add_route";
+        return "route/admin_addRoute";
     }
 
     @GetMapping("/showUpdateForm/{id}")

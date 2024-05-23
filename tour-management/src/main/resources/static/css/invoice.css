@@ -102,9 +102,9 @@
 }
 
 .pagination .active a {
-    background-color: #285960;
+    background-color: #327d81;
     color: #fff;
-    border-color: #327d81;
+    border-radius: 5px;
 }
 
 .pagination .disabled a {
@@ -115,6 +115,7 @@
 .pagination .disabled a:hover {
     background-color: #fff;
 }
+
 h2 {
     text-align: center;
     color: #327d81;
