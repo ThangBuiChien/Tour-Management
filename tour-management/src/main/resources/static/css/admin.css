@@ -318,7 +318,7 @@
 
 .setting-dropdown {
     position: absolute;
-    right: 4%;
+    right: 2%;
     /*top: 13%;*/
     background-color: white;
     padding: .75rem;
@@ -334,47 +334,6 @@
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-}
-
-.status-button {
-    width: 100px;
-    height: 50px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    border: none;
-}
-
-.status-button[data-status="available"] {
-    background-color: green;
-    color: white;
-}
-
-.status-button[data-status="unavailable"] {
-    background-color: red;
-    color: white;
-}
-
-.status-button[data-status="fully-booked"] {
-    background-color: yellow;
-    color: black;
-}
-
-.status-button[data-status="complete"] {
-    background-color: green;
-    color: white;
-}
-
-.status-button[data-status="deny"] {
-    background-color: red;
-    color: white;
-}
-
-.status-button[data-status="pending"] {
-    background-color: yellow;
-    color: black;
 }
 
 .set {
@@ -455,4 +414,44 @@
 
 .a-button:active {
     background-color: #1c4d52;
+}
+
+.pagination {
+    justify-content: center;
+    display: inline-flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #eee;
+}
+
+.pagination .active a {
+    background-color: #327d81;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.pagination .disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.pagination .disabled a:hover {
+    background-color: #fff;
 }

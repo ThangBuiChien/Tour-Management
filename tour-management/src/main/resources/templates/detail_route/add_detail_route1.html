@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Detail Route</title>
+    <link rel="stylesheet" th:href="@{/css/detail_route.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/add_detail.js}" defer></script>
+</head>
+<body>
+<section th:replace="~{/main_component/header :: header}"></section>
+<section class="container mt-5">
+    <h2>Add Detail Route</h2>
+    <form th:action="@{/detail/add}" th:object="${detailRoute}" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <input type="number" th:field="*{lengthTrip}" class="form-control" placeholder="Detail Route's Length Trip" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" th:field="*{stopLocation}" class="form-control" placeholder="Detail Route's Stop Location" required>
+        </div>
+        <div class="mb-3">
+            <label for="shortDescription" class="form-label">Short Description:</label>
+            <textarea id="shortDescription" th:field="*{shortDetailTrip}" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" th:field="*{detailTrip}" class="form-control" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="route" class="form-label">Route:</label>
+            <select id="route" th:field="*{route}" class="form-control" required>
+                <option th:each="route : ${routes}" th:value="${route.getId()}" th:text="${route.startLocation} + ' - ' + ${route.endLocation}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary">Add detail route</button>
+    </form>
+</section>
+<section th:replace="~{/main_component/footer :: footer}"></section>
+</body>
+</html>

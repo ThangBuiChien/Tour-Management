@@ -13,12 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.expression.Lists;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -60,7 +57,7 @@ public class AssignmentController {
         model.addAttribute("tourguides", tourGuides);
         TourAssignment tourAssignment = new TourAssignment();
         model.addAttribute(tourAssignment);
-        return "tour_assignment/tour_assign";
+        return "tour_assign1";
     }
 
     @PostMapping("/add")

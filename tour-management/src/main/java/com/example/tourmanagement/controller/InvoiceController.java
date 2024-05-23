@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 
 @Controller
 @RequestMapping("/invoice")
@@ -26,14 +25,14 @@ public class InvoiceController {
     }
 
     // Update this from "/invoice" to just "/" to match the base mapping + this
-    @GetMapping
+    @GetMapping("/admin")
     public String getAllInvoices(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Invoice> invoicePage = invoiceService.getAllInvoices(pageable);
         model.addAttribute("listInvoice", invoicePage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", invoicePage.getTotalPages());
-        return "invoice/admin_invoice";
+        return "invoice/invoice_home";
     }
 
 
