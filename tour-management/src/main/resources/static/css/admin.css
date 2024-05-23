@@ -388,6 +388,21 @@
     align-items: center;
 }
 
+.listtour {
+    margin: 100px 225px 150px;
+}
+
+.listtour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listtour .title-part .listtour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
 .tourprice,
 .stday {
     border: none;

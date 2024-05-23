@@ -57,7 +57,7 @@ public class AssignmentController {
         model.addAttribute("tourguides", tourGuides);
         TourAssignment tourAssignment = new TourAssignment();
         model.addAttribute(tourAssignment);
-        return "tour_assign1";
+        return "tour_assignment/tour_assign";
     }
 
     @PostMapping("/add")
@@ -85,7 +85,7 @@ public class AssignmentController {
         List<TourGuide> tourGuides = tourGuideService.getAllTourGuides();
 
         model.addAttribute("tourGuides", tourGuides);
-        return "admin/admin_tourguides";
+        return "tour_assignment/tour_assign";
     }
 
 
