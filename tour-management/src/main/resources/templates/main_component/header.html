@@ -43,7 +43,8 @@
                     </div>
                     <div class="ms-2 text-start">
                         <h6>Full name</h6> <!--name here-->
-                        <p>example@gmail.com</p> <!--email here-->
+<!--                        <p>example@gmail.com</p> &lt;!&ndash;email here&ndash;&gt;-->
+                        <p th:text="${session.email}"></p>
                     </div>
                 </div>
                 <hr class="mt-0 mb-2">
