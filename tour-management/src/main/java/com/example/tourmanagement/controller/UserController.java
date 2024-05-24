@@ -6,9 +6,6 @@ import com.example.tourmanagement.model.enumRole;
 import com.example.tourmanagement.service.UserRoleService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,12 +31,12 @@ public class UserController {
         return "redirect:/user/load";
     }
 
-    @GetMapping("/admin_users")
+    @GetMapping("/load")
     public String loadUser(Model model){
         List<UserModel> userModels = userService.getAllUser();
         model.addAttribute("ListUsers", userModels);
         //return "user/user_home";
-        return "admin/admin_users";
+        return "user/user_home";
     }
 
     @PostMapping("/add")
@@ -52,7 +49,7 @@ public class UserController {
     @PostMapping("/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id){
         this.userService.deleteUser(id);
-        return "redirect:/user/admin_users";
+        return "redirect:/user/user_home";
     }
 
     @PostMapping("update/{id}")
@@ -85,7 +82,7 @@ public class UserController {
             model.addAttribute("user", user.get());
             List<UserRole> userRoles = userRoleService.getAllUserRole();
             model.addAttribute("userRoles", userRoles);
-            return "user/updated_user";
+            return "updated_user1";
         }
         else{
             model.addAttribute("message", "User can not found!");

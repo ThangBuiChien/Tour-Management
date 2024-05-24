@@ -299,7 +299,4 @@ public class TourController {
 
     }
 
-
-
-
 }
