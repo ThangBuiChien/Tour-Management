@@ -6,6 +6,8 @@ import com.example.tourmanagement.model.enumRole;
 import com.example.tourmanagement.service.UserRoleService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -163,6 +165,21 @@ public class UserController {
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "User not found");
             return "redirect:/user";
+        }
+    }
+
+    @GetMapping("/profile")
+    public String showProfile(Model model, @AuthenticationPrincipal UserDetails userDetails){
+        Optional<UserModel> user = userService.loadByEmail(userDetails.getUsername());
+        if(user.isPresent()){
+            model.addAttribute("user", user.get());
+            List<UserRole> userRoles = userRoleService.getAllUserRole();
+            model.addAttribute("userRoles", userRoles);
+            return "user/updated_user1";
+        }
+        else{
+            model.addAttribute("message", "User can not found!");
+            return "redirect:/user_role";
         }
     }
 
