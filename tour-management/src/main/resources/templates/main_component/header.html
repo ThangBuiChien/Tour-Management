@@ -24,7 +24,7 @@
         </div>
         <div sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')">
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a th:href="@{/index}" class="nav-link px-2 link-dark">Home</a></li>
+                <li><a th:href="@{/}" class="nav-link px-2 link-dark">Home</a></li>
                 <li><a th:href="@{/}" class="nav-link px-2 link-dark">About Us</a></li>
                 <li><a th:href="@{/}" class="nav-link px-2 link-dark">Contact</a></li>
             </ul>
