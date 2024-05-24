@@ -1,7 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('numMembers').addEventListener('input', function() {
-        let maxCapacity = parseInt(this.max); // More reliable access to the 'max' attribute
+    const numMembersInput = document.getElementById('numMembers');
+    const container = document.getElementById('membersContainer');
+    const submitBtn = document.getElementById('submitBtn');
+
+    numMembersInput.addEventListener('input', function() {
         let numMembers = parseInt(this.value);
+        let maxCapacity = parseInt(this.max);
+
+        // Check if the input value is a positive number
+        if (!/^[1-9]\d*$/.test(this.value)) {
+            alert("Please enter a positive number.");
+            this.value = ''; // Reset the input value
+            numMembers = 0; // Ensure subsequent logic uses the corrected number
+        }
 
         // Ensure the number does not exceed max capacity
         if (numMembers > maxCapacity) {
@@ -10,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
             numMembers = maxCapacity; // Ensure subsequent logic uses the corrected number
         }
 
-        let container = document.getElementById('membersContainer');
         container.innerHTML = ''; // Clear existing fields if number changes
         for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
@@ -19,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     <input type="text" name="listOfMember" required />
                 </div>`;
         }
-        updateTotalPrice(numMembers);
+        updateSubmitButton();
     });
 
-    function updateTotalPrice(numMembers) {
-        let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
-        let totalPrice = pricePerPerson * numMembers;
-        document.querySelector('.total-price span').textContent = totalPrice.toFixed(2);
+    function updateSubmitButton() {
+        submitBtn.disabled = numMembersInput.value.trim() === '';
     }
+
+    numMembersInput.addEventListener('input', updateSubmitButton);
 });
