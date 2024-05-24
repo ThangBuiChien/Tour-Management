@@ -176,8 +176,9 @@
     z-index: -1; /* Place it behind other content */
 }
 
-.search {
-    margin: 90px;
+.search,
+.search-result {
+    margin: 100px 225px 100px;
 }
 
 .search .container {
@@ -190,6 +191,10 @@
     width: 500px;
     height: 85px;
     background-color: #f8f9fa;
+}
+.search h2 {
+    font-weight: 700;
+    font-size: 45px;
 }
 
 .search .box-container .col:last-child {
