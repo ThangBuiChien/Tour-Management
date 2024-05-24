@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -19,9 +19,12 @@
                     <h1 class="display-3"><b>WayLingo</b></h1>
                     <p class="display-6 pt-2"><small>Your passport to unforgettable journeys</small></p>
                 </div>
-                <div class="but-div mt-4 px-4">
-                    <button type="button" class="button">Explore our magic</button>
-                </div>
+                <th:block sec:authorize="!isAuthenticated()">
+                    <div class="but-div mt-4 px-4">
+                        <button type="button" class="button">Explore our magic</button>
+                    </div>
+                </th:block>
+                <th:block sec:authorize="isAuthenticated()"></th:block>
             </div>
             <div class="grid-item-right">
                 <div class="gray-shape rounded"></div>
@@ -145,18 +148,18 @@
                             </div>
                             <div class="grid-des mt-4">
                                 <span>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi
+                                    This is so far the best application that I have ever used, pls improve the website so it can look even better
                                 </span>
                             </div>
                             <div class="grid-tourist">
-                                <p>Tourist's name</p>
+                                <p>Josh Kelly</p>
                             </div>
                         </div>
                     </div>
                     <div class="grid-container">
                         <div class="grid-content">
                             <div class="grid-tourist mt-0">
-                                <p>Tourist's name</p>
+                                <p>Memory Keith</p>
                             </div>
                             <div class="grid-icon" style="margin-top: 150px">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="50" fill="white" class="bi bi-person" viewBox="0 0 16 16">
@@ -165,7 +168,7 @@
                             </div>
                             <div class="grid-des mt-4">
                                 <span>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi
+                                    Just like a precious gem in the middle of a sea of sand, I had the best tour ever thanks to this website
                                 </span>
                             </div>
                         </div>
@@ -179,11 +182,11 @@
                             </div>
                             <div class="grid-des mt-4">
                                 <span>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi
+                                    A flawless demonstration of how tour booking websites should be developed!
                                 </span>
                             </div>
                             <div class="grid-tourist">
-                                <p>Tourist's name</p>
+                                <p>Darknight Hunter</p>
                             </div>
                         </div>
                     </div>
