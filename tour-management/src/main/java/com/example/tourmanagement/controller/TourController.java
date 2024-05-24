@@ -157,7 +157,7 @@ public class TourController {
         }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         // return "redirect:/tour/load";
-        return "redirect:/tour/sorting";
+        return "redirect:/tour/admin";
 
     }
 
@@ -167,10 +167,10 @@ public class TourController {
         Optional<Tour> department = tourService.findByID(id);
         if(department.isPresent()){
             this.tourService.deleteTour(id);
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
         }
         else{
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
 
         }
 
@@ -183,9 +183,9 @@ public class TourController {
         if (optionalDepartment.isPresent()) {
             updatedTour.setId(id);
             tourService.saveTour(updatedTour);
-            return "redirect:/tour/sorting";
+            return "redirect:/tour/admin";
         } else {
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
         }
     }
 
@@ -242,7 +242,7 @@ public class TourController {
 
         } else {
             model.addAttribute("message", "Detail Route is can not found!");
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
         }
     }
 
@@ -293,7 +293,7 @@ public class TourController {
             return "tour/add_tour";
         }
         else{
-            return "redirect:/tour";
+            return "redirect:/tour/admin";
 
         }
 
