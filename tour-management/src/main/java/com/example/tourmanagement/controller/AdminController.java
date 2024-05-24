@@ -49,7 +49,7 @@ public class AdminController {
     public String adminPage(
                               ){
 
-        return "admin/admin_page";
+        return "admin/admin_main";
 
     }
 

@@ -22,7 +22,7 @@
                 <li><a th:href="@{/}" class="nav-link px-2 link-dark">Contact</a></li>
             </ul>
         </div>
-        <div sec:authorize="isAuthenticated()">
+        <div sec:authorize="isAuthenticated() and !hasRole('ROLE_ADMIN')">
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/index}" class="nav-link px-2 link-dark">Home</a></li>
                 <li><a th:href="@{/}" class="nav-link px-2 link-dark">About Us</a></li>
@@ -31,7 +31,7 @@
         </div>
         <div sec:authorize="hasRole('ROLE_ADMIN')">
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-<!--                <li><a th:href="@{/}" class="nav-link px-2 link-dark">Dashboard</a></li>-->
+                <li><a th:href="@{/admin/page}" class="nav-link px-2 link-dark">Dashboard</a></li>
                 <li><a th:href="@{/tour/admin}" class="nav-link px-2 link-dark">Tours</a></li>
                 <li><a th:href="@{/assignments}" class="nav-link px-2 link-dark">Tour Guides</a></li>
                 <li><a th:href="@{/user}" class="nav-link px-2 link-dark">Users</a></li>
