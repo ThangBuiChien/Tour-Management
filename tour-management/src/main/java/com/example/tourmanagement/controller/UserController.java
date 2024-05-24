@@ -82,7 +82,7 @@ public class UserController {
             model.addAttribute("user", user.get());
             List<UserRole> userRoles = userRoleService.getAllUserRole();
             model.addAttribute("userRoles", userRoles);
-            return "updated_user1";
+            return "user/updated_user";
         }
         else{
             model.addAttribute("message", "User can not found!");
