@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/feedback")
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 public class FeedbackController {
 
     private final FeedbackService feedbackService;
