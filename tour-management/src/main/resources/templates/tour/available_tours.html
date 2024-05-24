@@ -10,12 +10,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/js/bootstrap.min.js"></script>
         <script th:src="@{/js/Search.js}" defer></script>
         <script th:src="@{/js/script.js}" defer></script>
-
-
 </head>
 <body>
 <section th:replace="~{/main_component/header :: header}"></section>
 <section class="search">
+    <div class="mb-5 justify-content-center align-items-center">
+        <h2>Searching</h2>
+    </div>
     <div class="container d-flex justify-content-center align-items-center">
         <form th:action="@{/tour/sorting}" class="box-container row" id="searchForm">
             <div class="col mx-3 py-2">
@@ -40,41 +41,40 @@
 </section>
 
 
-<section>
+<section class="search-result">
     <div th:if="${availableTours.isEmpty()}">
         <p>No tours are currently available.</p>
     </div>
 
-    <div th:each="tour : ${availableTours}" class="tour-card">
-        <div class="tour-image-container">
-            <img th:src="@{/img/journey.png}" alt="Journey Image" class="img-fluid rounded-start tour-image">
-        </div>
-        <div class="tour-info">
-            <p class="tour-title" th:text="${tour.tourName}"></p>
-            <div class="tour-dates">
-                <span th:text="${tour.startDate}"></span>
+    <div class="p-2">
+        <div th:each="tour : ${availableTours}" class="tour-card">
+            <div class="tour-image-container">
+                <img th:src="@{/img/landscape.jpg}" alt="Journey Image" class="img-fluid rounded-start tour-image">
             </div>
-            <p th:text="${tour.tourDescription}"></p>
-        </div>
-        <div class="button-container">
-            <a th:href="@{/book/{id}(id=${tour.id})}" class="button btn-book">Book Now</a>
-            <a th:href="@{/tour/detailed/{id}(id=${tour.id})}" class="btn btn-detail">Detail Tour</a>
+            <div class="tour-info w-25">
+                <h3 class="tour-title text-wrap" th:text="${tour.tourName}"></h3>
+                <div class="tour-dates mt-2">
+                    <span th:text="${tour.startDate}"></span>
+                </div>
+                <p th:text="${tour.tourDescription}"></p>
+            </div>
+            <div class="button-container">
+                <a th:href="@{/book/{id}(id=${tour.id})}" class="button btn-book">Book Now</a>
+                <a th:href="@{/tour/detailed/{id}(id=${tour.id})}" class="mt-2 button-outline btn-detail">Detail Tour</a>
+            </div>
         </div>
     </div>
-
-
-
 
     <nav aria-label="Page navigation example">
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" th:href="@{/tour/sorting(page=${currentPage - 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage > 0}">Previous</a>
+            <a class="page-link button" th:href="@{/tour/sorting(page=${currentPage - 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage > 0}" >Previous</a>
         </li>
         <li class="page-item" th:each="pageNumber : ${#numbers.sequence(0, totalPages-1)}">
-            <a class="page-link" th:href="@{/tour/sorting(page=${pageNumber}, size=${size}, keyword=${keyword})}" th:text="${pageNumber + 1}"></a>
+            <a class="page-link button" th:href="@{/tour/sorting(page=${pageNumber}, size=${size}, keyword=${keyword})}" th:text="${pageNumber + 1}"></a>
         </li>
         <li class="page-item">
-            <a class="page-link" th:href="@{/tour/sorting(page=${currentPage + 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage < totalPages - 1}">Next</a>
+            <a class="page-link button" th:href="@{/tour/sorting(page=${currentPage + 1}, size=${size}, keyword=${keyword})}" th:if="${currentPage < totalPages - 1}">Next</a>
         </li>
     </ul>
 </nav>

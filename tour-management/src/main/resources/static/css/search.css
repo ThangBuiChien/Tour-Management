@@ -17,17 +17,22 @@ h2 {
 }
 
 .tour-card {
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.1);
     border-radius: 8px;
     overflow: hidden;
     align-items: center; /* Center aligns items vertically */
-    background-color: #fff;
+    background-color: #f4f6ef;
     padding: 10px;
     justify-content: space-between; /* Aligns items to the left and right ends */
     width: 100%;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.tour-card:hover {
+    box-shadow: 0 10px 10px 0 rgba(0,0,0,0.2);
 }
 
 .tour-image-container {
@@ -35,7 +40,7 @@ h2 {
 }
 
 .tour-image {
-    width: 120px; /* Adjust width as needed */
+    width: 375px; /* Adjust width as needed */
     height: 80px; /* Adjust height as needed */
     object-fit: cover; /* Ensures the image covers the space nicely */
     border-radius: 4px; /* Rounded corners for the image */
@@ -48,9 +53,15 @@ h2 {
     justify-content: space-between; /* Spreads out content vertically */
 }
 
+.tour-info p,
+.tour-info span {
+    font-size: 20px;
+}
+
 .tour-title {
     font-weight: bold;
     margin-bottom: 5px;
+    width: 600px;
 }
 
 .tour-dates, .tour-description {
@@ -77,15 +88,5 @@ h2 {
     cursor: pointer;
 }
 
-.btn-book {
-    background-color: #276567;
-}
 
-.btn-detail {
-    background-color: #4CAF50; /* Deep orange */
-}
-
-.btn:hover {
-    opacity: 0.9; /* Slight opacity change on hover */
-}
 
