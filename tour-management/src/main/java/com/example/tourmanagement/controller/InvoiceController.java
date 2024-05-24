@@ -25,7 +25,7 @@ public class InvoiceController {
     }
 
     // Update this from "/invoice" to just "/" to match the base mapping + this
-    @GetMapping("/admin")
+    @GetMapping
     public String getAllInvoices(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Invoice> invoicePage = invoiceService.getAllInvoices(pageable);
