@@ -69,7 +69,7 @@
 <!--                                            </svg>-->
 <!--                                        </button>-->
 <!--                                    </form>-->
-                                    <span sec:authorize="!hasRole('ADMIN')">Status: <span th:text="${invoice.status}"></span></span>
+                                    <span sec:authorize="!hasRole('ADMIN')"> <span th:text="${invoice.status}"></span></span>
                                     <!-- Admin controls for updating status -->
                                         <div sec:authorize="hasRole('ADMIN')">
                                             <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post" style="display: inline;">
