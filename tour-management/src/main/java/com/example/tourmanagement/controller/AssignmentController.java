@@ -13,12 +13,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.expression.Lists;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -81,6 +78,14 @@ public class AssignmentController {
                 .collect(Collectors.toList());
         model.addAttribute("members", members);
         return "tour_assignment/tour_members";
+    }
+
+    @GetMapping("/loadTourGuide")
+    public String loadTourGuide(Model model) {
+        List<TourGuide> tourGuides = tourGuideService.getAllTourGuides();
+
+        model.addAttribute("tourGuides", tourGuides);
+        return "tour_assignment/tour_assign";
     }
 
 

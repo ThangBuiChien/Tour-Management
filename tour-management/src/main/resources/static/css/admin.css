@@ -199,6 +199,21 @@
     font-size: 36px;
 }
 
+.users {
+    margin: 100px 225px 200px;
+}
+
+.users .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.users .title-part .users-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
 .tourguides {
     margin: 100px 225px 200px;
 }
@@ -245,7 +260,7 @@
 }
 
 .payment {
-    margin: 100px 225px 200px;
+    margin: 100px 225px;
 }
 
 .payment .title-part {
@@ -255,6 +270,36 @@
 }
 
 .payment .title-part .payment-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.routes {
+    margin: 100px 225px 200px;
+}
+
+.routes .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.routes .title-part .routes-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.detailroutes {
+    margin: 100px 225px 200px;
+}
+
+.detailroutes .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detailroutes .title-part .routes-title .title {
     font-weight: 700;
     font-size: 36px;
 }
@@ -288,7 +333,7 @@
 
 .setting-dropdown {
     position: absolute;
-    right: 4%;
+    right: 2%;
     /*top: 13%;*/
     background-color: white;
     padding: .75rem;
@@ -306,49 +351,152 @@
     pointer-events: auto;
 }
 
-.status-button {
+.set {
+    color: gray;
+}
+
+.addtour {
+    margin: 100px 225px 200px;
+}
+
+.addtour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.addtour .title-part .addtour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.addtour-form {
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: none;
+    background-color: #f4f6ef;
+    align-items: center;
+}
+
+.edittour {
+    margin: 100px 225px 150px;
+}
+
+.edittour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edittour .title-part .edittour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.edittour-form {
+    width: auto;
+    height: auto;
+    border-radius: 25px;
+    border: none;
+    background-color: #f4f6ef;
+    align-items: center;
+}
+
+.adduser {
+    margin: 100px 225px 200px;
+}
+
+.adduser .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adduser .title-part .adduser-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.listtour {
+    margin: 100px 225px 150px;
+}
+
+.listtour .title-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.listtour .title-part .listtour-title .title {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+.tourprice,
+.stday {
+    border: none;
+    height: 35px;
+}
+
+.a-button {
     width: 100px;
     height: 50px;
+    padding: 8px 16px;
+    background-color: #327d81;
+    color: #fff;
+    text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s ease;
     justify-content: center;
     align-items: center;
     display: flex;
-    border: none;
 }
 
-.status-button[data-status="available"] {
-    background-color: green;
-    color: white;
+.a-button:hover {
+    background-color: #276567;
 }
 
-.status-button[data-status="unavailable"] {
-    background-color: red;
-    color: white;
+.a-button:active {
+    background-color: #1c4d52;
 }
 
-.status-button[data-status="fully-booked"] {
-    background-color: yellow;
-    color: black;
+.pagination {
+    justify-content: center;
+    display: inline-flex;
+    list-style-type: none;
+    padding: 0;
 }
 
-.status-button[data-status="complete"] {
-    background-color: green;
-    color: white;
+.pagination li {
+    margin: 0 5px;
 }
 
-.status-button[data-status="deny"] {
-    background-color: red;
-    color: white;
+.pagination a {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.status-button[data-status="pending"] {
-    background-color: yellow;
-    color: black;
+.pagination a:hover {
+    background-color: #eee;
 }
 
-.set {
-    color: gray;
+.pagination .active a {
+    background-color: #327d81;
+    color: #fff;
+    border-radius: 5px;
 }
 
+.pagination .disabled a {
+    color: #ccc;
+    cursor: not-allowed;
+}
 
+.pagination .disabled a:hover {
+    background-color: #fff;
+}

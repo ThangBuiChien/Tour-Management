@@ -6,9 +6,6 @@ import com.example.tourmanagement.model.enumRole;
 import com.example.tourmanagement.service.UserRoleService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +35,7 @@ public class UserController {
     public String loadUser(Model model){
         List<UserModel> userModels = userService.getAllUser();
         model.addAttribute("ListUsers", userModels);
+        //return "user/user_home";
         return "user/user_home";
     }
 
@@ -51,7 +49,7 @@ public class UserController {
     @PostMapping("/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id){
         this.userService.deleteUser(id);
-        return "redirect:/user";
+        return "redirect:/user/user_home";
     }
 
     @PostMapping("update/{id}")
