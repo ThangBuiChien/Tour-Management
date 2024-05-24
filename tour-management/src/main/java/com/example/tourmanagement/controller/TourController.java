@@ -246,7 +246,7 @@ public class TourController {
         }
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/detailed/{id}")
     public String showDetail(Model model, @PathVariable long id) {
         Optional<Tour> tour = tourService.findByID(id);
