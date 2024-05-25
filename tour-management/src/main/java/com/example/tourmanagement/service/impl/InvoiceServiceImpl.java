@@ -100,4 +100,9 @@ public class InvoiceServiceImpl implements InvoiceService {
     public Page<Invoice> getAllInvoices(Pageable pageable) {
         return invoiceRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Invoice> getInvoicesByUser(Pageable pageable, String email) {
+        return invoiceRepository.findByUserModelEmail(pageable, email);
+    }
 }

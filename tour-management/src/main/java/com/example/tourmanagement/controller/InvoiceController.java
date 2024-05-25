@@ -4,6 +4,8 @@ import com.example.tourmanagement.model.Invoice;
 import com.example.tourmanagement.model.InvoiceStatus;
 import com.example.tourmanagement.service.InvoiceService;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,20 @@ public class InvoiceController {
         invoiceService.updateInvoiceStatus(id, status);
         redirectAttributes.addFlashAttribute("successMessage", "Invoice status updated successfully!");
         return "redirect:/invoice"; // Updated this to redirect correctly
+    }
+
+    @GetMapping("/user")
+    public String getAllInvoicesByUser(Model model,
+                                       @RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "5") int size,
+                                       @AuthenticationPrincipal UserDetails userDetails) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        String email = userDetails.getUsername();
+        Page<Invoice> invoicePage = invoiceService.getInvoicesByUser(pageable, email);
+        model.addAttribute("listInvoice", invoicePage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", invoicePage.getTotalPages());
+        return "invoice/invoice_home";
     }
 }
