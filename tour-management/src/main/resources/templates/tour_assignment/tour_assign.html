@@ -26,6 +26,17 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-wrap">
+                    <form th:action="@{/assignments/add}" th:object = "${tourAssignment}" method="post">
+                        <select id="tour" th:field="*{tour}">
+                            <option th:each="tour : ${tours}" th:value="${tour.getId()}"
+                                    th:text="${tour.getTourName()}"></option>
+                        </select>
+                        <select id="tourGuide" th:field="*{tourGuide}">
+                            <option th:each="tourGuide : ${tourguides}" th:value="${tourGuide.getId()}"
+                                    th:text="${tourGuide.getName()}"></option>
+                        </select>
+                        <button>Add</button>
+                    </form>
                     <table class="table table-striped align-middle">
                         <thead>
                         <tr>
