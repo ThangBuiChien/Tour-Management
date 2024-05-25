@@ -24,13 +24,32 @@ document.addEventListener('DOMContentLoaded', function() {
         container.innerHTML = ''; // Clear existing fields if number changes
         for (let i = 0; i < numMembers; i++) {
             container.innerHTML += `
-                <div>
-                    <label>Member ${i + 1} Name:</label>
-                    <input type="text" name="listOfMember" required />
-                </div>`;
+            <div>
+                <label>Member ${i + 1} Name:</label>
+                <input type="text" name="listOfMember" required />
+            </div>`;
         }
+
+        // Add event listener to each input field
+        const memberNameInputs = container.querySelectorAll('input[name="listOfMember"]');
+        memberNameInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.trim() === '') {
+                    this.setCustomValidity('Please enter a name for this member.');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+        });
+
         updateSubmitButton();
+        updateTotalPrice(numMembers);
     });
+    function updateTotalPrice(numMembers) {
+        let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
+        let totalPrice = pricePerPerson * numMembers;
+        document.querySelector('.total-price span').textContent = totalPrice.toFixed(2);
+    }
 
     function updateSubmitButton() {
         submitBtn.disabled = numMembersInput.value.trim() === '';
