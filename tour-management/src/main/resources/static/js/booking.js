@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.innerHTML += `
             <div>
                 <label>Member ${i + 1} Name:</label>
-                <input type="text" name="listOfMember" required />
+                <input type="text" name="listOfMember" required minlength="1" />
             </div>`;
         }
 
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSubmitButton();
         updateTotalPrice(numMembers);
     });
+
     function updateTotalPrice(numMembers) {
         let pricePerPerson = parseFloat(document.getElementById('pricePerPerson').textContent.replace('$', ''));
         let totalPrice = pricePerPerson * numMembers;
@@ -52,8 +53,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function updateSubmitButton() {
-        submitBtn.disabled = numMembersInput.value.trim() === '';
+        const memberNameInputs = container.querySelectorAll('input[name="listOfMember"]');
+        const allInputsFilled = Array.from(memberNameInputs).every(input => input.value.trim() !== '');
+        submitBtn.disabled = !allInputsFilled || numMembersInput.value.trim() === '';
     }
 
     numMembersInput.addEventListener('input', updateSubmitButton);
+    container.addEventListener('input', updateSubmitButton);
 });
