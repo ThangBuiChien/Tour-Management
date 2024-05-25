@@ -20,4 +20,7 @@ public interface TourService {
     void deleteTour(long id);
 
     List<Tour> findToursByDayAndSmallerThanMinCapacity(LocalDate date);
+
+    Page<Tour> getTourByKeyWordAndDate(Pageable pageable, String keyword, LocalDate date);
+
 }

@@ -53,4 +53,18 @@ public class TourServiceImpl implements TourService {
     public List<Tour> findToursByDayAndSmallerThanMinCapacity(LocalDate date) {
         return repo.findToursByDayAndSmallerThanMinCapacity(date);
     }
+
+    @Override
+    public Page<Tour> getTourByKeyWordAndDate(Pageable pageable, String keyword, LocalDate date) {
+        if (keyword != null && date != null) {
+            return repo.searchPageableAndDate(pageable, keyword, date);
+        }
+        else if(keyword != null){
+            return repo.searchPageable(pageable, keyword);
+        }
+        else if(date != null){
+            return repo.searchByDate(pageable, date);
+        }
+        return repo.findAll(pageable);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,7 +60,8 @@ public class TourController {
                                   @RequestParam(defaultValue = "0") int page,
                                   @RequestParam(defaultValue = "5") int size,
                                   @RequestParam(defaultValue = "id") String sortBy,
-                                  @RequestParam(defaultValue = "") String keyword){
+                                  @RequestParam(defaultValue = "") String keyword,
+                                  @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
 
         if (redirectAttributes.containsAttribute("successMessage")) {
             model.addAttribute("successMessage", redirectAttributes.getAttribute("successMessage"));
@@ -68,7 +70,10 @@ public class TourController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 //        Page<Tour> listTours = tourService.getAllTour(pageable, keyword);
 //        model.addAttribute("listTours", listTours);
-        Page<Tour> availableTours = tourService.getAllTour(pageable, keyword);
+//        Page<Tour> availableTours = tourService.getAllTour(pageable, keyword);
+
+        Page<Tour> availableTours = tourService.getTourByKeyWordAndDate(pageable, keyword, date);
+
         model.addAttribute("availableTours", availableTours);
         int totalPages = availableTours.getTotalPages();
 

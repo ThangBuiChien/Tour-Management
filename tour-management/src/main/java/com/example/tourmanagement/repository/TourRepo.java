@@ -18,4 +18,10 @@ public interface TourRepo extends JpaRepository<Tour, Long> {
 
     @Query("SELECT t FROM Tour t WHERE t.startDate = :currentDate AND t.register < t.tourCapacity.minMember")
     public List<Tour> findToursByDayAndSmallerThanMinCapacity(LocalDate currentDate);
+
+    @Query("SELECT p FROM Tour p WHERE CONCAT(p.detailRoute, ' ', p.tourDescription, ' ',p.tourName) LIKE %:keyword% AND p.startDate >= :date")
+    public Page<Tour> searchPageableAndDate(Pageable pageable, String keyword, LocalDate date);
+
+    @Query("SELECT p FROM Tour p WHERE p.startDate >= :date")
+    public Page<Tour> searchByDate(Pageable pageable,  LocalDate date);
 }

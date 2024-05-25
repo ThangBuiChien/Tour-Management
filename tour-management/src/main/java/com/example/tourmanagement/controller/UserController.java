@@ -6,6 +6,7 @@ import com.example.tourmanagement.model.enumRole;
 import com.example.tourmanagement.service.UserRoleService;
 import com.example.tourmanagement.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class UserController {
         return "redirect:/user/load";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/load")
     public String loadUser(Model model){
         List<UserModel> userModels = userService.getAllUser();
@@ -41,6 +43,8 @@ public class UserController {
         return "user/user_home";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+
     @PostMapping("/add")
     public String addUser(Model model, @ModelAttribute("user") UserModel userModel){
         this.userService.saveUser(userModel);
@@ -48,6 +52,7 @@ public class UserController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id){
         this.userService.deleteUser(id);
@@ -68,6 +73,7 @@ public class UserController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/showAddForm")
     public String showAddForm(Model model){
         UserModel userModel = new UserModel();

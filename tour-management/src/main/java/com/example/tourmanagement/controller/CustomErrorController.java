@@ -31,7 +31,7 @@ public class CustomErrorController implements ErrorController {
         }
 
         // Default error page if status code is not recognized
-        return "error";
+        return "err/error";
     }
 
 
