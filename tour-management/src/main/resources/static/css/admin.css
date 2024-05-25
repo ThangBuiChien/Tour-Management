@@ -125,6 +125,14 @@
     font-size: 18px;
 }
 
+.logout input[type="submit"] {
+    border: none;
+    background: none;
+    padding: 0;
+    color: #000;
+    font-size: 18px;
+}
+
 .signout a {
     color: #000;
     font-size: 18px;
