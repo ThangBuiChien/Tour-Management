@@ -53,10 +53,15 @@
                 <!-- Div to hold dynamic input fields for start dates -->
                 <div class="d-flex mt-4">
                     <h5 class="mb-0 mt-1">Start Date: </h5>
-                    <div id="startDatesContainer" class="ms-3">
-                        <input type="date" name="startDates" class="form-control stday mt-2">
-                    </div>
+                    <div id="startDatesContainer"></div>
+
+                    <!-- Button to add another start date input field -->
+                    <button type="button" onclick="addStartDateField()">Add Start Date</button>
+
+                    <button type="button" onclick="removeLastStartDate()">Remove Last Start Date</button>
                 </div>
+
+
 <!--                <div class="mt-4 mb-3">-->
 <!--                    <button type="button" class="btn btn-secondary me-2" onclick="addStartDateField()">Add Start Date</button>-->
 <!--                    <button type="button" class="btn btn-secondary" onclick="removeLastStartDate()">Remove Last Start Date</button>-->
