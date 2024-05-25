@@ -14,59 +14,102 @@
 <body>
 <section th:replace="~{/main_component/header :: header}"></section>
 
-<section class="container my-4">
-    <h2>Tour Detail</h2>
-    <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-            <h2 class="card-title" th:text="${tour.getDetailRoute().stopLocation}">Ha Noi - Pho Co - Hang Khay - Bun Cha Obama</h2>
-            <div class="card-text">
-                <p><strong>Start Date:</strong> <span th:text="${tour.getStartDate()}">2024-05-31</span></p>
-                <p><strong>Price:</strong> <span th:text="${tour.tourPrice}">$3.0</span></p>
-                <p><strong>Description:</strong></p>
-                <ul th:with="days=${T(com.example.tourmanagement.others.Day).parseTourDescription(tour.getTourDescription())}">
-                    <li th:each="day : ${days}" th:text="${day}"></li>
-                </ul>
+<img th:src="@{/img/landscape.jpg}" alt="Journey Image" class="img-fluid rounded-start w-100">
+    <section class="dtt">
+        <h1 class="text-center pt-5">Tour Detail</h1>
+        <div class="mb-4 d-flex view-tour">
+            <div class="card-body mx-5">
+                <h2 class="card-title text-left" th:text="${tour.getDetailRoute().stopLocation}"></h2>
+                <div class="card-text">
+                    <div class="d-flex mt-3">
+                        <p>
+                            <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z"></path>
+                            </svg>
+                            <strong>Start Date:</strong>
+                            <span th:text="${tour.getStartDate()}"></span>
+                        </p>
+                        <p class="ms-3">
+                            <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path>
+                            </svg>
+                            <strong>Trip length:</strong>
+                            <span th:text="${tour.detailRoute.getLengthTrip()}"></span>
+                            <p class="ms-1">days</p>
+                        </p>
+                    </div>
+                    <p>
+                        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a2.25 2.25 0 0 0-2.25-2.25H15a3 3 0 1 1-6 0H5.25A2.25 2.25 0 0 0 3 12m18 0v6a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18v-6m18 0V9M3 12V9m18 0a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 9m18 0V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v3"></path>
+                        </svg>
+                        <strong>Price:</strong>
+                        <span>$</span>
+                        <span th:text="${tour.tourPrice}"></span>
+                    </p>
+                    <span>
+                        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path>
+                        </svg>
+                        <strong>Description:</strong>
+                    </span>
+                    <ul th:with="days=${T(com.example.tourmanagement.others.Day).parseTourDescription(tour.getTourDescription())}">
+                        <li th:each="day : ${days}" th:text="${day}"></li>
+                    </ul>
+                </div>
             </div>
-            <a th:href="@{/book/{id}(id=${tour.id})}" class="button">Book Now</a>
+            <div class="w-25 d-flex flex-row justify-content-center align-items-center">
+                <a th:href="@{/book/{id}(id=${tour.id})}" class="button text-center">
+                    <svg data-slot="icon" fill="none" stroke-width="1.5" class="me-2" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0 1 15.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 0 1 3 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 0 0-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 0 1-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 0 0 3 15h-.75M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm3 0h.008v.008H18V10.5Zm-12 0h.008v.008H6V10.5Z"></path>
+                    </svg>
+                    Book Now
+                </a>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <h3 class="mb-3">Comments</h3>
-    <div class="list-group">
-        <div th:each="feedback : ${feedbacks}" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1" th:text="${feedback.getUserModel().getFullName()}">User Full Name</h5>
-                <small class="text-muted">Rating:
-                    <div class="star-rating" th:data-rating="${feedback.getRating()}"></div>
-                </small>
+    <section class="cmt py-5">
+        <div class="view-tour">
+            <h1 class="mb-3">Comments</h1>
+            <div class="list-group">
+                <div th:each="feedback : ${feedbacks}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1" th:text="${feedback.getUserModel().getFullName()}">User Full Name</h5>
+                        <small class="text-muted">Rating:
+                            <div class="star-rating" th:data-rating="${feedback.getRating()}"></div>
+                        </small>
+                    </div>
+                    <p class="mb-1" th:text="${feedback.getComment()}">This is a sample comment.</p>
+                </div>
             </div>
-            <p class="mb-1" th:text="${feedback.getComment()}">This is a sample comment.</p>
+
+            <div class="my-4">
+                <h3>Add Comment</h3>
+                <form th:action="@{/feedback/add}" th:object="${feedback}" method="post" class="form-floating">
+                    <input type="hidden" name="tourId" th:value="${tour.getId()}"/>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" id="comment" th:field="*{comment}" placeholder="Write your comment" required></textarea>
+                        <label for="comment">Comment:</label>
+                    </div>
+
+                    <div class="rating d-flex">
+                        <p class="me-2">Your rating:</p>
+                        <input type="radio" id="star5" name="rating" value="5" th:field="*{rating}" onclick="updateRatingText('Awesome - 5 stars')"/><label for="star5" title="Awesome - 5 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" th:field="*{rating}" onclick="updateRatingText('Pretty good - 4 stars')"/><label for="star4" title="Pretty good - 4 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" th:field="*{rating}" onclick="updateRatingText('Meh - 3 stars')"/><label for="star3" title="Meh - 3 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" th:field="*{rating}" onclick="updateRatingText('Kinda bad - 2 stars')"/><label for="star2" title="Kinda bad - 2 stars"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" th:field="*{rating}" onclick="updateRatingText('Sucks big time - 1 star')"/><label for="star1" title="Sucks big time - 1 star"><i class="fas fa-star"></i></label>
+                        <span id="rating-text" style="padding-left: 10px;"></span>
+                    </div>
+
+                    <button type="submit" class="button mt-3">
+                        Submit
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
-
-    <div class="my-4">
-        <h3>Add Comment</h3>
-        <form th:action="@{/feedback/add}" th:object="${feedback}" method="post" class="form-floating">
-            <input type="hidden" name="tourId" th:value="${tour.getId()}"/>
-
-            <div class="form-floating mb-3">
-                <textarea class="form-control" id="comment" th:field="*{comment}" placeholder="Write your comment" required></textarea>
-                <label for="comment">Comment:</label>
-            </div>
-
-            <div class="rating">
-                <input type="radio" id="star5" name="rating" value="5" th:field="*{rating}" onclick="updateRatingText('Awesome - 5 stars')"/><label for="star5" title="Awesome - 5 stars"><i class="fas fa-star"></i></label>
-                <input type="radio" id="star4" name="rating" value="4" th:field="*{rating}" onclick="updateRatingText('Pretty good - 4 stars')"/><label for="star4" title="Pretty good - 4 stars"><i class="fas fa-star"></i></label>
-                <input type="radio" id="star3" name="rating" value="3" th:field="*{rating}" onclick="updateRatingText('Meh - 3 stars')"/><label for="star3" title="Meh - 3 stars"><i class="fas fa-star"></i></label>
-                <input type="radio" id="star2" name="rating" value="2" th:field="*{rating}" onclick="updateRatingText('Kinda bad - 2 stars')"/><label for="star2" title="Kinda bad - 2 stars"><i class="fas fa-star"></i></label>
-                <input type="radio" id="star1" name="rating" value="1" th:field="*{rating}" onclick="updateRatingText('Sucks big time - 1 star')"/><label for="star1" title="Sucks big time - 1 star"><i class="fas fa-star"></i></label>
-                <span id="rating-text" style="padding-left: 10px;"></span>
-            </div>
-
-            <div><button type="submit" class="button">Submit Feedback</button></div>
-        </form>
-    </div>
-</section>
+    </section>
 
 <section th:replace="~{/main_component/footer :: footer}"></section>
 </body>

@@ -1,0 +1,18 @@
+.error-message {
+    color: red;
+    margin-bottom: 10px;
+}
+.center-form-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.center-form-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust this value to center vertically */
+}

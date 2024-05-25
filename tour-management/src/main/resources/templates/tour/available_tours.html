@@ -49,7 +49,7 @@
     <div class="p-2">
         <div th:each="tour : ${availableTours}" class="tour-card">
             <div class="tour-image-container">
-                <img th:src="@{/img/landscape.jpg}" alt="Journey Image" class="img-fluid rounded-start tour-image">
+                <img th:src="@{/img/landscape-full.jpg}" alt="Journey Image" class="img-fluid rounded-start tour-image">
             </div>
             <div class="tour-info w-25">
                 <h3 class="tour-title text-wrap" th:text="${tour.tourName}"></h3>
