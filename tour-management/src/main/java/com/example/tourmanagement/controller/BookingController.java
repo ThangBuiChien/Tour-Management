@@ -1,5 +1,7 @@
     package com.example.tourmanagement.controller;
 
+    import com.example.tourmanagement.depa.PaymentService;
+    import com.example.tourmanagement.depa.PaymentServiceFactory;
     import com.example.tourmanagement.model.*;
     import com.example.tourmanagement.service.TourService;
     import com.example.tourmanagement.service.InvoiceService;
@@ -30,10 +32,14 @@
         private final InvoiceService invoiceService;
         private final UserService userService;
 
-        public BookingController(TourService tourService, InvoiceService invoiceService, UserService userService) {
+        private final PaymentServiceFactory paymentServiceFactory;
+
+
+        public BookingController(TourService tourService, InvoiceService invoiceService, UserService userService, PaymentServiceFactory paymentServiceFactory) {
             this.tourService = tourService;
             this.invoiceService = invoiceService;
             this.userService = userService;
+            this.paymentServiceFactory = paymentServiceFactory;
         }
 
         @GetMapping("/{tourId}")
@@ -164,7 +170,11 @@
 
 
         @PostMapping("/submitPayment")
-        public String submitPayment(@RequestParam Map<String, String> params, HttpSession session, RedirectAttributes redirectAttributes) {
+        public String submitPayment(@RequestParam Map<String,
+                String> params, HttpSession session, Model model,
+                                    RedirectAttributes redirectAttributes,
+                                    @RequestParam("paymentMethod") String paymentMethod,
+                                    @RequestParam("amount") double amount) {
             Long invoiceId = (Long) session.getAttribute("currentInvoiceId"); // Assuming invoice ID is stored in the session
             Optional<Invoice> invoiceOpt = Optional.ofNullable(invoiceService.findInvoiceById(invoiceId));
 
@@ -180,6 +190,9 @@
 
             try {
                 invoiceService.updateInvoice(invoice);
+                PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
+                String message = paymentService.processPayment(amount);
+                model.addAttribute("message", message);
                 redirectAttributes.addFlashAttribute("successMessage", "Payment submitted successfully!");
             } catch (Exception e) {
                 redirectAttributes.addFlashAttribute("errorMessage", "Error updating invoice: " + e.getMessage());
