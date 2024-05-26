@@ -12,7 +12,6 @@
 <body>
 <!--header-->
 <section th:replace="~{/main_component/header :: header}"></section>
-
 <section class="tourguides">
     <div class="title-part">
         <div class="tourguides-title d-flex">
@@ -26,6 +25,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-wrap">
+                    <select id="tourGuideSelect" onchange="redirectToGuide()">
+                        <option value="0">All Tour Guide</option>
+                        <option th:each="tourGuide : ${tourguides}" th:value="${tourGuide.getId()}" th:text="${tourGuide.getName()}">
+                        </option>
+                    </select>
+
                     <form th:action="@{/assignments/add}" th:object = "${tourAssignment}" method="post">
                         <select id="tour" th:field="*{tour}">
                             <option th:each="tour : ${tours}" th:value="${tour.getId()}"
@@ -76,6 +81,22 @@
         </div>
     </div>
 </section>
+
+<script>
+    function redirectToGuide() {
+        var selectedValue = document.getElementById('tourGuideSelect').value;
+        window.location.href = '?tourGuideId=' + selectedValue;
+    }
+    function setSelectedTourGuide() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tourGuideId = urlParams.get('tourGuideId'); // Get the tourGuideId from URL
+        const selectElement = document.getElementById('tourGuideSelect');
+        selectElement.value = tourGuideId || '0'; // Set the default value or '0' if none is found
+    }
+
+    // Call the function to set the selected value on page load
+    window.onload = setSelectedTourGuide;
+</script>
 
 <!--footer-->
 <section th:replace="~{/main_component/footer :: footer}"></section>
