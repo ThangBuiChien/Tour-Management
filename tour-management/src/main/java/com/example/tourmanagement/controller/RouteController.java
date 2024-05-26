@@ -5,6 +5,7 @@ import com.example.tourmanagement.model.Route;
 import com.example.tourmanagement.service.DetailRouteService;
 import com.example.tourmanagement.service.RouteService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,11 +47,14 @@ public class RouteController {
         return "route/route_home";
 
     }
-
-
     @PostMapping("/add")
     public String addRoute(@ModelAttribute("route") Route route, RedirectAttributes redirectAttributes){
-        this.routeServices.saveRoute(route);
+        Route newRoute = Route.builder()
+                .startLocation(route.getStartLocation())
+                .endLocation(route.getEndLocation())
+                .distance(route.getDistance())
+                .build();
+        this.routeServices.saveRoute(newRoute);
         redirectAttributes.addFlashAttribute("successMessage", "Route added successfully!");
         return "redirect:/route/load";
 
@@ -72,10 +76,10 @@ public class RouteController {
 
     @PostMapping("/update/{id}")
     public String updateDepartment(@PathVariable Long id, @ModelAttribute("route") Route updatedRoute) {
-        Optional<Route> optionalDepartment = routeServices.findByID(id);
-        if (optionalDepartment.isPresent()) {
+        Optional<Route> optionalRoute = routeServices.findByID(id);
+        if(optionalRoute.isPresent()){
             updatedRoute.setId(id);
-            routeServices.saveRoute(updatedRoute);
+            this.routeServices.saveRoute(updatedRoute);
             return "redirect:/route";
         } else {
             return "redirect:/route";

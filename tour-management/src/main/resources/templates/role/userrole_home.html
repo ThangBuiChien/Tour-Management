@@ -3,47 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>User Role Main</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" th:href="@{/css/role.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<h2>User Role List</h2>
-<table border="1">
-    <a th:href="@{/role/showAddForm}" class="btn btn-primary"> Add new User Role</a>
+<section th:replace="~{/main_component/header :: header}"></section>
+<div class="container">
+    <h2>User Role List</h2>
 
-
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="role : ${listUserRoles}">
+            <td th:text="${role.id}"></td>
+            <td th:text="${role.roleName}"></td>
+            <td>
+                <form th:action="@{/role/showUpdateForm/{id}(id=${role.id})}" method="get" style="display:inline;">
+                    <button type="submit" class="btn-warning">Edit</button>
+                </form>
+                <form th:action="@{/role/delete/{id}(id=${role.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/role/showAddForm}" class="btn-primary"> Add new User Role</a>
     <span th:text="${successMessage}"></span>
+</div>
 
-    <thead>
-
-    <tr>
-        <th>ID</th>
-        <th>Role Name</th>
-
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Iterate over the list of departments -->
-    <tr th:each="role : ${listUserRoles}">
-        <td th:text="${role.id}"></td>
-        <td th:text="${role.roleName}"></td>
-
-        <td>
-            <!-- Edit button -->
-            <form th:action="@{/role/showUpdateForm/{id}(id=${role.id})}" method="get">
-                <button type="submit">Edit</button>
-            </form>
-            <!-- Delete button -->
-            <form th:action="@{/role/delete/{id}(id=${role.id})}" method="post">
-                <button type="submit">Delete</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
+<section th:replace="~{/main_component/footer :: footer}"></section>
 </body>
 </html>

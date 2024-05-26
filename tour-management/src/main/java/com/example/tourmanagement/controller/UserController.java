@@ -42,9 +42,10 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String addUser(Model model, @ModelAttribute("user") UserModel userModel){
+    public String addUser(@ModelAttribute("user") UserModel userModel, RedirectAttributes redirectAttributes){
         this.userService.saveUser(userModel);
-        return "redirect:/user";
+        redirectAttributes.addFlashAttribute("successMessage", "User added successfully!");
+        return "redirect:/user/load";
 
     }
 

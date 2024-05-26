@@ -2,9 +2,16 @@ package com.example.tourmanagement.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Route {
     @Id
@@ -20,47 +27,5 @@ public class Route {
     @OneToMany(mappedBy = "route", cascade = CascadeType.REMOVE)
     @JsonIgnore
     private List<DetailRoute> detailRouteList;
-
-    public List<DetailRoute> getDetailRouteList() {
-        return detailRouteList;
-    }
-
-    public void setDetailRouteList(List<DetailRoute> detailRouteList) {
-        this.detailRouteList = detailRouteList;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-
-    public String getStartLocation() {
-        return startLocation;
-    }
-
-    public void setStartLocation(String startLocation) {
-        this.startLocation = startLocation;
-    }
-
-    public String getEndLocation() {
-        return endLocation;
-    }
-
-    public void setEndLocation(String endLocation) {
-        this.endLocation = endLocation;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
-
 
 }

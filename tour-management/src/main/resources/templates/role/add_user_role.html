@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add User Role</title>
+    <link rel="stylesheet" th:href="@{/css/role.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script th:src="@{/js/role.js}" defer></script>
 </head>
 <body>
-
+<section th:replace="~{/main_component/header :: header}"></section>
 <!-- Add UserRole form -->
-<h2>Add UserRole</h2>
-<form th:action="@{/role/add}" th:object = "${role}" method="post">
-
-    <input type="text" th:field="*{roleName}" placeholder="Role Name" >
-
-    <button type="submit">Add</button>
-</form>
-
-
+<div class="container">
+    <h2>Add UserRole</h2>
+    <form th:action="@{/role/add}" th:object="${role}" method="post" onsubmit="return validateForm();">
+        <label class="form-label" for="roleName">Role Name</label>
+        <input type="text" id="roleName" th:field="*{roleName}" class="form-control" placeholder="Role Name">
+        <button type="submit" class="btn-primary">Add</button>
+    </form>
+</div>
+<section th:replace="~{/main_component/footer :: footer}"></section>
 </body>
 </html>

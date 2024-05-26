@@ -12,10 +12,6 @@
 <section th:replace="~{/main_component/header :: header}"></section>
 <section class="container mt-5">
     <h2>User List</h2>
-
-    <div class="mb-3">
-        <span th:text="${successMessage}" class="text-success"></span>
-    </div>
     <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
@@ -54,6 +50,7 @@
     <div class="mb-3">
         <a th:href="@{/user/showAddForm}" class="btn-primary">Add new User</a>
     </div>
+   
 </section>
 <section th:replace="~{/main_component/footer :: footer}"></section>
 </body>

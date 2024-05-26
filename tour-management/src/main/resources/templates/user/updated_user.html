@@ -13,7 +13,7 @@
 <section th:replace="~{/main_component/header :: header}"></section>
 <section class="container mt-5">
     <h2>Update User</h2>
-    <form th:action="@{/user/update2/{id} (id = ${user.id})}" th:object="${user}" method="post" class="needs-validation" novalidate>
+    <form th:action="@{/user/update/{id} (id = ${user.id})}" th:object="${user}" method="post" class="needs-validation" novalidate>
         <div class="mb-3">
             <label for="fullName" class="form-label">Full Name:</label>
             <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="Enter Full Name" required>
