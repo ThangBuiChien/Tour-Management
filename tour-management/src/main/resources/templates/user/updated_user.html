@@ -15,21 +15,21 @@
 <section class="container mt-5">
     <h2>User Profile</h2>
     <form th:action="@{/user/update2/{id} (id = ${user.id})}" th:object="${user}" method="post" class="needs-validation" novalidate>
-        <div class="mb-3">
-            <label for="fullName" class="form-label">Full Name:</label>
-            <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="Enter Full Name" required>
-        </div>
+<!--        <div class="mb-3">-->
+<!--            <label for="fullName" class="form-label">Full Name:</label>-->
+<!--            <input type="text" id="fullName" th:field="*{fullName}" class="form-control" placeholder="Enter Full Name" required>-->
+<!--        </div>-->
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" th:field="*{email}" class="form-control" placeholder="Enter Email" required disabled>
         </div>
         <div class="mb-3">
             <label for="birthDate" class="form-label">Birth Date:</label>
-            <input type="date" id="birthDate" th:field="*{birthDate}" class="form-control" required>
+            <input type="text" id="birthDate" th:field="*{birthDate}" class="form-control" readonly>
         </div>
         <div class="mb-3">
             <label for="citizenID" class="form-label">Citizen ID:</label>
-            <input type="text" id="citizenID" th:field="*{citizenID}" class="form-control" placeholder="Enter Citizen ID" required>
+            <input type="number" id="citizenID" th:field="*{citizenID}" class="form-control" placeholder="Enter Citizen ID" required>
         </div>
         <div class="mb-3">
             <label for="phoneNumber" class="form-label">Phone Number:</label>

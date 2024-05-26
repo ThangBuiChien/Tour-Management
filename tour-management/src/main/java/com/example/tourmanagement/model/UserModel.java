@@ -1,9 +1,17 @@
 package com.example.tourmanagement.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class UserModel {
     @Id
@@ -28,65 +36,9 @@ public class UserModel {
     @Column(name = "phoneNumber")
     private int phoneNumber;
 
+    @Column(name = "role")
     private enumRole userRole;
 
-    public enumRole getUserRole() {
-        return userRole;
-    }
 
-    public void setUserRole(enumRole userRole) {
-        this.userRole = userRole;
-    }
 
-    public long getId() {return id;}
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFullName() {return fullName;}
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public int getCitizenID() {
-        return citizenID;
-    }
-
-    public void setCitizenID(int citizenID) {
-        this.citizenID = citizenID;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
