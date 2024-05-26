@@ -27,9 +27,9 @@ public class AdminController {
 
 
        // return "admin/admin_payment";
-        return "depa/payment";
+//        return "depa/payment";
 
-        //x return "index";
+        return "index";
 
     }
 
