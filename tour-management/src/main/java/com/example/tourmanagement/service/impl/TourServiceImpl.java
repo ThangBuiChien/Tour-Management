@@ -67,4 +67,7 @@ public class TourServiceImpl implements TourService {
         }
         return repo.findAll(pageable);
     }
+    public Tour generateTourPrototype(Tour prototype) { //for depa
+        return prototype.clone();
+    }
 }

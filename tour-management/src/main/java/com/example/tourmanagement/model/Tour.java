@@ -126,4 +126,13 @@ public class Tour {
         return this.tourCapacity.getMaxMember() - this.register;
     }
 
+    @Override
+    public Tour clone() { //for depa
+        try {
+            return (Tour) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(); // This should never happen
+        }
+    }
+
 }

@@ -144,22 +144,32 @@ public class TourController {
         tour.setRegister(0);
         tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
 
+        this.tourService.saveTour(tour);
+
         for (LocalDate startDate : startDates) {
-            // Create a new Tour object for each start date
-            Tour tourCopy = new Tour();
-            tourCopy.setDetailRoute(tour.getDetailRoute());
-            tourCopy.setTourCapacity(tour.getTourCapacity());
-            tourCopy.setTourPrice(tour.getTourPrice());
-            tourCopy.setStartDate(startDate);
+            // Clone the prototype tour for each start date
+            Tour tourClone = tourService.generateTourPrototype(tour);
+            tourClone.setStartDate(startDate);
 
-            tourCopy.setLengthTrip(tour.getDetailRoute().getLengthTrip());
-            tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
-            tourCopy.setTourStatus("available");
-            tourCopy.setRegister(0);
-            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
-
-            this.tourService.saveTour(tourCopy);
+            this.tourService.saveTour(tourClone);
         }
+
+//        for (LocalDate startDate : startDates) {
+//            // Create a new Tour object for each start date
+//            Tour tourCopy = new Tour();
+//            tourCopy.setDetailRoute(tour.getDetailRoute());
+//            tourCopy.setTourCapacity(tour.getTourCapacity());
+//            tourCopy.setTourPrice(tour.getTourPrice());
+//            tourCopy.setStartDate(startDate);
+//
+//            tourCopy.setLengthTrip(tour.getDetailRoute().getLengthTrip());
+//            tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
+//            tourCopy.setTourStatus("available");
+//            tourCopy.setRegister(0);
+//            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+//
+//            this.tourService.saveTour(tourCopy);
+//        }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         // return "redirect:/tour/load";
         return "redirect:/tour/admin";

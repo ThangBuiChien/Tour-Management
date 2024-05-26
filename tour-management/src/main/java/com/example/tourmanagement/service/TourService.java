@@ -23,4 +23,5 @@ public interface TourService {
 
     Page<Tour> getTourByKeyWordAndDate(Pageable pageable, String keyword, LocalDate date);
 
+    Tour generateTourPrototype(Tour prototype); // for depa
 }
