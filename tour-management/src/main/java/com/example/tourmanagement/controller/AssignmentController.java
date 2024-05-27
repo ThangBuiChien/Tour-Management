@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/assignments")
-@PreAuthorize("hasRole('ADMIN')")
 public class AssignmentController {
 
     private final TourAssignmentService tourAssignmentService;
@@ -37,6 +36,7 @@ public class AssignmentController {
         this.invoiceService = invoiceService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public String showTourAssignments(@RequestParam(defaultValue = "0") long tourGuideId,Model model) {
         // Show available tour assignments
@@ -60,6 +60,7 @@ public class AssignmentController {
         return "tour_assignment/tour_assign";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public String addTourAssignment(@ModelAttribute("tourAssignment") TourAssignment tourAssignment){
         // Validate received tourAssignment
@@ -85,6 +86,29 @@ public class AssignmentController {
         List<TourGuide> tourGuides = tourGuideService.getAllTourGuides();
 
         model.addAttribute("tourGuides", tourGuides);
+        return "tour_assignment/tour_assign";
+    }
+
+    @GetMapping("/loadByTourGuide")
+    public String showTourAssignmentsTourGuide(@RequestParam(defaultValue = "0") long tourGuideId,Model model) {
+        // Show available tour assignments
+        Object[] tourAssignmentList = null;
+        // Show adding tour assignment form
+        List<Tour> tours = null;
+        List<TourGuide> tourGuides = null;
+        if (tourGuideId == 0)
+        {
+            tourAssignmentList = tourAssignmentService.getAllTourAssignment().stream().map(i -> Arrays.asList(i.getTour(), i.getTourGuide())).toArray();
+        }
+        else {
+            tourAssignmentList = tourAssignmentService.findByTourGuide(tourGuideService.findById(tourGuideId).get()).stream().map(i -> Arrays.asList(i.getTour(), i.getTourGuide())).toArray();
+        }
+        model.addAttribute("tourAssignmentList", tourAssignmentList);
+        //
+        model.addAttribute("tours", tours);
+        model.addAttribute("tourguides", tourGuides);
+        TourAssignment tourAssignment = new TourAssignment();
+        model.addAttribute(tourAssignment);
         return "tour_assignment/tour_assign";
     }
 
