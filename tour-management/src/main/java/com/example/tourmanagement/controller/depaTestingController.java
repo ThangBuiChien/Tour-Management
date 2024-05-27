@@ -2,6 +2,9 @@ package com.example.tourmanagement.controller;
 
 import com.example.tourmanagement.depa.PaymentService;
 import com.example.tourmanagement.depa.PaymentServiceFactory;
+import com.example.tourmanagement.depa_AbstractFactory.BankTransferFactory;
+import com.example.tourmanagement.depa_AbstractFactory.PaymentFactory;
+import com.example.tourmanagement.depa_AbstractFactory.QRFactory;
 import com.example.tourmanagement.service.DetailRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,9 +28,22 @@ public class depaTestingController {
     public String processPayment(Model model,
                                  @RequestParam("paymentMethod") String paymentMethod,
                                  @RequestParam("amount") double amount) {
-        PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
-        String message = paymentService.processPayment(amount);
-        model.addAttribute("message", message);
+//        PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
+        String mess;
+        if(paymentMethod.equals("qr")) {
+            PaymentService paymentService = PaymentFactory.getPaymentService(new QRFactory());
+            mess = paymentService.processPayment(amount);
+
+        }
+        else if(paymentMethod.equals("bank")){
+            PaymentService paymentService = PaymentFactory.getPaymentService(new BankTransferFactory());
+            mess = paymentService.processPayment(amount);
+        }
+        else{
+            throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
+        }
+//        String message = paymentService.processPayment(amount);
+        model.addAttribute("message", mess);
         return "depa/payment";
     }
 
