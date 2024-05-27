@@ -22,24 +22,24 @@
     </div>
     <div class="addtour-form mt-4">
         <div class="py-3 px-4">
-            <form th:action="@{/tour/add}" th:object="${tour}" method="post" id="tourForm">
+            <form th:action="@{/tour/add}" th:object="${tour}" method="post" id="tourForm" class ="needs-validation">
                 <div class="d-flex mt-2">
                     <h5 class="mb-0 mt-1">Main Route: </h5>
-                    <select class="form-select w-50 ms-3" id="routeSelect" name="tourName" th:field="*{tourName}">
+                    <select class="form-select w-50 ms-3" id="routeSelect" name="tourName" th:field="*{tourName}" required >
                         <option th:if="${tour.getTourName() == null}" value="" selected>Choose a main route</option>
                         <option th:each="route : ${routes}" th:value="${route.id}" th:text="${route.startLocation} + '-->' + ${route.endLocation}"></option>
                     </select>
                 </div>
-                <div class="d-flex mt-4">
+                <div class="d-flex mt-4" >
                     <h5 class="mb-0 mt-1">Detail Route: </h5>
-                    <select class="form-select w-75 ms-3" id="detailRouteSelect" name="detailTour" th:field="*{detailRoute}">
+                    <select class="form-select w-75 ms-3" id="detailRouteSelect" name="detailTour" th:field="*{detailRoute}" required >
                         <option value="" selected>Choose a detail route</option>
                         <!-- Options will be populated dynamically -->
                     </select>
                 </div>
                 <div class="d-flex mt-4">
                     <h5 class="mb-0 mt-1">Tour Capacity: </h5>
-                    <select class="form-select w-25 ms-3" id="tourCapacity" name="tourCapacity" th:field="*{tourCapacity}">
+                    <select class="form-select w-25 ms-3" id="tourCapacity" name="tourCapacity" th:field="*{tourCapacity}" required >
                         <option value="" selected>Choose a tour capacity</option>
                         <option th:each="capacity : ${capacities}" th:value="${capacity.id}" th:text="${capacity.minMember} + '--' + ${capacity.maxMember}"></option>
                     </select>
@@ -47,7 +47,7 @@
                 <div class="d-flex mt-4">
                     <div class="d-flex">
                         <h5 class="mb-0 mt-1">Tour Price: </h5>
-                        <input type="number" placeholder="Tour's Price" id="tourPrice" name="tourPrice" th:field="*{tourPrice}" value="0.0" class="ms-3 tourprice">
+                        <input type="number" placeholder="Tour's Price" id="tourPrice" name="tourPrice" min = "1" th:field="*{tourPrice}" value="0.0" class="ms-3 tourprice">
                     </div>
                 </div>
                 <!-- Div to hold dynamic input fields for start dates -->

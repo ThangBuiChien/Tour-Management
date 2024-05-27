@@ -36,4 +36,55 @@ document.addEventListener('DOMContentLoaded', function() {
             container.removeChild(inputs[inputs.length - 1]);
         }
     };
+    // var form = document.querySelector('.needs-validation');
+    // form.addEventListener('submit', function(event) {
+    //     var startDatesContainer = document.getElementById('startDatesContainer');
+    //     var inputs = startDatesContainer.getElementsByTagName('input');
+    //
+    //     if (inputs.length === 0) {
+    //         event.preventDefault();
+    //         event.stopPropagation();
+    //         alert('Please add at least one start date.');
+    //     }
+    //
+    //     form.classList.add('was-validated');
+    // }, false);
+
+    var form = document.querySelector('.needs-validation');
+    form.addEventListener('submit', function(event) {
+        var startDatesContainer = document.getElementById('startDatesContainer');
+        var inputs = startDatesContainer.getElementsByTagName('input');
+        var today = new Date();
+        var minDate = new Date(today);
+        minDate.setDate(today.getDate());
+
+        if (inputs.length === 0) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert('Please add at least one start date.');
+            return;
+        }
+
+        var valid = true;
+        Array.prototype.forEach.call(inputs, function(input) {
+            var inputDate = new Date(input.value);
+            if (inputDate <= minDate) {
+                valid = false;
+                input.setCustomValidity('Start date must be greater than today');
+            } else {
+                input.setCustomValidity('');
+            }
+        });
+
+        if (!valid) {
+            event.preventDefault();
+            event.stopPropagation();
+            alert('All start dates must be greater than today');
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+
+
+
 });
