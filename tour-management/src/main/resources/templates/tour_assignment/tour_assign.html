@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Tour Guide</title>
@@ -25,6 +25,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-wrap">
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+
+
                     <select id="tourGuideSelect" onchange="redirectToGuide()">
                         <option value="0">All Tour Guide</option>
                         <option th:each="tourGuide : ${tourguides}" th:value="${tourGuide.getId()}" th:text="${tourGuide.getName()}">
@@ -42,6 +45,8 @@
                         </select>
                         <button>Add</button>
                     </form>
+
+                    </th:block>
                     <table class="table table-striped align-middle">
                         <thead>
                         <tr>
