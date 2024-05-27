@@ -26,13 +26,14 @@ public class InvoiceServiceImpl implements InvoiceService, Subject {
     private final InvoiceRepo invoiceRepository;
     private final List<Observer> observers = new ArrayList<>();
     private final TourService tourService;
-    @Autowired
-    private NotificationService notificationService;
+
+    private final NotificationService notificationService;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService) {
+    public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService, NotificationService notificationService) {
         this.invoiceRepository = invoiceRepository;
         this.tourService = tourService;
+        this.notificationService = notificationService;
         attachObserver(notificationService);
 
     }
@@ -49,9 +50,9 @@ public class InvoiceServiceImpl implements InvoiceService, Subject {
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Invoice invoice) {
         for (Observer observer : observers) {
-            observer.update(this); // Provide 'this' or relevant data as needed
+            observer.update(invoice); // Provide 'this' or relevant data as needed
         }
     }
 
@@ -98,7 +99,7 @@ public class InvoiceServiceImpl implements InvoiceService, Subject {
         }
 
         invoiceRepository.save(invoice);
-        notifyObservers(); // Notify all observers about the status change
+        notifyObservers(invoice); // Notify all observers about the status change
     }
 
     @Override
