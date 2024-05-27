@@ -93,14 +93,16 @@
                         <label for="comment">Comment:</label>
                     </div>
 
-                    <div class="rating d-flex">
-                        <p class="me-2">Your rating:</p>
-                        <input type="radio" id="star5" name="rating" value="5" th:field="*{rating}" onclick="updateRatingText('Awesome - 5 stars')"/><label for="star5" title="Awesome - 5 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star4" name="rating" value="4" th:field="*{rating}" onclick="updateRatingText('Pretty good - 4 stars')"/><label for="star4" title="Pretty good - 4 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star3" name="rating" value="3" th:field="*{rating}" onclick="updateRatingText('Meh - 3 stars')"/><label for="star3" title="Meh - 3 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star2" name="rating" value="2" th:field="*{rating}" onclick="updateRatingText('Kinda bad - 2 stars')"/><label for="star2" title="Kinda bad - 2 stars"><i class="fas fa-star"></i></label>
-                        <input type="radio" id="star1" name="rating" value="1" th:field="*{rating}" onclick="updateRatingText('Sucks big time - 1 star')"/><label for="star1" title="Sucks big time - 1 star"><i class="fas fa-star"></i></label>
-                        <span id="rating-text" style="padding-left: 10px;"></span>
+                    <div class="d-flex">
+                        <p class="me-2 mb-0">Your rating:</p>
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" th:field="*{rating}" onclick="updateRatingText('Awesome - 5 stars')"/><label for="star5" title="Awesome - 5 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star4" name="rating" value="4" th:field="*{rating}" onclick="updateRatingText('Pretty good - 4 stars')"/><label for="star4" title="Pretty good - 4 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star3" name="rating" value="3" th:field="*{rating}" onclick="updateRatingText('Meh - 3 stars')"/><label for="star3" title="Meh - 3 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star2" name="rating" value="2" th:field="*{rating}" onclick="updateRatingText('Kinda bad - 2 stars')"/><label for="star2" title="Kinda bad - 2 stars"><i class="fas fa-star"></i></label>
+                            <input type="radio" id="star1" name="rating" value="1" th:field="*{rating}" onclick="updateRatingText('Sucks big time - 1 star')"/><label for="star1" title="Sucks big time - 1 star"><i class="fas fa-star"></i></label>
+                            <span id="rating-text" style="padding-left: 10px;"></span>
+                        </div>
                     </div>
 
                     <button type="submit" class="button mt-3">
