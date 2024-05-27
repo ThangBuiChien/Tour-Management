@@ -36,6 +36,13 @@ public class AdminController {
 
         if(userDetails != null){
             session.setAttribute("email", userDetails.getUsername());
+            userDetails.getAuthorities().iterator().next();
+            if(userDetails.getUsername().contains("tourguide")){
+                char tourGuideId = userDetails.getUsername().charAt(9);
+                return "redirect:/assignments/loadByTourGuide?tourGuideId=" + tourGuideId;
+
+            }
+
 
         }
 

@@ -26,7 +26,7 @@
                 <div class="d-flex mt-2">
                     <h5 class="mb-0 mt-1">Main Route: </h5>
                     <select class="form-select w-50 ms-3" id="routeSelect" name="tourName" th:field="*{tourName}">
-                        <option value="" selected>Choose a main route</option>
+                        <option th:if="${tour.getTourName() == null}" value="" selected>Choose a main route</option>
                         <option th:each="route : ${routes}" th:value="${route.id}" th:text="${route.startLocation} + '-->' + ${route.endLocation}"></option>
                     </select>
                 </div>

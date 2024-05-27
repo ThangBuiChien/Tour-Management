@@ -3,6 +3,8 @@ package com.example.tourmanagement.service.impl;
 import com.example.tourmanagement.model.Invoice;
 import com.example.tourmanagement.model.InvoiceStatus;
 import com.example.tourmanagement.model.Tour;
+import com.example.tourmanagement.observer.Observer;
+import com.example.tourmanagement.observer.Subject;
 import com.example.tourmanagement.service.TourService;
 import com.example.tourmanagement.repository.InvoiceRepo;
 import com.example.tourmanagement.service.InvoiceService;
@@ -19,17 +21,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class InvoiceServiceImpl implements InvoiceService {
+public class InvoiceServiceImpl implements InvoiceService, Subject {
 
     private final InvoiceRepo invoiceRepository;
+    private final List<Observer> observers = new ArrayList<>();
     private final TourService tourService;
-    @Autowired
-    private NotificationService notificationService;
+
+    private final NotificationService notificationService;
 
     @Autowired
-    public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService) {
+    public InvoiceServiceImpl(InvoiceRepo invoiceRepository, TourService tourService, NotificationService notificationService) {
         this.invoiceRepository = invoiceRepository;
-        this.tourService = tourService;  // Initialize TourService
+        this.tourService = tourService;
+        this.notificationService = notificationService;
+        attachObserver(notificationService);
+
+    }
+    @Override
+    public void attachObserver(Observer o) {
+        if (!observers.contains(o)) {
+            observers.add(o);
+        }
+    }
+
+    @Override
+    public void detachObserver(Observer o) {
+        observers.remove(o);
+    }
+
+    @Override
+    public void notifyObservers(Invoice invoice) {
+        for (Observer observer : observers) {
+            observer.update(invoice); // Provide 'this' or relevant data as needed
+        }
     }
 
     @Override
@@ -75,9 +99,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         }
 
         invoiceRepository.save(invoice);
-
-        // Create and send notification
-        notificationService.createNotification(invoice.getUserModel(), "The status of your invoice #" + invoiceId + " has been updated to " + status + ".");
+        notifyObservers(invoice); // Notify all observers about the status change
     }
 
     @Override
