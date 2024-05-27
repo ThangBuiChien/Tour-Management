@@ -24,6 +24,7 @@
             <h1 class="title ms-2 mb-0">Invoice report</h1>
         </div>
     </div>
+    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
     <form th:action="@{/invoice/search}" class="box-container row" id="searchForm">
         <div class="col mx-3 py-2">
             <h6>Search Invoice</h6>
@@ -32,6 +33,7 @@
         <button type="submit"> Search</button>
 
     </form>
+    </th:block>
     <div class="table-part mt-5">
         <div class="row">
             <div class="col-md-12">
