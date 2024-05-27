@@ -56,7 +56,7 @@ public class UserController {
     @PostMapping("/delete/{id}")
     public String deleteUser(Model model, @PathVariable long id){
         this.userService.deleteUser(id);
-        return "redirect:/user/user_home";
+        return "redirect:/user";
     }
 
     @PostMapping("update/{id}")
