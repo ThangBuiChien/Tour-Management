@@ -39,19 +39,25 @@
                     <table class="table table-striped align-middle">
                         <thead>
                         <tr>
-                            <th>TOUR ID</th>
+
+                            <th>INVOICE ID</th>
+                            <th>Tour ID</th>
                             <th>TOUR NAME</th>
                             <th>TOUR DATE</th>
                             <th>CUSTOMER EMAIL</th>
                             <th>NUMBER OF CUSTOMER</th>
+                            <th>Status </th>
                             <th>TOTAL PRICE</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="invoice : ${listInvoice}" >
                             <th scope="row" >
-                                <span th:text="${invoice.tour.getId()}"></span>
+                                <span th:text="${invoice.getId()}"></span>
                             </th>
+                            <td>
+                                <span th:text="${invoice.tour.getId()}"></span>
+                            </td>
                             <td>
                                 <span th:text="${invoice.tour.getTourName()}"></span>
                             </td>
@@ -63,6 +69,9 @@
                             </td>
                             <td>
                                 <span th:text="${invoice.totalPrice/invoice.tour.getTourPrice()}"></span>
+                            </td>
+                            <td>
+                                <span th:text="${invoice.getStatus()}"></span>
                             </td>
                             <td>
                                 <span th:text="${invoice.totalPrice}"></span>

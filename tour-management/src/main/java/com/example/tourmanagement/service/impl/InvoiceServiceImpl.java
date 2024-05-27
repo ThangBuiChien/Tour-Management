@@ -79,7 +79,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         // Create and send notification
         notificationService.createNotification(invoice.getUserModel(), "The status of your invoice'" +
                 " id #" + invoiceId + " has been updated to " + status + "."
-        + " Your trip name is " + invoice.getTour().getTourName() + " Your ticket is " + invoiceId) ;
+        + " Your trip name is " + invoice.getTour().getTourName() ) ;
     }
 
     @Override
