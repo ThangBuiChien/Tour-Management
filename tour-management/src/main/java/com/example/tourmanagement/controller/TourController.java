@@ -142,7 +142,7 @@ public class TourController {
         tour.setTourDescription(tour.getDetailRoute().getDetailTrip());
         tour.setTourStatus("available");
         tour.setRegister(0);
-        tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+        tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() +" " + tour.getDetailRoute().getStopLocation());
 
         for (LocalDate startDate : startDates) {
             // Create a new Tour object for each start date
@@ -156,7 +156,7 @@ public class TourController {
             tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
             tourCopy.setTourStatus("available");
             tourCopy.setRegister(0);
-            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + " " + tour.getDetailRoute().getStopLocation());
 
             this.tourService.saveTour(tourCopy);
         }
