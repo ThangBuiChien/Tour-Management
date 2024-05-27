@@ -147,12 +147,11 @@ public class TourController {
         this.tourService.saveTour(tour);
 
         for (LocalDate startDate : startDates) {
-            // Clone the prototype tour for each start date
-            Tour tourClone = tourService.generateTourPrototype(tour);
-            tourClone.setStartDate(startDate);
-
-            this.tourService.saveTour(tourClone);
+            // Create a new tour from the prototype for each start date
+            Tour newTour = tourService.generateTourPrototype(tour, startDate);
+            this.tourService.saveTour(newTour);
         }
+
 
 //        for (LocalDate startDate : startDates) {
 //            // Create a new Tour object for each start date
