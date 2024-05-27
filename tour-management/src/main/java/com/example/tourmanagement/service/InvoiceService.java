@@ -21,6 +21,8 @@ public interface InvoiceService {
     Page<Invoice> getAllInvoices(Pageable pageable);
     Page<Invoice> getInvoicesByUser(Pageable pageable, String email);
 
+    Page<Invoice> getInvoiceById(Pageable pageable, Long id);
+
 
 
 }

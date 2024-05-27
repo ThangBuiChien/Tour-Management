@@ -61,4 +61,16 @@ public class InvoiceController {
         model.addAttribute("totalPages", invoicePage.getTotalPages());
         return "invoice/invoice_home";
     }
+
+    @GetMapping("/search")
+    public String getInvoiceByID(Model model, @RequestParam(defaultValue = "0") int page,
+                                 @RequestParam(defaultValue = "5") int size,
+                                 @RequestParam("keyword") long id) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Invoice> invoicePage = invoiceService.getInvoiceById(pageable, id);
+        model.addAttribute("listInvoice", invoicePage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", invoicePage.getTotalPages());
+        return "invoice/invoice_search";
+    }
 }

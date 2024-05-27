@@ -24,6 +24,14 @@
             <h1 class="title ms-2 mb-0">Invoice report</h1>
         </div>
     </div>
+    <form th:action="@{/invoice/search}" class="box-container row" id="searchForm">
+        <div class="col mx-3 py-2">
+            <h6>Search Invoice</h6>
+            <input type="text" class="form-control" name="keyword" placeholder="Invoice ID" required th:value="${id}"/>
+        </div>
+        <button type="submit"> Search</button>
+
+    </form>
     <div class="table-part mt-5">
         <div class="row">
             <div class="col-md-12">
@@ -74,7 +82,7 @@
                                     </th:block>
                                     <!-- Admin controls for updating status -->
                                         <div sec:authorize="hasRole('ADMIN')">
-                                            <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" method="post" style="display: inline;">
+                                            <form th:action="@{'/invoice/updateStatus/' + ${invoice.id}}" class="button_update" method="post" style="display: inline;">
 
                                                 <select name="status" >
                                                     <option th:each="status : ${T(com.example.tourmanagement.model.InvoiceStatus).values()}"

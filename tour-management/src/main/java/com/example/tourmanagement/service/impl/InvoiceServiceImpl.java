@@ -77,7 +77,9 @@ public class InvoiceServiceImpl implements InvoiceService {
         invoiceRepository.save(invoice);
 
         // Create and send notification
-        notificationService.createNotification(invoice.getUserModel(), "The status of your invoice #" + invoiceId + " has been updated to " + status + ".");
+        notificationService.createNotification(invoice.getUserModel(), "The status of your invoice'" +
+                " id #" + invoiceId + " has been updated to " + status + "."
+        + " Your trip name is " + invoice.getTour().getTourName() + " Your ticket is " + invoiceId) ;
     }
 
     @Override
@@ -107,5 +109,10 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public Page<Invoice> getInvoicesByUser(Pageable pageable, String email) {
         return invoiceRepository.findByUserModelEmail(pageable, email);
+    }
+
+    @Override
+    public Page<Invoice> getInvoiceById(Pageable pageable, Long id) {
+        return invoiceRepository.findById(pageable, id);
     }
 }

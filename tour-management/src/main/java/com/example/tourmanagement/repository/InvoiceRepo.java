@@ -14,4 +14,6 @@ public interface InvoiceRepo extends JpaRepository<Invoice, Long> {
     List<Invoice> findByTour(Tour tour);
 
     Page<Invoice> findByUserModelEmail(Pageable pageable, String email);
+
+    Page<Invoice> findById(Pageable pageable, Long id);
 }
