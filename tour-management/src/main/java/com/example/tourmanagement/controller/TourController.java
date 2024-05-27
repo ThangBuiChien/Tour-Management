@@ -143,32 +143,32 @@ public class TourController {
         tour.setTourStatus("available");
         tour.setRegister(0);
         tour.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+//
+//        this.tourService.saveTour(tour);
+//
+//        for (LocalDate startDate : startDates) {
+//            // Create a new tour from the prototype for each start date
+//            Tour newTour = tourService.generateTourPrototype(tour, startDate);
+//            this.tourService.saveTour(newTour);
+//        }
 
-        this.tourService.saveTour(tour);
 
         for (LocalDate startDate : startDates) {
-            // Create a new tour from the prototype for each start date
-            Tour newTour = tourService.generateTourPrototype(tour, startDate);
-            this.tourService.saveTour(newTour);
+            // Create a new Tour object for each start date
+            Tour tourCopy = new Tour();
+            tourCopy.setDetailRoute(tour.getDetailRoute());
+            tourCopy.setTourCapacity(tour.getTourCapacity());
+            tourCopy.setTourPrice(tour.getTourPrice());
+            tourCopy.setStartDate(startDate);
+
+            tourCopy.setLengthTrip(tour.getDetailRoute().getLengthTrip());
+            tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
+            tourCopy.setTourStatus("available");
+            tourCopy.setRegister(0);
+            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
+
+            this.tourService.saveTour(tourCopy);
         }
-
-
-//        for (LocalDate startDate : startDates) {
-//            // Create a new Tour object for each start date
-//            Tour tourCopy = new Tour();
-//            tourCopy.setDetailRoute(tour.getDetailRoute());
-//            tourCopy.setTourCapacity(tour.getTourCapacity());
-//            tourCopy.setTourPrice(tour.getTourPrice());
-//            tourCopy.setStartDate(startDate);
-//
-//            tourCopy.setLengthTrip(tour.getDetailRoute().getLengthTrip());
-//            tourCopy.setTourDescription(tour.getDetailRoute().getDetailTrip());
-//            tourCopy.setTourStatus("available");
-//            tourCopy.setRegister(0);
-//            tourCopy.setTourName(tour.getDetailRoute().getRoute().getEndLocation() + tour.getDetailRoute().getStopLocation());
-//
-//            this.tourService.saveTour(tourCopy);
-//        }
         redirectAttributes.addFlashAttribute("successMessage", "Department added successfully!");
         // return "redirect:/tour/load";
         return "redirect:/tour/admin";
@@ -277,40 +277,54 @@ public class TourController {
         }
     }
 
-
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/clone/{id}")
-    public String cloneTour(@PathVariable Long id, Model model  ){
+    public String cloneTour(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Optional<Tour> tour = tourService.findByID(id);
-        if(tour.isPresent()){
-            Tour tourCopy = new Tour();
+        if (tour.isPresent()) {
+            Tour tourCopy = tourService.generateTourPrototype(tour.get());
+            tourService.saveTour(tourCopy);
+            redirectAttributes.addFlashAttribute("successMessage", "Tour cloned successfully!");
+        } else {
+            redirectAttributes.addFlashAttribute("errorMessage", "Tour not found!");
+        }
+        return "redirect:/tour/admin";
+    }
+
+
+//    @PreAuthorize("hasRole('ADMIN')")
+//    @PostMapping("/clone/{id}")
+//    public String cloneTour(@PathVariable Long id, Model model  ){
+//        Optional<Tour> tour = tourService.findByID(id);
+//        if(tour.isPresent()){
+//            Tour tourCopy = new Tour();
+////            tourCopy.setDetailRoute(tour.get().getDetailRoute());
+////            tourCopy.setTourCapacity(tour.get().getTourCapacity());
+////            tourCopy.setTourPrice(tour.get().getTourPrice());
+////
+////            tourCopy.setLengthTrip(tour.get().getDetailRoute().getLengthTrip());
+////            tourCopy.setTourDescription(tour.get().getDetailRoute().getDetailTrip());
+////            tourCopy.setTourStatus("available");
+////            tourCopy.setRegister(0);
+////            tourCopy.setTourName(tour.get().getDetailRoute().getRoute().getEndLocation() + tour.get().getDetailRoute().getStopLocation());
+//            tourCopy.setTourName(tour.get().getTourName());
 //            tourCopy.setDetailRoute(tour.get().getDetailRoute());
 //            tourCopy.setTourCapacity(tour.get().getTourCapacity());
 //            tourCopy.setTourPrice(tour.get().getTourPrice());
 //
-//            tourCopy.setLengthTrip(tour.get().getDetailRoute().getLengthTrip());
-//            tourCopy.setTourDescription(tour.get().getDetailRoute().getDetailTrip());
-//            tourCopy.setTourStatus("available");
-//            tourCopy.setRegister(0);
-//            tourCopy.setTourName(tour.get().getDetailRoute().getRoute().getEndLocation() + tour.get().getDetailRoute().getStopLocation());
-            tourCopy.setTourName(tour.get().getTourName());
-            tourCopy.setDetailRoute(tour.get().getDetailRoute());
-            tourCopy.setTourCapacity(tour.get().getTourCapacity());
-            tourCopy.setTourPrice(tour.get().getTourPrice());
-
-
-            model.addAttribute("tour", tourCopy);
-            model.addAttribute("routes", tour.get().getDetailRoute().getRoute());
+//
 //            model.addAttribute("tour", tourCopy);
-            model.addAttribute("capacities", tour.get().getTourCapacity());
-
-            return "tour/add_tour";
-        }
-        else{
-            return "redirect:/tour/admin";
-
-        }
-
-    }
+//            model.addAttribute("routes", tour.get().getDetailRoute().getRoute());
+////            model.addAttribute("tour", tourCopy);
+//            model.addAttribute("capacities", tour.get().getTourCapacity());
+//
+//            return "tour/add_tour";
+//        }
+//        else{
+//            return "redirect:/tour/admin";
+//
+//        }
+//
+//    }
 
 }

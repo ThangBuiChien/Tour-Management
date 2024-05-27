@@ -3,7 +3,7 @@ package com.example.tourmanagement.model;
 import jakarta.persistence.*;
 
 @Entity
-public class Capacity {
+public class Capacity implements Cloneable{
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long id;
@@ -35,5 +35,14 @@ public class Capacity {
 
     public void setMaxMember(int maxMember) {
         this.maxMember = maxMember;
+    }
+
+    @Override
+    public Capacity clone() {
+        try {
+            return (Capacity) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Cloning not supported", e);
+        }
     }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Tour {
+public class Tour implements Cloneable{
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
@@ -127,11 +127,17 @@ public class Tour {
     }
 
     @Override
-    public Tour clone() { //for depa
+    public Tour clone() {
         try {
-            return (Tour) super.clone();
+            Tour cloned = (Tour) super.clone();
+            cloned.setDetailRoute(this.detailRoute.clone());
+            cloned.setTourCapacity(this.tourCapacity.clone());
+            if (this.tourGuide != null) {
+                cloned.setTourGuide(this.tourGuide.clone());
+            }
+            return cloned;
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError(); // This should never happen
+            throw new AssertionError("Cloning not supported", e);
         }
     }
 
