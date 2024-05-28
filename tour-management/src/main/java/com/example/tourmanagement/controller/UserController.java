@@ -121,7 +121,16 @@ public class UserController {
         Optional<UserModel> currentUser = userService.loadByEmail(user.getEmail());
         if(currentUser.isEmpty()) {
             user.setUserRole(enumRole.USER);
-            userService.saveUser(user);
+            UserModel newUser = UserModel.builder()
+                            .fullName(user.getFullName())
+                            .email(user.getEmail())
+                                    .password(user.getPassword())
+                                    .birthDate(user.getBirthDate())
+                                    .citizenID(user.getCitizenID())
+                                    .phoneNumber(user.getPhoneNumber())
+                                    .userRole(user.getUserRole())
+                                    .build();
+            userService.saveUser(newUser);
 
             return "redirect:/user/login?success";
             //return "redirect:/user/showUpdateNewForm/" + user.getId() ;
