@@ -3,6 +3,9 @@
     import com.example.tourmanagement.depa.creator.PaymentFactory;
     import com.example.tourmanagement.depa.product.PaymentService;
     import com.example.tourmanagement.depa.creator.PaymentServiceFactory;
+    import com.example.tourmanagement.depa_abstractFactory1.BankTransferFactory;
+    import com.example.tourmanagement.depa_abstractFactory1.PaymentAbstractFactory1;
+    import com.example.tourmanagement.depa_abstractFactory1.QRFactory;
     import com.example.tourmanagement.model.*;
     import com.example.tourmanagement.service.TourService;
     import com.example.tourmanagement.service.InvoiceService;
@@ -190,8 +193,22 @@
             try {
                 invoiceService.updateInvoice(invoice);
 //                PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
-                PaymentServiceFactory factory = PaymentFactory.getFactory(paymentMethod);
-                PaymentService paymentService = factory.createPaymentService(paymentMethod);
+//                PaymentServiceFactory factory = PaymentFactory.getFactory(paymentMethod);
+//                PaymentService paymentService = factory.createPaymentService(paymentMethod);
+
+
+                PaymentService paymentService;
+                if("bank".equalsIgnoreCase(paymentMethod)) {
+                    paymentService = PaymentAbstractFactory1.getPaymentService(new BankTransferFactory());
+
+                }
+                else if("qr".equalsIgnoreCase(paymentMethod)) {
+                    paymentService = PaymentAbstractFactory1.getPaymentService(new QRFactory());
+                }
+                else {
+                    throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
+                }
+
                 String message = paymentService.processPayment(amount);
                 model.addAttribute("message", message);
                 redirectAttributes.addFlashAttribute("successMessage", "Payment submitted successfully!");
