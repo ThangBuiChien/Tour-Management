@@ -31,10 +31,10 @@ public class UserModel {
     private LocalDate birthDate;
 
     @Column(name = "citizenID")
-    private int citizenID;
+    private Integer citizenID;
 
     @Column(name = "phoneNumber")
-    private int phoneNumber;
+    private Integer phoneNumber;
 
     @Column(name = "role")
     private enumRole userRole;
