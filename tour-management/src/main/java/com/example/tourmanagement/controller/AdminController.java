@@ -47,8 +47,11 @@ public class AdminController {
         }
 
 
-        return "index";
-       //x return "index";
+       // return "admin/admin_payment";
+        return "depa/payment";
+
+        //x return "index";
+
 
     }
     @PreAuthorize("hasRole('ADMIN')")
