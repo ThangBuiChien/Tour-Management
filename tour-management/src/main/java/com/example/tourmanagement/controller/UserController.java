@@ -121,21 +121,15 @@ public class UserController {
         Optional<UserModel> currentUser = userService.loadByEmail(user.getEmail());
         if(currentUser.isEmpty()) {
             user.setUserRole(enumRole.USER);
-
-            // Start building the user model
-            UserModel.UserModelBuilder userModelBuilder = UserModel.builder()
-                    .fullName(user.getFullName())
-                    .email(user.getEmail())
-                    .password(user.getPassword())
-                    .birthDate(user.getBirthDate())
-                    .citizenID(user.getCitizenID())
-                    .phoneNumber(user.getPhoneNumber())
-                    .userRole(user.getUserRole());
-
-            // Build the user model
-            UserModel newUser = userModelBuilder.build();
-
-            // Save the new user
+            UserModel newUser = UserModel.builder()
+                            .fullName(user.getFullName())
+                            .email(user.getEmail())
+                                    .password(user.getPassword())
+                                    .birthDate(user.getBirthDate())
+                                    .citizenID(user.getCitizenID())
+                                    .phoneNumber(user.getPhoneNumber())
+                                    .userRole(user.getUserRole())
+                                    .build();
             userService.saveUser(newUser);
 
             return "redirect:/user/login?success";
