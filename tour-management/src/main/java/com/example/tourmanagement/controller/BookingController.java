@@ -1,16 +1,18 @@
     package com.example.tourmanagement.controller;
 
-    import com.example.tourmanagement.depa.PaymentService;
-    import com.example.tourmanagement.depa.PaymentServiceFactory;
+    import com.example.tourmanagement.depa.creator.PaymentFactory;
+    import com.example.tourmanagement.depa.product.PaymentService;
+    import com.example.tourmanagement.depa.creator.PaymentServiceFactory;
+    import com.example.tourmanagement.depa_abstractFactory1.BankTransferFactory;
+    import com.example.tourmanagement.depa_abstractFactory1.PaymentAbstractFactory1;
+    import com.example.tourmanagement.depa_abstractFactory1.QRFactory;
     import com.example.tourmanagement.model.*;
     import com.example.tourmanagement.service.TourService;
     import com.example.tourmanagement.service.InvoiceService;
     import com.example.tourmanagement.service.UserService;
     import jakarta.servlet.http.HttpSession;
     import org.springframework.security.access.prepost.PreAuthorize;
-    import org.springframework.security.core.Authentication;
     import org.springframework.security.core.annotation.AuthenticationPrincipal;
-    import org.springframework.security.core.context.SecurityContextHolder;
     import org.springframework.security.core.userdetails.UserDetails;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
@@ -190,7 +192,23 @@
 
             try {
                 invoiceService.updateInvoice(invoice);
-                PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
+//                PaymentService paymentService = paymentServiceFactory.createPaymentService(paymentMethod);
+//                PaymentServiceFactory factory = PaymentFactory.getFactory(paymentMethod);
+//                PaymentService paymentService = factory.createPaymentService(paymentMethod);
+
+
+                PaymentService paymentService;
+                if("bank".equalsIgnoreCase(paymentMethod)) {
+                    paymentService = PaymentAbstractFactory1.getPaymentService(new BankTransferFactory());
+
+                }
+                else if("qr".equalsIgnoreCase(paymentMethod)) {
+                    paymentService = PaymentAbstractFactory1.getPaymentService(new QRFactory());
+                }
+                else {
+                    throw new IllegalArgumentException("Invalid payment method: " + paymentMethod);
+                }
+
                 String message = paymentService.processPayment(amount);
                 model.addAttribute("message", message);
                 redirectAttributes.addFlashAttribute("successMessage", "Payment submitted successfully!");

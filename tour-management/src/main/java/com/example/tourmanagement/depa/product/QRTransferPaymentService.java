@@ -1,4 +1,4 @@
-package com.example.tourmanagement.depa;
+package com.example.tourmanagement.depa.product;
 
 public class QRTransferPaymentService implements PaymentService{
     @Override
