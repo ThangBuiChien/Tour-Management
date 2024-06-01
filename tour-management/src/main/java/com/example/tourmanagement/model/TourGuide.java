@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class TourGuide {
+public class TourGuide implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,5 +43,14 @@ public class TourGuide {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public TourGuide clone() {
+        try {
+            return (TourGuide) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException("Failed to clone TourGuide", e);
+        }
     }
 }
