@@ -67,17 +67,4 @@ public class TourServiceImpl implements TourService {
         }
         return repo.findAll(pageable);
     }
-
-    @Override
-    public Tour generateTourPrototype(Tour prototype) {
-        try {
-            Tour newTour = prototype.clone();
-            newTour.setId(0); // Ensure it's treated as a new entity
-            newTour.setRegister(0); // Reset the register count
-            newTour.setStartDate(prototype.getStartDate()); // Reset start date if needed
-            return newTour;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to clone the tour", e);
-        }
-    }
 }

@@ -3,7 +3,7 @@ package com.example.tourmanagement.model;
 import jakarta.persistence.*;
 
 @Entity
-public class DetailRoute implements Cloneable{
+public class DetailRoute {
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private long id;
@@ -69,14 +69,4 @@ public class DetailRoute implements Cloneable{
     public void setDetailTrip(String detailTrip) {
         this.detailTrip = detailTrip;
     }
-
-    @Override
-    public DetailRoute clone() {
-        try {
-            return (DetailRoute) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError("Cloning not supported", e);
-        }
-    }
-    
 }
